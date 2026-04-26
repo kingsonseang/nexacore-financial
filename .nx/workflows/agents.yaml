@@ -1,0 +1,17 @@
+# .nx/workflows/agents.yaml
+launchTemplates:
+  linux-bun:
+    resourceClass: linux-medium-js
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: jdx/mise-action@v2
+        with:
+          # Reads node + bun versions from mise.toml
+          experimental: true
+
+      - run: bun install --no-cache
+
+      - run: bunx nx-cloud start-agent
