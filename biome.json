@@ -57,7 +57,7 @@
   "json": {
     "parser": {
       "allowComments": true,
-      "allowTrailingCommas": true
+      "allowTrailingCommas": false
     },
     "formatter": {
       "enabled": true
