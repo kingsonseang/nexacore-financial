@@ -24,6 +24,10 @@ jobs:
       # Learn more at https://nx.dev/ci/reference/nx-cloud-cli#npx-nxcloud-startcirun
       - run: npx nx start-ci-run --distribute-on="3 linux-medium-js" --stop-agents-after="e2e-ci"
 
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.28.2
+
       # Cache node_modules
       - uses: actions/setup-node@v4
         with:
