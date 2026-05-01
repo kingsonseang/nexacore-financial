@@ -1,107 +1,214 @@
-# New Nx Repository
+# NexaCore Financial
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+NexaCore Financial is a **multi-currency neobank + wealth intelligence platform** for self-directed investors. It focuses on NGN/USD cash management, portfolio tracking, AI-driven insights, and realistic money movement via Paystack.
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is ready ✨.
+The repository is a **polyglot Nx monorepo** with:
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/js?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
-## Finish your Nx platform setup
+- TypeScript, Go, and Python backend services
+- gRPC for internal service-to-service communication
+- Redis Streams for event-driven workflows
+- React microfrontends using Module Federation
+- pnpm for dependency management
+- Ultracite + Biome, commitlint, and Commitizen for developer workflow
 
-🚀 [Finish setting up your workspace](https://cloud.nx.app/connect/gEZWBVghwE) to get faster builds with remote caching, distributed task execution, and self-healing CI. [Learn more about Nx Cloud](https://nx.dev/ci/intro/why-nx-cloud).
+---
 
-## Generate a library
+## Architecture overview
 
-```sh
-npx nx g @nx/js:lib packages/pkg1 --publishable --importPath=@my-org/pkg1
+### Backend services (planned)
+
+- `api-gateway` (TypeScript)  
+  Public REST API, authentication, routing to internal gRPC services.
+
+- `identity-service` (TypeScript)  
+  Users, auth, basic KYC profile.
+
+- `accounts-service` (TypeScript)  
+  NGN/USD wallets, balances, account metadata.
+
+- `payments-service` (TypeScript)  
+  Deposit/withdraw intents, Paystack integration, webhooks, payment status.
+
+- `ledger-service` (Go)  
+  Double-entry ledger with journal entries, postings, and balance queries.
+
+- `market-data-service` (Python)  
+  Fetches and caches stock and FX data from external market APIs.
+
+- `insights-service` (Python)  
+  AI-powered portfolio and cashflow insights, summaries, and alerts.
+
+- `notification-service` (TypeScript)  
+  Email / in-app notifications for funding, thresholds, and system events.
+
+### Frontend apps
+
+React + Module Federation (managed by Nx):
+
+- `web-shell`  
+  Host app providing layout, routing, and shared chrome.
+
+- `mfe-dashboard`  
+  Overview of balances, recent activity, and key metrics.
+
+- `mfe-funding`  
+  Funding flows via Paystack, deposit history, reconciliation status.
+
+(Additional MFEs like `mfe-portfolio` and `mfe-insights` will be added later.)
+
+### Data & infrastructure
+
+- **Database:** Postgres (single instance, multiple schemas to start)  
+- **Event bus:** Redis Streams for events such as payments, ledger postings, and notifications  
+- **Containers:** Docker for local development (Kubernetes planned for later)  
+
+---
+
+## Tech stack
+
+- **Workspace:** Nx, pnpm workspaces  
+- **Languages:** TypeScript, Go, Python  
+- **Backend:** Node (TS) + Go + Python, gRPC for internal calls  
+- **Frontend:** React, Module Federation, Nx  
+- **Payments:** Paystack (funding and reconciliation demo)  
+- **Market data:** external stock/FX APIs (e.g., Marketstack, CurrencyLayer)  
+- **Tooling:** Ultracite, Biome, commitlint, Commitizen (git-cz), Lefthook  
+
+---
+
+## Project layout (planned)
+
+```txt
+apps/
+  api-gateway/
+  identity-service/
+  accounts-service/
+  payments-service/
+  ledger-service/          # Go
+  market-data-service/     # Python
+  insights-service/        # Python
+  notification-service/
+  web-shell/
+  mfe-dashboard/
+  mfe-funding/
+
+libs/
+  protos/                  # .proto files + generated clients
+  shared-types/
+  ui/
+  api-client/
+
+infra/
+  docker/
+  db/
+  redis/
 ```
 
-## Run tasks
+Nx projects will be wired to use pnpm and share tooling across the monorepo.
 
-To build the library use:
+---
 
-```sh
-npx nx build pkg1
+## Getting started
+
+### Prerequisites
+
+- Node 20+
+- pnpm
+- Docker & Docker Compose
+- Go toolchain
+- Python 3.x
+
+### Install dependencies
+
+```bash
+pnpm install
 ```
 
-To run any task with Nx use:
+### Run services (once project.json targets are defined)
 
-```sh
-npx nx <target> <project-name>
+Examples (these commands will evolve as services are generated and configured):
+
+```bash
+# Start core backend services
+pnpm nx serve api-gateway
+pnpm nx serve identity-service
+pnpm nx serve accounts-service
+pnpm nx serve payments-service
+
+# Start frontend shell and microfrontends
+pnpm nx serve web-shell
+pnpm nx serve mfe-dashboard
+pnpm nx serve mfe-funding
 ```
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+### Run infrastructure locally
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+From `infra/docker` (or repository root once the compose file is added):
 
-## Versioning and releasing
-
-To version and release the library use
-
-```
-npx nx release
+```bash
+docker compose up -d
 ```
 
-Pass `--dry-run` to see what would happen without actually releasing the library.
+This will spin up Postgres, Redis, and any other shared infrastructure used locally.
 
-[Learn more about Nx release &raquo;](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+---
 
-## Keep TypeScript project references up to date
+## Developer workflow
 
-Nx automatically updates TypeScript [project references](https://www.typescriptlang.org/docs/handbook/project-references.html) in `tsconfig.json` files to ensure they remain accurate based on your project dependencies (`import` or `require` statements). This sync is automatically done when running tasks such as `build` or `typecheck`, which require updated references to function correctly.
+### Formatting & linting
 
-To manually trigger the process to sync the project graph dependencies information to the TypeScript project references, run the following command:
+- **Ultracite** orchestrates Biome and related tools across TS/JS/JSON/Python.
+- Run manually:
 
-```sh
-npx nx sync
+```bash
+pnpm ultracite fix
 ```
 
-You can enforce that the TypeScript project references are always in the correct state when running in CI by adding a step to your CI job configuration that runs the following command:
+Git hooks (via Lefthook) will run Ultracite on staged files before commit.
 
-```sh
-npx nx sync:check
+### Commits
+
+- Conventional Commits are enforced by commitlint.
+- Commitizen (git-cz) is used for interactive commit messages:
+
+```bash
+pnpm commit
 ```
 
-[Learn more about nx sync](https://nx.dev/reference/nx-commands#sync)
+This opens an interactive prompt and generates a properly formatted commit message.
 
-## Nx Cloud
+---
 
-Nx Cloud ensures a [fast and scalable CI](https://nx.dev/ci/intro/why-nx-cloud?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) pipeline. It includes features such as:
+## Nx usage
 
-- [Remote caching](https://nx.dev/ci/features/remote-cache?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task distribution across multiple machines](https://nx.dev/ci/features/distribute-task-execution?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Automated e2e test splitting](https://nx.dev/ci/features/split-e2e-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task flakiness detection and rerunning](https://nx.dev/ci/features/flaky-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+Common Nx commands in this workspace:
 
-### Set up CI (non-Github Actions CI)
+```bash
+# Visualize projects and dependencies
+pnpm nx graph
 
-**Note:** This is only required if your CI provider is not GitHub Actions.
+# Run any target on a project
+pnpm nx <target> <project>
 
-Use the following command to configure a CI workflow for your workspace:
-
-```sh
-npx nx g ci-workflow
+# Examples (after apps are added)
+pnpm nx build api-gateway
+pnpm nx test accounts-service
 ```
 
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+Nx caches task outputs to speed up subsequent builds and tests and integrates with CI via Nx Cloud if configured.
 
-## Install Nx Console
+---
 
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
+## Roadmap (short term)
 
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+1. Configure core services:
+   - `api-gateway`, `identity-service`, `accounts-service`, `payments-service`
+2. Add `ledger-service` (Go) with gRPC interface and Postgres integration
+3. Set up Postgres and Redis via Docker Compose
+4. Integrate Paystack for funding + basic reconciliation flows
+5. Build `web-shell`, `mfe-dashboard`, and `mfe-funding`
+6. Add `market-data-service` + portfolio modeling and initial `insights-service` integration
 
-## Useful links
+---
 
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/nx-api/js?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+_Note: This README describes the intended architecture and will be updated as the implementation evolves._
