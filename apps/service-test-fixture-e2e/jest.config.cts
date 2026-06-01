@@ -1,16 +1,16 @@
 /* eslint-disable */
-import { readFileSync } from 'node:fs'
+import { readFileSync } from 'fs';
 
 // Reading the SWC compilation config for the spec files
 const swcJestConfig = JSON.parse(
-  readFileSync(`${import.meta.dirname}/.spec.swcrc`, 'utf-8'),
-)
+  readFileSync(`${__dirname}/.spec.swcrc`, 'utf-8')
+);
 
 // Disable .swcrc look-up by SWC core because we're passing in swcJestConfig ourselves
-swcJestConfig.swcrc = false
+swcJestConfig.swcrc = false;
 
 export default {
-  displayName: '@org/accounts-service-e2e',
+  displayName: '@org/service-test-fixture-e2e',
   preset: '../../jest.preset.js',
   setupFiles: ['<rootDir>/src/test-setup.ts'],
   testEnvironment: 'node',
@@ -19,4 +19,4 @@ export default {
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: 'test-output/jest/coverage',
-}
+};

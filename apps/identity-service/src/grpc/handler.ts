@@ -1,7 +1,7 @@
 import { Code, ConnectError, type ConnectRouter } from '@connectrpc/connect'
 import { IdentityPb, type MessageShape } from '@org/protos'
-import { Effect, Layer, ManagedRuntime } from 'effect'
-import { DatabaseLive } from '../db/client.js'
+import { Effect, Either, Layer, ManagedRuntime } from 'effect'
+import { DatabaseLive, type DrizzleDB } from '../db/client.js'
 import * as identity from '../services/identity.js'
 
 // --- Runtime ---
@@ -15,6 +15,31 @@ const fail = (message: string, code: Code) =>
   Effect.fail(new ConnectError(message, code))
 
 const internalError = fail('Internal server error', Code.Internal)
+
+/*
+ * runHandler uses Effect.either to move failures into the success channel
+ * before passing to runtime.runPromise. runPromise wraps all Effect failures
+ * in FiberFailure regardless of type — ConnectRPC does not recognise
+ * FiberFailure and falls back to Code.Internal for every failure, even when
+ * the error is already a correctly typed ConnectError. Effect.either prevents
+ * any failure from reaching runPromise, so the ConnectError is extracted from
+ * Either.Left and thrown directly. ConnectRPC then receives a real ConnectError
+ * and maps it to the correct gRPC status code.
+ */
+const runHandler = async <A, R>(
+  effect: Effect.Effect<A, ConnectError, R>,
+): Promise<A> => {
+  const either = Effect.either(effect) as unknown as Effect.Effect<
+    Either.Either<A, ConnectError>,
+    never,
+    DrizzleDB
+  >
+  const result = await runtime.runPromise(either)
+  if (Either.isLeft(result)) {
+    throw result.left
+  }
+  return result.right
+}
 
 // --- Routes ---
 
@@ -32,7 +57,7 @@ export const identityRoutes = (router: ConnectRouter) =>
      * to the same type as the generated message alias — not a cast.
      */
     register: (req: MessageShape<typeof IdentityPb.RegisterRequestSchema>) =>
-      runtime.runPromise(
+      runHandler(
         identity
           .register({
             email: req.email,
@@ -43,7 +68,6 @@ export const identityRoutes = (router: ConnectRouter) =>
           })
           .pipe(
             Effect.map((user) => ({ userId: user.id, email: user.email })),
-            Effect.tapError((e) => Effect.logError('verifyToken error', e)),
             Effect.catchTags({
               UserAlreadyExistsError: () =>
                 fail('Email already in use', Code.AlreadyExists),
@@ -60,7 +84,7 @@ export const identityRoutes = (router: ConnectRouter) =>
      * to the same type as the generated message alias — not a cast.
      */
     login: (req: MessageShape<typeof IdentityPb.LoginRequestSchema>) =>
-      runtime.runPromise(
+      runHandler(
         identity.login(req.email, req.password).pipe(
           Effect.map(({ accessToken, refreshToken }) => ({
             accessToken,
@@ -86,14 +110,13 @@ export const identityRoutes = (router: ConnectRouter) =>
     verifyToken: (
       req: MessageShape<typeof IdentityPb.VerifyTokenRequestSchema>,
     ) =>
-      runtime.runPromise(
+      runHandler(
         identity.verifyToken(req.token).pipe(
           Effect.map(({ userId, email }) => ({
             userId,
             email,
             valid: true,
           })),
-          Effect.tapError((e) => Effect.logError('verifyToken error', e)),
           Effect.catchTags({
             InvalidTokenError: (e) => fail(e.reason, Code.Unauthenticated),
           }),

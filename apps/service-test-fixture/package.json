@@ -1,21 +1,7 @@
 {
-  "name": "@org/identity-service",
+  "name": "@org/service-test-fixture",
   "version": "0.0.1",
   "private": true,
-  "type": "module",
-  "dependencies": {
-    "@connectrpc/connect": "^2.1.1",
-    "@connectrpc/connect-node": "^2.1.1",
-    "@effect/opentelemetry": "^0.63.0",
-    "@effect/platform": "^0.96.1",
-    "@effect/platform-node": "^0.106.0",
-    "@org/protos": "workspace:*",
-    "argon2": "^0.44.0",
-    "drizzle-orm": "^0.45.2",
-    "effect": "^3.21.2",
-    "jose": "^6.2.3",
-    "postgres": "^3.4.9"
-  },
   "nx": {
     "targets": {
       "build": {
@@ -26,15 +12,15 @@
         "defaultConfiguration": "production",
         "options": {
           "platform": "node",
-          "outputPath": "apps/identity-service/dist",
+          "outputPath": "apps/service-test-fixture/dist",
           "format": [
-            "esm"
+            "cjs"
           ],
           "bundle": false,
-          "main": "apps/identity-service/src/main.ts",
-          "tsConfig": "apps/identity-service/tsconfig.app.json",
+          "main": "apps/service-test-fixture/src/main.ts",
+          "tsConfig": "apps/service-test-fixture/tsconfig.app.json",
           "assets": [
-            "apps/identity-service/src/assets"
+            "apps/service-test-fixture/src/assets"
           ],
           "esbuildOptions": {
             "sourcemap": true,
@@ -62,8 +48,8 @@
         "cache": true,
         "executor": "@nx/js:prune-lockfile",
         "outputs": [
-          "{workspaceRoot}/apps/identity-service/dist/package.json",
-          "{workspaceRoot}/apps/identity-service/dist/pnpm-lock.yaml"
+          "{workspaceRoot}/apps/service-test-fixture/dist/package.json",
+          "{workspaceRoot}/apps/service-test-fixture/dist/pnpm-lock.yaml"
         ],
         "options": {
           "buildTarget": "build"
@@ -75,7 +61,7 @@
         ],
         "cache": true,
         "outputs": [
-          "{workspaceRoot}/apps/identity-service/dist/workspace_modules"
+          "{workspaceRoot}/apps/service-test-fixture/dist/workspace_modules"
         ],
         "executor": "@nx/js:copy-workspace-modules",
         "options": {
@@ -97,49 +83,29 @@
           "build"
         ],
         "options": {
-          "buildTarget": "@org/identity-service:build",
+          "buildTarget": "@org/service-test-fixture:build",
           "runBuildTargetDependencies": false
         },
         "configurations": {
           "development": {
-            "buildTarget": "@org/identity-service:build:development"
+            "buildTarget": "@org/service-test-fixture:build:development"
           },
           "production": {
-            "buildTarget": "@org/identity-service:build:production"
+            "buildTarget": "@org/service-test-fixture:build:production"
           }
         }
       },
       "test": {
+        "executor": "@nx/jest:jest",
+        "outputs": [
+          "{projectRoot}/test-output/jest/coverage"
+        ],
         "options": {
+          "jestConfig": "apps/service-test-fixture/jest.config.cts",
           "passWithNoTests": true
-        }
-      },
-      "dev": {
-        "continuous": true,
-        "executor": "nx:run-commands",
-        "options": {
-          "command": "tsx watch src/main.ts",
-          "cwd": "apps/identity-service"
-        }
-      },
-      "generate": {
-        "executor": "nx:run-commands",
-        "options": {
-          "command": "dotenv -e .env -- drizzle-kit generate",
-          "cwd": "apps/identity-service"
-        }
-      },
-      "migrate": {
-        "executor": "nx:run-commands",
-        "options": {
-          "command": "dotenv -e .env -- drizzle-kit migrate",
-          "cwd": "apps/identity-service"
         }
       }
     }
   },
-  "devDependencies": {
-    "drizzle-kit": "^0.31.10",
-    "tsx": "^4.22.3"
-  }
+  "dependencies": {}
 }
