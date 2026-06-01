@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+package nexacore.marketdata.v1;
+
+option go_package = "github.com/kingsonseang/nexacore-financial/ledger-service/gen/nexacore/marketdata/v1;marketdatav1";
+
+service MarketDataService {
+  rpc GetQuote(GetQuoteRequest) returns (GetQuoteResponse);
+  rpc GetFxRate(GetFxRateRequest) returns (GetFxRateResponse);
+  rpc GetHistoricalPrices(GetHistoricalPricesRequest) returns (GetHistoricalPricesResponse);
+}
+
+message Quote {
+  string symbol = 1;
+  string price = 2;
+  string change = 3;
+  string change_percent = 4;
+  string currency = 5;
+  string timestamp = 6;
+}
+
+message GetQuoteRequest {
+  string symbol = 1;
+}
+
+message GetQuoteResponse {
+  Quote quote = 1;
+}
+
+message GetFxRateRequest {
+  string from_currency = 1;
+  string to_currency = 2;
+}
+
+message GetFxRateResponse {
+  string rate = 1;
+  string from_currency = 2;
+  string to_currency = 3;
+  string timestamp = 4;
+}
+
+message PricePoint {
+  string date = 1;
+  string open = 2;
+  string high = 3;
+  string low = 4;
+  string close = 5;
+  string volume = 6;
+}
+
+message GetHistoricalPricesRequest {
+  string symbol = 1;
+  string from_date = 2;
+  string to_date = 3;
+}
+
+message GetHistoricalPricesResponse {
+  string symbol = 1;
+  repeated PricePoint prices = 2;
+}

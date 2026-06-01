@@ -1,0 +1,26 @@
+meta {
+  name: register
+  type: grpc
+  seq: 2
+}
+
+grpc {
+  url: {{GRPC_URL}}
+  method: /nexacore.identity.v1.IdentityService/Register
+  body: grpc
+  protoPath: ../libs/protos/proto/nexacore/identity/v1/identity.proto
+  auth: none
+  methodType: unary
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {
+      "email": "test@test.com",
+      "password": "test1234",
+      "firstName": "Test",
+      "lastName": "User"
+    }
+  '''
+}

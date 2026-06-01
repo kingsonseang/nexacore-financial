@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+package nexacore.ledger.v1;
+
+option go_package = "github.com/kingsonseang/nexacore-financial/ledger-service/gen/nexacore/ledger/v1;ledgerv1";
+
+service LedgerService {
+  rpc PostEntry(PostEntryRequest) returns (PostEntryResponse);
+  rpc GetBalance(GetBalanceRequest) returns (GetBalanceResponse);
+  rpc ListEntries(ListEntriesRequest) returns (ListEntriesResponse);
+}
+
+enum EntryType {
+  ENTRY_TYPE_UNSPECIFIED = 0;
+  ENTRY_TYPE_DEBIT = 1;
+  ENTRY_TYPE_CREDIT = 2;
+}
+
+message JournalEntry {
+  string entry_id = 1;
+  string account_id = 2;
+  EntryType type = 3;
+  string amount = 4;
+  string currency = 5;
+  string reference = 6;
+  string description = 7;
+  string created_at = 8;
+}
+
+message PostEntryRequest {
+  string account_id = 1;
+  string amount = 2;
+  string currency = 3;
+  EntryType type = 4;
+  string reference = 5;
+  string description = 6;
+}
+
+message PostEntryResponse {
+  string entry_id = 1;
+  string balance_after = 2;
+}
+
+message GetBalanceRequest {
+  string account_id = 1;
+  string currency = 2;
+}
+
+message GetBalanceResponse {
+  string balance = 1;
+  string currency = 2;
+  string account_id = 3;
+}
+
+message ListEntriesRequest {
+  string account_id = 1;
+  int32 page = 2;
+  int32 page_size = 3;
+}
+
+message ListEntriesResponse {
+  repeated JournalEntry entries = 1;
+  int32 total = 2;
+}

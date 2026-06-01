@@ -27,5 +27,22 @@
     }
   ],
   "nxCloudId": "69ed7bc702e33f96a383f30d",
-  "analytics": true
+  "analytics": true,
+  "targetDefaults": {
+    "@nx/esbuild:esbuild": {
+      "cache": true,
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "production",
+        "^production"
+      ]
+    },
+    "test": {
+      "dependsOn": [
+        "^build"
+      ]
+    }
+  }
 }

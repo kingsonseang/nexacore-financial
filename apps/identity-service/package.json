@@ -1,0 +1,129 @@
+{
+  "name": "@org/identity-service",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@connectrpc/connect": "^2.1.1",
+    "@connectrpc/connect-node": "^2.1.1",
+    "@effect/opentelemetry": "^0.63.0",
+    "@effect/platform": "^0.96.1",
+    "@effect/platform-node": "^0.106.0",
+    "@org/protos": "workspace:*",
+    "argon2": "^0.44.0",
+    "drizzle-orm": "^0.45.2",
+    "effect": "^3.21.2",
+    "jose": "^6.2.3",
+    "postgres": "^3.4.9"
+  },
+  "nx": {
+    "targets": {
+      "build": {
+        "executor": "@nx/esbuild:esbuild",
+        "outputs": ["{options.outputPath}"],
+        "defaultConfiguration": "production",
+        "options": {
+          "platform": "node",
+          "outputPath": "apps/identity-service/dist",
+          "format": ["esm"],
+          "bundle": false,
+          "main": "apps/identity-service/src/main.ts",
+          "tsConfig": "apps/identity-service/tsconfig.app.json",
+          "assets": ["apps/identity-service/src/assets"],
+          "esbuildOptions": {
+            "sourcemap": true,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        },
+        "configurations": {
+          "development": {},
+          "production": {
+            "esbuildOptions": {
+              "sourcemap": false,
+              "outExtension": {
+                ".js": ".js"
+              }
+            }
+          }
+        }
+      },
+      "prune-lockfile": {
+        "dependsOn": ["build"],
+        "cache": true,
+        "executor": "@nx/js:prune-lockfile",
+        "outputs": [
+          "{workspaceRoot}/apps/identity-service/dist/package.json",
+          "{workspaceRoot}/apps/identity-service/dist/pnpm-lock.yaml"
+        ],
+        "options": {
+          "buildTarget": "build"
+        }
+      },
+      "copy-workspace-modules": {
+        "dependsOn": ["build"],
+        "cache": true,
+        "outputs": [
+          "{workspaceRoot}/apps/identity-service/dist/workspace_modules"
+        ],
+        "executor": "@nx/js:copy-workspace-modules",
+        "options": {
+          "buildTarget": "build"
+        }
+      },
+      "prune": {
+        "dependsOn": ["prune-lockfile", "copy-workspace-modules"],
+        "executor": "nx:noop"
+      },
+      "serve": {
+        "continuous": true,
+        "executor": "@nx/js:node",
+        "defaultConfiguration": "development",
+        "dependsOn": ["build"],
+        "options": {
+          "buildTarget": "@org/identity-service:build",
+          "runBuildTargetDependencies": false
+        },
+        "configurations": {
+          "development": {
+            "buildTarget": "@org/identity-service:build:development"
+          },
+          "production": {
+            "buildTarget": "@org/identity-service:build:production"
+          }
+        }
+      },
+      "test": {
+        "options": {
+          "passWithNoTests": true
+        }
+      },
+      "dev": {
+        "continuous": true,
+        "executor": "nx:run-commands",
+        "options": {
+          "command": "tsx watch src/main.ts",
+          "cwd": "apps/identity-service"
+        }
+      },
+      "generate": {
+        "executor": "nx:run-commands",
+        "options": {
+          "command": "dotenv -e .env -- drizzle-kit generate",
+          "cwd": "apps/identity-service"
+        }
+      },
+      "migrate": {
+        "executor": "nx:run-commands",
+        "options": {
+          "command": "dotenv -e .env -- drizzle-kit migrate",
+          "cwd": "apps/identity-service"
+        }
+      }
+    }
+  },
+  "devDependencies": {
+    "tsx": "^4.22.3"
+  }
+}

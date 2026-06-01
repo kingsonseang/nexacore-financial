@@ -1,0 +1,7 @@
+export type { MessageShape } from '@bufbuild/protobuf'
+export * as AccountsPb from './gen/nexacore/accounts/v1/accounts_pb.js'
+export * as IdentityPb from './gen/nexacore/identity/v1/identity_pb.js'
+export * as InsightsPb from './gen/nexacore/insights/v1/insights_pb.js'
+export * as LedgerPb from './gen/nexacore/ledger/v1/ledger_pb.js'
+export * as MarketDataPb from './gen/nexacore/market_data/v1/market_data_pb.js'
+export * as PaymentsPb from './gen/nexacore/payments/v1/payments_pb.js'

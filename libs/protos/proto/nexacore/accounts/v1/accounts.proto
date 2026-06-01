@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+package nexacore.accounts.v1;
+
+option go_package = "github.com/kingsonseang/nexacore-financial/ledger-service/gen/nexacore/accounts/v1;accountsv1";
+
+service AccountsService {
+  rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse);
+  rpc GetAccount(GetAccountRequest) returns (GetAccountResponse);
+  rpc GetBalance(GetBalanceRequest) returns (GetBalanceResponse);
+  rpc ListWallets(ListWalletsRequest) returns (ListWalletsResponse);
+}
+
+enum Currency {
+  CURRENCY_UNSPECIFIED = 0;
+  CURRENCY_NGN = 1;
+  CURRENCY_USD = 2;
+}
+
+message Wallet {
+  string wallet_id = 1;
+  string user_id = 2;
+  Currency currency = 3;
+  string balance = 4;
+  string created_at = 5;
+}
+
+message CreateAccountRequest {
+  string user_id = 1;
+}
+
+message CreateAccountResponse {
+  string account_id = 1;
+  repeated Wallet wallets = 2;
+}
+
+message GetAccountRequest {
+  string user_id = 1;
+}
+
+message GetAccountResponse {
+  string account_id = 1;
+  string user_id = 2;
+  repeated Wallet wallets = 3;
+}
+
+message GetBalanceRequest {
+  string user_id = 1;
+  Currency currency = 2;
+}
+
+message GetBalanceResponse {
+  string balance = 1;
+  Currency currency = 2;
+}
+
+message ListWalletsRequest {
+  string user_id = 1;
+}
+
+message ListWalletsResponse {
+  repeated Wallet wallets = 1;
+}

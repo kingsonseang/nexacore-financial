@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package nexacore.insights.v1;
+
+option go_package = "github.com/kingsonseang/nexacore-financial/ledger-service/gen/nexacore/insights/v1;insightsv1";
+
+service InsightsService {
+  rpc GeneratePortfolioSummary(GeneratePortfolioSummaryRequest) returns (GeneratePortfolioSummaryResponse);
+  rpc GetRiskAlerts(GetRiskAlertsRequest) returns (GetRiskAlertsResponse);
+}
+
+message GeneratePortfolioSummaryRequest {
+  string user_id = 1;
+  string period = 2;
+}
+
+message GeneratePortfolioSummaryResponse {
+  string user_id = 1;
+  string summary = 2;
+  string generated_at = 3;
+}
+
+message RiskAlert {
+  string alert_id = 1;
+  string user_id = 2;
+  string type = 3;
+  string message = 4;
+  string severity = 5;
+  string created_at = 6;
+}
+
+message GetRiskAlertsRequest {
+  string user_id = 1;
+}
+
+message GetRiskAlertsResponse {
+  repeated RiskAlert alerts = 1;
+}

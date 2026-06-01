@@ -1,0 +1,20 @@
+{
+  "version": "1",
+  "name": "NexaCore Financial",
+  "type": "collection",
+  "ignore": ["node_modules", ".git"],
+  "size": 0.00033092498779296875,
+  "filesCount": 1,
+  "protobuf": {
+    "protoFiles": [
+      {
+        "path": "../libs/protos/proto/nexacore/identity/v1/identity.proto",
+        "type": "file"
+      }
+    ]
+  },
+  "presets": {
+    "requestType": "graphql",
+    "requestUrl": ""
+  }
+}

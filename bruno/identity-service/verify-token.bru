@@ -1,0 +1,25 @@
+meta {
+  name: verify-token
+  type: grpc
+  seq: 3
+}
+
+grpc {
+  url: {{GRPC_URL}}
+  method: /nexacore.identity.v1.IdentityService/VerifyToken
+  body: grpc
+  protoPath: ../libs/protos/proto/nexacore/identity/v1/identity.proto
+  auth: none
+  methodType: unary
+}
+
+metadata {
+  ~token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmMDU0MTg4Ni00ZjA1LTRmOTQtODQ3Zi1mNThmMWI2ZGZkMWMiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJleHAiOjE3Nzk2MTQxMTd9.JHnIEoIUSIYyZ1WiPjv6mQVGPlEqIJHZ38uuCcaXzbg
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {}
+  '''
+}

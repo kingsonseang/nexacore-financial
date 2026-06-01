@@ -1,0 +1,45 @@
+{
+  "name": "@org/protos",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "@org/source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "dependencies": {
+    "@bufbuild/protobuf": "^2.12.0",
+    "@connectrpc/connect": "^2.1.1",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@bufbuild/buf": "^1.69.0",
+    "@bufbuild/protoc-gen-es": "^2.12.0"
+  },
+  "nx": {
+    "targets": {
+      "generate": {
+        "executor": "nx:run-commands",
+        "options": {
+          "command": "buf generate",
+          "cwd": "libs/protos"
+        }
+      },
+      "lint": {
+        "executor": "nx:run-commands",
+        "options": {
+          "command": "buf lint",
+          "cwd": "libs/protos"
+        }
+      }
+    }
+  }
+}

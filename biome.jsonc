@@ -1,4 +1,11 @@
 {
+  "extends": [
+    "ultracite/biome/core",
+    "ultracite/biome/react",
+    "ultracite/biome/next",
+    "ultracite/biome/remix",
+    "ultracite/biome/jest"
+  ],
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "vcs": {
     "enabled": true,
@@ -26,13 +33,25 @@
       "!./coverage",
       "!./.nx/cache",
       "!./.nx/workspace-data",
-      "!.nx/self-healing"
+      "!.nx/self-healing",
+      "!.agent",
+      "!.claude",
+      "!.codex",
+      "!.gemini",
+      "!.opencode",
+      "!.windsurf",
+      "!.zed"
     ]
   },
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "performance": {
+        "noNamespaceImport": "off",
+        "noBarrelFile": "off",
+        "useTopLevelRegex": "info"
+      }
     }
   },
   "javascript": {
@@ -71,10 +90,27 @@
       }
     }
   },
-  "extends": [
-    "ultracite/biome/core",
-    "ultracite/biome/react",
-    "ultracite/biome/next",
-    "ultracite/biome/remix"
+  "overrides": [
+    {
+      "includes": [
+        "**/*.spec.ts",
+        "**/*.test.ts"
+      ],
+      "javascript": {
+        "globals": [
+          "describe",
+          "it",
+          "expect",
+          "xdescribe",
+          "xit",
+          "test",
+          "beforeEach",
+          "afterEach",
+          "beforeAll",
+          "afterAll",
+          "jest"
+        ]
+      }
+    }
   ]
 }

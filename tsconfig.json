@@ -2,7 +2,47 @@
   "extends": "./tsconfig.base.json",
   "compileOnSave": false,
   "files": [],
-  "references": [],
+  "references": [
+    {
+      "path": "./apps/api-gateway-e2e"
+    },
+    {
+      "path": "./apps/api-gateway"
+    },
+    {
+      "path": "./apps/identity-service-e2e"
+    },
+    {
+      "path": "./apps/identity-service"
+    },
+    {
+      "path": "./apps/accounts-service-e2e"
+    },
+    {
+      "path": "./apps/accounts-service"
+    },
+    {
+      "path": "./apps/payments-service-e2e"
+    },
+    {
+      "path": "./apps/payments-service"
+    },
+    {
+      "path": "./apps/notification-service-e2e"
+    },
+    {
+      "path": "./apps/notification-service"
+    },
+    {
+      "path": "./libs/protos"
+    },
+    {
+      "path": "./apps/service-test-fixture-e2e"
+    },
+    {
+      "path": "./apps/service-test-fixture"
+    }
+  ],
   "compilerOptions": {
     "strictNullChecks": true
   }

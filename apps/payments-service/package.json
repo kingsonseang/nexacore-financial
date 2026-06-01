@@ -1,0 +1,99 @@
+{
+  "name": "@org/payments-service",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@effect/opentelemetry": "^0.63.0",
+    "@effect/platform": "^0.96.1",
+    "@effect/platform-node": "^0.106.0",
+    "drizzle-orm": "^0.45.2",
+    "effect": "^3.21.2",
+    "postgres": "^3.4.9"
+  },
+  "nx": {
+    "targets": {
+      "build": {
+        "executor": "@nx/esbuild:esbuild",
+        "outputs": ["{options.outputPath}"],
+        "defaultConfiguration": "production",
+        "options": {
+          "platform": "node",
+          "outputPath": "apps/payments-service/dist",
+          "format": ["esm"],
+          "bundle": false,
+          "main": "apps/payments-service/src/main.ts",
+          "tsConfig": "apps/payments-service/tsconfig.app.json",
+          "assets": ["apps/payments-service/src/assets"],
+          "esbuildOptions": {
+            "sourcemap": true,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        },
+        "configurations": {
+          "development": {},
+          "production": {
+            "esbuildOptions": {
+              "sourcemap": false,
+              "outExtension": {
+                ".js": ".js"
+              }
+            }
+          }
+        }
+      },
+      "prune-lockfile": {
+        "dependsOn": ["build"],
+        "cache": true,
+        "executor": "@nx/js:prune-lockfile",
+        "outputs": [
+          "{workspaceRoot}/apps/payments-service/dist/package.json",
+          "{workspaceRoot}/apps/payments-service/dist/pnpm-lock.yaml"
+        ],
+        "options": {
+          "buildTarget": "build"
+        }
+      },
+      "copy-workspace-modules": {
+        "dependsOn": ["build"],
+        "cache": true,
+        "outputs": [
+          "{workspaceRoot}/apps/payments-service/dist/workspace_modules"
+        ],
+        "executor": "@nx/js:copy-workspace-modules",
+        "options": {
+          "buildTarget": "build"
+        }
+      },
+      "prune": {
+        "dependsOn": ["prune-lockfile", "copy-workspace-modules"],
+        "executor": "nx:noop"
+      },
+      "serve": {
+        "continuous": true,
+        "executor": "@nx/js:node",
+        "defaultConfiguration": "development",
+        "dependsOn": ["build"],
+        "options": {
+          "buildTarget": "@org/payments-service:build",
+          "runBuildTargetDependencies": false
+        },
+        "configurations": {
+          "development": {
+            "buildTarget": "@org/payments-service:build:development"
+          },
+          "production": {
+            "buildTarget": "@org/payments-service:build:production"
+          }
+        }
+      },
+      "test": {
+        "options": {
+          "passWithNoTests": true
+        }
+      }
+    }
+  }
+}

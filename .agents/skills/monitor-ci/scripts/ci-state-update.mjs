@@ -38,8 +38,8 @@ function gate() {
   const gateType = getArg('--gate-type')
 
   if (gateType === 'local-fix') {
-    const count = parseInt(getArg('--local-verify-count') || '0', 10)
-    const max = parseInt(getArg('--local-verify-attempts') || '3', 10)
+    const count = Number.parseInt(getArg('--local-verify-count') || '0', 10)
+    const max = Number.parseInt(getArg('--local-verify-attempts') || '3', 10)
     if (count >= max) {
       return output({
         allowed: false,
@@ -55,7 +55,7 @@ function gate() {
   }
 
   if (gateType === 'env-rerun') {
-    const count = parseInt(getArg('--env-rerun-count') || '0', 10)
+    const count = Number.parseInt(getArg('--env-rerun-count') || '0', 10)
     if (count >= 2) {
       return output({
         allowed: false,
@@ -96,7 +96,7 @@ function postAction() {
   const trackByCipeUrl = cipeUrlActions.includes(action)
   const trackByCommitSha = commitShaActions.includes(action)
 
-  if (!trackByCipeUrl && !trackByCommitSha) {
+  if (!(trackByCipeUrl || trackByCommitSha)) {
     return output({ error: `Unknown action: ${action}` })
   }
 
@@ -119,15 +119,19 @@ function postAction() {
 function cycleCheck() {
   const status = getArg('--code')
   const wasAgentTriggered = getFlag('--agent-triggered')
-  let cycleCount = parseInt(getArg('--cycle-count') || '0', 10)
-  const maxCycles = parseInt(getArg('--max-cycles') || '10', 10)
-  let envRerunCount = parseInt(getArg('--env-rerun-count') || '0', 10)
+  let cycleCount = Number.parseInt(getArg('--cycle-count') || '0', 10)
+  const maxCycles = Number.parseInt(getArg('--max-cycles') || '10', 10)
+  let envRerunCount = Number.parseInt(getArg('--env-rerun-count') || '0', 10)
 
   // Cycle classification: if previous cycle was agent-triggered, count it
-  if (wasAgentTriggered) cycleCount++
+  if (wasAgentTriggered) {
+    cycleCount++
+  }
 
   // Reset env_rerun_count on non-environment status
-  if (status !== 'environment_issue') envRerunCount = 0
+  if (status !== 'environment_issue') {
+    envRerunCount = 0
+  }
 
   // Approaching limit gate
   const approachingLimit = cycleCount >= maxCycles - 2
