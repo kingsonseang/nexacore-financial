@@ -1,7 +1,7 @@
 meta {
   name: login
   type: grpc
-  seq: 1
+  seq: 3
 }
 
 grpc {
@@ -9,7 +9,7 @@ grpc {
   method: /nexacore.identity.v1.IdentityService/Login
   body: grpc
   protoPath: ../libs/protos/proto/nexacore/identity/v1/identity.proto
-  auth: none
+  auth: inherit
   methodType: unary
 }
 
@@ -18,7 +18,7 @@ body:grpc {
   content: '''
     {
       "email": "test@test.com",
-      "password": "test1234",
+      "password": "test1234"
     }
   '''
 }

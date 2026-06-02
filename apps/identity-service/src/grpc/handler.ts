@@ -73,7 +73,6 @@ export const identityRoutes = (router: ConnectRouter) =>
                 fail('Email already in use', Code.AlreadyExists),
               InfrastructureError: () => internalError,
             }),
-            Effect.catchAll(() => internalError),
           ),
       ),
 
@@ -90,14 +89,12 @@ export const identityRoutes = (router: ConnectRouter) =>
             accessToken,
             refreshToken,
           })),
-          Effect.tapError((e) => Effect.logError('verifyToken error', e)),
           Effect.catchTags({
             UserNotFoundError: () => fail('User not found', Code.NotFound),
             InvalidPasswordError: () =>
               fail('Invalid credentials', Code.Unauthenticated),
             InfrastructureError: () => internalError,
           }),
-          Effect.catchAll(() => internalError),
         ),
       ),
 
@@ -120,7 +117,6 @@ export const identityRoutes = (router: ConnectRouter) =>
           Effect.catchTags({
             InvalidTokenError: (e) => fail(e.reason, Code.Unauthenticated),
           }),
-          Effect.catchAll(() => internalError),
         ),
       ),
   })

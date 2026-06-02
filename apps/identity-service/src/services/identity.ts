@@ -40,8 +40,6 @@ export const register = (params: {
   Effect.gen(function* () {
     const db = yield* DatabaseService
 
-    yield* Effect.logInfo('register', params)
-
     const existing = yield* Effect.tryPromise({
       try: () =>
         db
