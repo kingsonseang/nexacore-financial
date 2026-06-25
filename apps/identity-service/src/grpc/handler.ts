@@ -27,10 +27,10 @@ const internalError = fail('Internal server error', Code.Internal)
  * and maps it to the correct gRPC status code.
  */
 const runHandler = async <A, R>(
-  effect: Effect.Effect<A, ConnectError, R>,
+  effect: Effect.Effect<A, ConnectError | unknown, R>,
 ): Promise<A> => {
   const either = Effect.either(effect) as unknown as Effect.Effect<
-    Either.Either<A, ConnectError>,
+    Either.Either<A, ConnectError | unknown>,
     never,
     DrizzleDB
   >

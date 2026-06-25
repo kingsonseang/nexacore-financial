@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX "wallets_user_currency_idx" ON "wallets" USING btree ("user_id","currency");

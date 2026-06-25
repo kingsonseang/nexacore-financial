@@ -35,12 +35,6 @@
     },
     {
       "path": "./libs/protos"
-    },
-    {
-      "path": "./apps/service-test-fixture-e2e"
-    },
-    {
-      "path": "./apps/service-test-fixture"
     }
   ],
   "compilerOptions": {

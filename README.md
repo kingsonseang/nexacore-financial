@@ -66,13 +66,15 @@ React + Module Federation (managed by Nx):
 
 ## Tech stack
 
-- **Workspace:** Nx, pnpm workspaces  
-- **Languages:** TypeScript, Go, Python  
-- **Backend:** Node (TS) + Go + Python, gRPC for internal calls  
-- **Frontend:** React, Module Federation, Nx  
-- **Payments:** Paystack (funding and reconciliation demo)  
-- **Market data:** external stock/FX APIs (e.g., Marketstack, CurrencyLayer)  
-- **Tooling:** Ultracite, Biome, commitlint, Commitizen (git-cz), Lefthook  
+- **Workspace:** Nx, pnpm workspaces
+- **Languages:** TypeScript, Go, Python
+- **Backend:** Node (TS) + Go + Python, gRPC for internal calls
+- **TS service stack:** Effect.ts, @effect/platform-node, ConnectRPC, Drizzle ORM, argon2, jose
+- **Frontend:** React, Module Federation, Nx
+- **Payments:** Paystack (funding and reconciliation demo)
+- **Market data:** external stock/FX APIs (e.g., Marketstack, CurrencyLayer)
+- **Proto tooling:** buf, protoc-gen-es v2 (ConnectRPC service descriptors generated inline, no separate connect-es plugin)
+- **Tooling:** Ultracite, Biome, commitlint, Commitizen (git-cz), Lefthook 
 
 ---
 
@@ -123,6 +125,32 @@ Nx projects will be wired to use pnpm and share tooling across the monorepo.
 ```bash
 pnpm install
 ```
+
+### Run services (development)
+
+Each TS service is run directly with `tsx watch` rather than through Nx's `dev` target — `nx:run-commands` with `continuous: true` currently buffers/swallows stdout for long-running watch processes in this workspace on Windows. Run from the service directory:
+
+\`\`\`bash
+cd apps/identity-service && pnpm tsx watch src/main.ts
+cd apps/accounts-service && pnpm tsx watch src/main.ts
+cd apps/api-gateway && pnpm tsx watch src/main.ts
+\`\`\`
+
+Nx `dev`/`build`/`generate`/`migrate` targets exist and work normally for non-continuous tasks.
+
+### Database setup per service
+
+Each service owns its own Postgres database (not just a schema — see Known workarounds). Create and migrate:
+
+\`\`\`bash
+createdb -U postgres nexacore_identity
+createdb -U postgres nexacore_accounts
+
+pnpm nx run identity-service:generate
+pnpm nx run identity-service:migrate
+pnpm nx run accounts-service:generate
+pnpm nx run accounts-service:migrate
+\`\`\`
 
 ### Run services (once project.json targets are defined)
 
@@ -201,14 +229,30 @@ Nx caches task outputs to speed up subsequent builds and tests and integrates wi
 
 ## Roadmap (short term)
 
-1. Configure core services:
-   - `api-gateway`, `identity-service`, `accounts-service`, `payments-service`
+1. ~~Configure core services~~ — in progress:
+   - ✅ `identity-service` — register, login, verifyToken implemented and tested
+   - ✅ `accounts-service` — createAccount, getAccount, listWallets, getBalance implemented and tested
+   - ✅ `api-gateway` — auth routes (register, login) wired to identity-service, JWT auth middleware in place
+   - ⬜ `payments-service` — not started
 2. Add `ledger-service` (Go) with gRPC interface and Postgres integration
-3. Set up Postgres and Redis via Docker Compose
+3. ✅ Postgres (local) and Redis (Docker Compose, infra profile) running
 4. Integrate Paystack for funding + basic reconciliation flows
 5. Build `web-shell`, `mfe-dashboard`, and `mfe-funding`
 6. Add `market-data-service` + portfolio modeling and initial `insights-service` integration
-
+7. ⬜ Unit and integration tests per service — not yet started
+8. 
 ---
 
 _Note: This README describes the intended architecture and will be updated as the implementation evolves._
+
+## Known workarounds
+
+- **ConnectRPC `UnaryImpl` is incompatible with protobuf-es v2 branded `$typeName` types.** `router.service(...)` is cast with `@ts-expect-error`/`as any` at the registration boundary only — handler bodies use explicit `MessageShape<typeof Schema>` parameter types for full internal type safety.
+- **`ManagedRuntime.runPromise` wraps all Effect failures in `FiberFailure`,** which ConnectRPC does not recognise, collapsing every error to `Code.Internal`. Each service's `grpc/handler.ts` uses a `runHandler` helper built on `Effect.either` to move the error into the success channel before `runPromise`, then throws the extracted `ConnectError` directly.
+- **`@effect/platform`'s `HttpRouter.post` handler type does not reliably infer `Respondable`** from `Effect.gen` generators when the success path returns through nested `Effect.tryPromise` calls. Gateway routes use explicit `Effect.flatMap` chains with typed `Effect.tryPromise<T, ConnectError>` generics instead of generators where this surfaces.
+- **gRPC reflection has no official ConnectRPC TypeScript implementation yet** (Go has one, TS does not). Bruno and grpcurl point at `.proto` files directly via `-import-path`/`-proto` instead of using reflection.
+- **gRPC JSON encoding requires camelCase field names** (e.g. `userId`, not `user_id`) — snake_case keys are silently dropped as unknown fields rather than erroring, which can mask bugs. Always verify request payloads use the camelCase proto JSON names.
+
+## Future considerations
+
+- `accounts-service` currently provisions NGN + USD wallets directly in Postgres on registration. This is intentional for now (mirrors Chipper Cash / Grey — wallets exist freely, KYC gates *actions* not wallet existence) but will eventually be replaced or augmented by a real provider integration (e.g. Paystack subaccounts) to issue real account numbers for receiving money. The `CreateAccount` gRPC contract is expected to remain stable through that change.

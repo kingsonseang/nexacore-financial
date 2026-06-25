@@ -1,0 +1,23 @@
+meta {
+  name: create-account
+  type: grpc
+  seq: 1
+}
+
+grpc {
+  url: {{ACCOUNTS_GRPC_URL}}
+  method: /nexacore.accounts.v1.AccountsService/CreateAccount
+  body: grpc
+  protoPath: ../libs/protos/proto/nexacore/accounts/v1/accounts.proto
+  auth: none
+  methodType: unary
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {
+      "userId": "f0541886-4f05-4f94-847f-f58f1b6dfd1c"
+    }
+  '''
+}

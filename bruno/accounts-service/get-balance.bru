@@ -1,0 +1,21 @@
+meta {
+  name: get-balance
+  type: grpc
+  seq: 3
+}
+
+grpc {
+  url: {{ACCOUNTS_GRPC_URL}}
+  method: /nexacore.accounts.v1.AccountsService/GetBalance
+  body: grpc
+  protoPath: ../libs/protos/proto/nexacore/accounts/v1/accounts.proto
+  auth: none
+  methodType: unary
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {}
+  '''
+}

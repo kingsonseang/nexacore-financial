@@ -4,9 +4,12 @@
   "private": true,
   "type": "module",
   "dependencies": {
+    "@connectrpc/connect": "^2.1.1",
+    "@connectrpc/connect-node": "^2.1.1",
     "@effect/opentelemetry": "^0.63.0",
     "@effect/platform": "^0.96.1",
     "@effect/platform-node": "^0.106.0",
+    "@org/protos": "workspace:*",
     "drizzle-orm": "^0.45.2",
     "effect": "^3.21.2",
     "postgres": "^3.4.9"
@@ -15,16 +18,22 @@
     "targets": {
       "build": {
         "executor": "@nx/esbuild:esbuild",
-        "outputs": ["{options.outputPath}"],
+        "outputs": [
+          "{options.outputPath}"
+        ],
         "defaultConfiguration": "production",
         "options": {
           "platform": "node",
           "outputPath": "apps/accounts-service/dist",
-          "format": ["esm"],
+          "format": [
+            "esm"
+          ],
           "bundle": false,
           "main": "apps/accounts-service/src/main.ts",
           "tsConfig": "apps/accounts-service/tsconfig.app.json",
-          "assets": ["apps/accounts-service/src/assets"],
+          "assets": [
+            "apps/accounts-service/src/assets"
+          ],
           "esbuildOptions": {
             "sourcemap": true,
             "outExtension": {
@@ -45,7 +54,9 @@
         }
       },
       "prune-lockfile": {
-        "dependsOn": ["build"],
+        "dependsOn": [
+          "build"
+        ],
         "cache": true,
         "executor": "@nx/js:prune-lockfile",
         "outputs": [
@@ -57,7 +68,9 @@
         }
       },
       "copy-workspace-modules": {
-        "dependsOn": ["build"],
+        "dependsOn": [
+          "build"
+        ],
         "cache": true,
         "outputs": [
           "{workspaceRoot}/apps/accounts-service/dist/workspace_modules"
@@ -68,14 +81,19 @@
         }
       },
       "prune": {
-        "dependsOn": ["prune-lockfile", "copy-workspace-modules"],
+        "dependsOn": [
+          "prune-lockfile",
+          "copy-workspace-modules"
+        ],
         "executor": "nx:noop"
       },
       "serve": {
         "continuous": true,
         "executor": "@nx/js:node",
         "defaultConfiguration": "development",
-        "dependsOn": ["build"],
+        "dependsOn": [
+          "build"
+        ],
         "options": {
           "buildTarget": "@org/accounts-service:build",
           "runBuildTargetDependencies": false
@@ -93,7 +111,34 @@
         "options": {
           "passWithNoTests": true
         }
+      },
+      "dev": {
+        "continuous": true,
+        "executor": "nx:run-commands",
+        "options": {
+          "command": "tsx watch src/main.ts",
+          "cwd": "apps/accounts-service"
+        }
+      },
+      "generate": {
+        "executor": "nx:run-commands",
+        "options": {
+          "command": "dotenv -e .env -- drizzle-kit generate",
+          "cwd": "apps/accounts-service"
+        }
+      },
+      "migrate": {
+        "executor": "nx:run-commands",
+        "options": {
+          "command": "dotenv -e .env -- drizzle-kit migrate",
+          "cwd": "apps/accounts-service"
+        }
       }
     }
+  },
+  "devDependencies": {
+    "dotenv-cli": "^11.0.0",
+    "drizzle-kit": "^0.31.10",
+    "tsx": "^4.22.3"
   }
 }
