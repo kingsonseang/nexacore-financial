@@ -17,21 +17,6 @@ const fail = (message: string, code: Code) =>
 
 const internalError = fail('Internal server error', Code.Internal)
 
-// --- gRPC helpers ---
-const toDbCurrency = (currency: AccountsPb.Currency): CurrencyEnum => {
-  switch (currency) {
-    case AccountsPb.Currency.NGN:
-      return 'NGN'
-    case AccountsPb.Currency.USD:
-      return 'USD'
-    default:
-      throw new ConnectError('Invalid currency', Code.InvalidArgument)
-  }
-}
-
-const toProtoCurrency = (currency: CurrencyEnum): AccountsPb.Currency =>
-  currency === 'NGN' ? AccountsPb.Currency.NGN : AccountsPb.Currency.USD
-
 /*
  * runHandler uses Effect.either to move failures into the success channel
  * before passing to runtime.runPromise. runPromise wraps all Effect failures
@@ -56,6 +41,22 @@ const runHandler = async <A, R>(
   }
   return result.right
 }
+
+// --- gRPC helpers ---
+
+const toDbCurrency = (currency: AccountsPb.Currency): CurrencyEnum => {
+  switch (currency) {
+    case AccountsPb.Currency.NGN:
+      return 'NGN'
+    case AccountsPb.Currency.USD:
+      return 'USD'
+    default:
+      throw new ConnectError('Invalid currency', Code.InvalidArgument)
+  }
+}
+
+const toProtoCurrency = (currency: CurrencyEnum): AccountsPb.Currency =>
+  currency === 'NGN' ? AccountsPb.Currency.NGN : AccountsPb.Currency.USD
 
 // --- Routes ---
 

@@ -2,183 +2,162 @@
 // @generated from file nexacore/identity/v1/identity.proto (package nexacore.identity.v1, syntax proto3)
 /* eslint-disable */
 
-import type { Message } from '@bufbuild/protobuf'
-import type {
-  GenFile,
-  GenMessage,
-  GenService,
-} from '@bufbuild/protobuf/codegenv2'
-import {
-  fileDesc,
-  messageDesc,
-  serviceDesc,
-} from '@bufbuild/protobuf/codegenv2'
+import type { GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
+import { fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv2";
+import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file nexacore/identity/v1/identity.proto.
  */
-export const file_nexacore_identity_v1_identity: GenFile =
-  /*@__PURE__*/
-  fileDesc(
-    'CiNuZXhhY29yZS9pZGVudGl0eS92MS9pZGVudGl0eS5wcm90bxIUbmV4YWNvcmUuaWRlbnRpdHkudjEibgoPUmVnaXN0ZXJSZXF1ZXN0Eg0KBWVtYWlsGAEgASgJEhAKCHBhc3N3b3JkGAIgASgJEhIKCmZpcnN0X25hbWUYAyABKAkSEQoJbGFzdF9uYW1lGAQgASgJEhMKC21pZGRsZV9uYW1lGAUgASgJIjIKEFJlZ2lzdGVyUmVzcG9uc2USDwoHdXNlcl9pZBgBIAEoCRINCgVlbWFpbBgCIAEoCSIvCgxMb2dpblJlcXVlc3QSDQoFZW1haWwYASABKAkSEAoIcGFzc3dvcmQYAiABKAkiPAoNTG9naW5SZXNwb25zZRIUCgxhY2Nlc3NfdG9rZW4YASABKAkSFQoNcmVmcmVzaF90b2tlbhgCIAEoCSIjChJWZXJpZnlUb2tlblJlcXVlc3QSDQoFdG9rZW4YASABKAkiRAoTVmVyaWZ5VG9rZW5SZXNwb25zZRIPCgd1c2VyX2lkGAEgASgJEg0KBWVtYWlsGAIgASgJEg0KBXZhbGlkGAMgASgIMqICCg9JZGVudGl0eVNlcnZpY2USWQoIUmVnaXN0ZXISJS5uZXhhY29yZS5pZGVudGl0eS52MS5SZWdpc3RlclJlcXVlc3QaJi5uZXhhY29yZS5pZGVudGl0eS52MS5SZWdpc3RlclJlc3BvbnNlElAKBUxvZ2luEiIubmV4YWNvcmUuaWRlbnRpdHkudjEuTG9naW5SZXF1ZXN0GiMubmV4YWNvcmUuaWRlbnRpdHkudjEuTG9naW5SZXNwb25zZRJiCgtWZXJpZnlUb2tlbhIoLm5leGFjb3JlLmlkZW50aXR5LnYxLlZlcmlmeVRva2VuUmVxdWVzdBopLm5leGFjb3JlLmlkZW50aXR5LnYxLlZlcmlmeVRva2VuUmVzcG9uc2VCX1pdZ2l0aHViLmNvbS9raW5nc29uc2VhbmcvbmV4YWNvcmUtZmluYW5jaWFsL2xlZGdlci1zZXJ2aWNlL2dlbi9uZXhhY29yZS9pZGVudGl0eS92MTtpZGVudGl0eXYxYgZwcm90bzM',
-  )
+export const file_nexacore_identity_v1_identity: GenFile = /*@__PURE__*/
+  fileDesc("CiNuZXhhY29yZS9pZGVudGl0eS92MS9pZGVudGl0eS5wcm90bxIUbmV4YWNvcmUuaWRlbnRpdHkudjEibgoPUmVnaXN0ZXJSZXF1ZXN0Eg0KBWVtYWlsGAEgASgJEhAKCHBhc3N3b3JkGAIgASgJEhIKCmZpcnN0X25hbWUYAyABKAkSEQoJbGFzdF9uYW1lGAQgASgJEhMKC21pZGRsZV9uYW1lGAUgASgJIjIKEFJlZ2lzdGVyUmVzcG9uc2USDwoHdXNlcl9pZBgBIAEoCRINCgVlbWFpbBgCIAEoCSIvCgxMb2dpblJlcXVlc3QSDQoFZW1haWwYASABKAkSEAoIcGFzc3dvcmQYAiABKAkiPAoNTG9naW5SZXNwb25zZRIUCgxhY2Nlc3NfdG9rZW4YASABKAkSFQoNcmVmcmVzaF90b2tlbhgCIAEoCSIjChJWZXJpZnlUb2tlblJlcXVlc3QSDQoFdG9rZW4YASABKAkiRAoTVmVyaWZ5VG9rZW5SZXNwb25zZRIPCgd1c2VyX2lkGAEgASgJEg0KBWVtYWlsGAIgASgJEg0KBXZhbGlkGAMgASgIMqICCg9JZGVudGl0eVNlcnZpY2USWQoIUmVnaXN0ZXISJS5uZXhhY29yZS5pZGVudGl0eS52MS5SZWdpc3RlclJlcXVlc3QaJi5uZXhhY29yZS5pZGVudGl0eS52MS5SZWdpc3RlclJlc3BvbnNlElAKBUxvZ2luEiIubmV4YWNvcmUuaWRlbnRpdHkudjEuTG9naW5SZXF1ZXN0GiMubmV4YWNvcmUuaWRlbnRpdHkudjEuTG9naW5SZXNwb25zZRJiCgtWZXJpZnlUb2tlbhIoLm5leGFjb3JlLmlkZW50aXR5LnYxLlZlcmlmeVRva2VuUmVxdWVzdBopLm5leGFjb3JlLmlkZW50aXR5LnYxLlZlcmlmeVRva2VuUmVzcG9uc2VCX1pdZ2l0aHViLmNvbS9raW5nc29uc2VhbmcvbmV4YWNvcmUtZmluYW5jaWFsL2xlZGdlci1zZXJ2aWNlL2dlbi9uZXhhY29yZS9pZGVudGl0eS92MTtpZGVudGl0eXYxYgZwcm90bzM");
 
 /**
  * @generated from message nexacore.identity.v1.RegisterRequest
  */
-export type RegisterRequest =
-  Message<'nexacore.identity.v1.RegisterRequest'> & {
-    /**
-     * @generated from field: string email = 1;
-     */
-    email: string
+export type RegisterRequest = Message<"nexacore.identity.v1.RegisterRequest"> & {
+  /**
+   * @generated from field: string email = 1;
+   */
+  email: string;
 
-    /**
-     * @generated from field: string password = 2;
-     */
-    password: string
+  /**
+   * @generated from field: string password = 2;
+   */
+  password: string;
 
-    /**
-     * @generated from field: string first_name = 3;
-     */
-    firstName: string
+  /**
+   * @generated from field: string first_name = 3;
+   */
+  firstName: string;
 
-    /**
-     * @generated from field: string last_name = 4;
-     */
-    lastName: string
+  /**
+   * @generated from field: string last_name = 4;
+   */
+  lastName: string;
 
-    /**
-     * @generated from field: string middle_name = 5;
-     */
-    middleName: string
-  }
+  /**
+   * @generated from field: string middle_name = 5;
+   */
+  middleName: string;
+};
 
 /**
  * Describes the message nexacore.identity.v1.RegisterRequest.
  * Use `create(RegisterRequestSchema)` to create a new message.
  */
-export const RegisterRequestSchema: GenMessage<RegisterRequest> =
-  /*@__PURE__*/
-  messageDesc(file_nexacore_identity_v1_identity, 0)
+export const RegisterRequestSchema: GenMessage<RegisterRequest> = /*@__PURE__*/
+  messageDesc(file_nexacore_identity_v1_identity, 0);
 
 /**
  * @generated from message nexacore.identity.v1.RegisterResponse
  */
-export type RegisterResponse =
-  Message<'nexacore.identity.v1.RegisterResponse'> & {
-    /**
-     * @generated from field: string user_id = 1;
-     */
-    userId: string
+export type RegisterResponse = Message<"nexacore.identity.v1.RegisterResponse"> & {
+  /**
+   * @generated from field: string user_id = 1;
+   */
+  userId: string;
 
-    /**
-     * @generated from field: string email = 2;
-     */
-    email: string
-  }
+  /**
+   * @generated from field: string email = 2;
+   */
+  email: string;
+};
 
 /**
  * Describes the message nexacore.identity.v1.RegisterResponse.
  * Use `create(RegisterResponseSchema)` to create a new message.
  */
-export const RegisterResponseSchema: GenMessage<RegisterResponse> =
-  /*@__PURE__*/
-  messageDesc(file_nexacore_identity_v1_identity, 1)
+export const RegisterResponseSchema: GenMessage<RegisterResponse> = /*@__PURE__*/
+  messageDesc(file_nexacore_identity_v1_identity, 1);
 
 /**
  * @generated from message nexacore.identity.v1.LoginRequest
  */
-export type LoginRequest = Message<'nexacore.identity.v1.LoginRequest'> & {
+export type LoginRequest = Message<"nexacore.identity.v1.LoginRequest"> & {
   /**
    * @generated from field: string email = 1;
    */
-  email: string
+  email: string;
 
   /**
    * @generated from field: string password = 2;
    */
-  password: string
-}
+  password: string;
+};
 
 /**
  * Describes the message nexacore.identity.v1.LoginRequest.
  * Use `create(LoginRequestSchema)` to create a new message.
  */
-export const LoginRequestSchema: GenMessage<LoginRequest> =
-  /*@__PURE__*/
-  messageDesc(file_nexacore_identity_v1_identity, 2)
+export const LoginRequestSchema: GenMessage<LoginRequest> = /*@__PURE__*/
+  messageDesc(file_nexacore_identity_v1_identity, 2);
 
 /**
  * @generated from message nexacore.identity.v1.LoginResponse
  */
-export type LoginResponse = Message<'nexacore.identity.v1.LoginResponse'> & {
+export type LoginResponse = Message<"nexacore.identity.v1.LoginResponse"> & {
   /**
    * @generated from field: string access_token = 1;
    */
-  accessToken: string
+  accessToken: string;
 
   /**
    * @generated from field: string refresh_token = 2;
    */
-  refreshToken: string
-}
+  refreshToken: string;
+};
 
 /**
  * Describes the message nexacore.identity.v1.LoginResponse.
  * Use `create(LoginResponseSchema)` to create a new message.
  */
-export const LoginResponseSchema: GenMessage<LoginResponse> =
-  /*@__PURE__*/
-  messageDesc(file_nexacore_identity_v1_identity, 3)
+export const LoginResponseSchema: GenMessage<LoginResponse> = /*@__PURE__*/
+  messageDesc(file_nexacore_identity_v1_identity, 3);
 
 /**
  * @generated from message nexacore.identity.v1.VerifyTokenRequest
  */
-export type VerifyTokenRequest =
-  Message<'nexacore.identity.v1.VerifyTokenRequest'> & {
-    /**
-     * @generated from field: string token = 1;
-     */
-    token: string
-  }
+export type VerifyTokenRequest = Message<"nexacore.identity.v1.VerifyTokenRequest"> & {
+  /**
+   * @generated from field: string token = 1;
+   */
+  token: string;
+};
 
 /**
  * Describes the message nexacore.identity.v1.VerifyTokenRequest.
  * Use `create(VerifyTokenRequestSchema)` to create a new message.
  */
-export const VerifyTokenRequestSchema: GenMessage<VerifyTokenRequest> =
-  /*@__PURE__*/
-  messageDesc(file_nexacore_identity_v1_identity, 4)
+export const VerifyTokenRequestSchema: GenMessage<VerifyTokenRequest> = /*@__PURE__*/
+  messageDesc(file_nexacore_identity_v1_identity, 4);
 
 /**
  * @generated from message nexacore.identity.v1.VerifyTokenResponse
  */
-export type VerifyTokenResponse =
-  Message<'nexacore.identity.v1.VerifyTokenResponse'> & {
-    /**
-     * @generated from field: string user_id = 1;
-     */
-    userId: string
+export type VerifyTokenResponse = Message<"nexacore.identity.v1.VerifyTokenResponse"> & {
+  /**
+   * @generated from field: string user_id = 1;
+   */
+  userId: string;
 
-    /**
-     * @generated from field: string email = 2;
-     */
-    email: string
+  /**
+   * @generated from field: string email = 2;
+   */
+  email: string;
 
-    /**
-     * @generated from field: bool valid = 3;
-     */
-    valid: boolean
-  }
+  /**
+   * @generated from field: bool valid = 3;
+   */
+  valid: boolean;
+};
 
 /**
  * Describes the message nexacore.identity.v1.VerifyTokenResponse.
  * Use `create(VerifyTokenResponseSchema)` to create a new message.
  */
-export const VerifyTokenResponseSchema: GenMessage<VerifyTokenResponse> =
-  /*@__PURE__*/
-  messageDesc(file_nexacore_identity_v1_identity, 5)
+export const VerifyTokenResponseSchema: GenMessage<VerifyTokenResponse> = /*@__PURE__*/
+  messageDesc(file_nexacore_identity_v1_identity, 5);
 
 /**
  * @generated from service nexacore.identity.v1.IdentityService
@@ -188,24 +167,26 @@ export const IdentityService: GenService<{
    * @generated from rpc nexacore.identity.v1.IdentityService.Register
    */
   register: {
-    methodKind: 'unary'
-    input: typeof RegisterRequestSchema
-    output: typeof RegisterResponseSchema
-  }
+    methodKind: "unary";
+    input: typeof RegisterRequestSchema;
+    output: typeof RegisterResponseSchema;
+  },
   /**
    * @generated from rpc nexacore.identity.v1.IdentityService.Login
    */
   login: {
-    methodKind: 'unary'
-    input: typeof LoginRequestSchema
-    output: typeof LoginResponseSchema
-  }
+    methodKind: "unary";
+    input: typeof LoginRequestSchema;
+    output: typeof LoginResponseSchema;
+  },
   /**
    * @generated from rpc nexacore.identity.v1.IdentityService.VerifyToken
    */
   verifyToken: {
-    methodKind: 'unary'
-    input: typeof VerifyTokenRequestSchema
-    output: typeof VerifyTokenResponseSchema
-  }
-}> = /*@__PURE__*/ serviceDesc(file_nexacore_identity_v1_identity, 0)
+    methodKind: "unary";
+    input: typeof VerifyTokenRequestSchema;
+    output: typeof VerifyTokenResponseSchema;
+  },
+}> = /*@__PURE__*/
+  serviceDesc(file_nexacore_identity_v1_identity, 0);
+

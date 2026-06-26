@@ -1,0 +1,35 @@
+meta {
+  name: create-deposit-intent
+  type: grpc
+  seq: 3
+}
+
+grpc {
+  url: {{PAYMENTS_GRPC_URL}}
+  method: /nexacore.payments.v1.PaymentsService/CreateDepositIntent
+  body: grpc
+  protoPath: ../libs/protos/proto/nexacore/payments/v1/payments.proto
+  auth: bearer
+  methodType: unary
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmMDU0MTg4Ni00ZjA1LTRmOTQtODQ3Zi1mNThmMWI2ZGZkMWMiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJleHAiOjE3ODI0MjQ0MzR9.lE0WptB2kwR0c62N7UPJHtd0rlCxAJyiGEd0rfJYR7M
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {
+      "userId": "f0541886-4f05-4f94-847f-f58f1b6dfd1c",
+      "amount": "500",
+      "currency": 1,
+      "bankCode": "0500",
+      "accountNumber": "7090000000"
+    }
+  '''
+}
+
+vars:pre-request {
+  PAYMENTS_GRPC_URL: localhost:50053
+}

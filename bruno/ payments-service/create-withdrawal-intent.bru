@@ -1,0 +1,31 @@
+meta {
+  name: create-withdrawal-intent
+  type: grpc
+  seq: 4
+}
+
+grpc {
+  url: {{PAYMENTS_GRPC_URL}}
+  method: /nexacore.payments.v1.PaymentsService/CreateWithdrawIntent
+  body: grpc
+  protoPath: ../libs/protos/proto/nexacore/payments/v1/payments.proto
+  auth: none
+  methodType: unary
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {
+      "user_id": "f0541886-4f05-4f94-847f-f58f1b6dfd1c",
+      "amount": 500,
+      "currency": 1,
+      "bank_code": "0500",
+      "account_number": 7090000000
+    }
+  '''
+}
+
+vars:pre-request {
+  PAYMENTS_GRPC_URL: localhost:50053
+}

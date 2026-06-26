@@ -115,7 +115,7 @@
         "continuous": true,
         "executor": "nx:run-commands",
         "options": {
-          "command": "tsx watch src/main.ts",
+          "command": "tsx --watch src/main.ts",
           "cwd": "apps/api-gateway"
         }
       }

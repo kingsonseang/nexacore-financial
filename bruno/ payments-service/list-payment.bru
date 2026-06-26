@@ -1,0 +1,28 @@
+meta {
+  name: list-payment
+  type: grpc
+  seq: 1
+}
+
+grpc {
+  url: {{PAYMENTS_GRPC_URL}}
+  method: /nexacore.payments.v1.PaymentsService/GetPaymentStatus
+  body: grpc
+  protoPath: ../libs/protos/proto/nexacore/payments/v1/payments.proto
+  auth: none
+  methodType: unary
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {
+      "user_id": "f0541886-4f05-4f94-847f-f58f1b6dfd1c",
+      "payment_id": "f0541886-4f05-4f94-847f-f58f1b6dfd1c"
+    }
+  '''
+}
+
+vars:pre-request {
+  PAYMENTS_GRPC_URL: localhost:50053
+}

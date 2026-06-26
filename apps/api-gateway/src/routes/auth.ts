@@ -47,7 +47,7 @@ export const authRoutes = HttpRouter.empty.pipe(
                 firstName: body.firstName,
                 lastName: body.lastName,
                 middleName: body.middleName,
-              }) as Promise<IdentityPb.RegisterResponse>,
+              }),
             catch: toConnectError,
           }),
         ),
@@ -78,7 +78,7 @@ export const authRoutes = HttpRouter.empty.pipe(
               client.login({
                 email: body.email,
                 password: body.password,
-              }) as Promise<IdentityPb.LoginResponse>,
+              }),
             catch: toConnectError,
           }),
         ),

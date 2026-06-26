@@ -2,243 +2,213 @@
 // @generated from file nexacore/accounts/v1/accounts.proto (package nexacore.accounts.v1, syntax proto3)
 /* eslint-disable */
 
-import type { Message } from '@bufbuild/protobuf'
-import type {
-  GenEnum,
-  GenFile,
-  GenMessage,
-  GenService,
-} from '@bufbuild/protobuf/codegenv2'
-import {
-  enumDesc,
-  fileDesc,
-  messageDesc,
-  serviceDesc,
-} from '@bufbuild/protobuf/codegenv2'
+import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
+import { enumDesc, fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv2";
+import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file nexacore/accounts/v1/accounts.proto.
  */
-export const file_nexacore_accounts_v1_accounts: GenFile =
-  /*@__PURE__*/
-  fileDesc(
-    'CiNuZXhhY29yZS9hY2NvdW50cy92MS9hY2NvdW50cy5wcm90bxIUbmV4YWNvcmUuYWNjb3VudHMudjEigwEKBldhbGxldBIRCgl3YWxsZXRfaWQYASABKAkSDwoHdXNlcl9pZBgCIAEoCRIwCghjdXJyZW5jeRgDIAEoDjIeLm5leGFjb3JlLmFjY291bnRzLnYxLkN1cnJlbmN5Eg8KB2JhbGFuY2UYBCABKAkSEgoKY3JlYXRlZF9hdBgFIAEoCSInChRDcmVhdGVBY2NvdW50UmVxdWVzdBIPCgd1c2VyX2lkGAEgASgJIloKFUNyZWF0ZUFjY291bnRSZXNwb25zZRISCgphY2NvdW50X2lkGAEgASgJEi0KB3dhbGxldHMYAiADKAsyHC5uZXhhY29yZS5hY2NvdW50cy52MS5XYWxsZXQiJAoRR2V0QWNjb3VudFJlcXVlc3QSDwoHdXNlcl9pZBgBIAEoCSJoChJHZXRBY2NvdW50UmVzcG9uc2USEgoKYWNjb3VudF9pZBgBIAEoCRIPCgd1c2VyX2lkGAIgASgJEi0KB3dhbGxldHMYAyADKAsyHC5uZXhhY29yZS5hY2NvdW50cy52MS5XYWxsZXQiVgoRR2V0QmFsYW5jZVJlcXVlc3QSDwoHdXNlcl9pZBgBIAEoCRIwCghjdXJyZW5jeRgCIAEoDjIeLm5leGFjb3JlLmFjY291bnRzLnYxLkN1cnJlbmN5IlcKEkdldEJhbGFuY2VSZXNwb25zZRIPCgdiYWxhbmNlGAEgASgJEjAKCGN1cnJlbmN5GAIgASgOMh4ubmV4YWNvcmUuYWNjb3VudHMudjEuQ3VycmVuY3kiJQoSTGlzdFdhbGxldHNSZXF1ZXN0Eg8KB3VzZXJfaWQYASABKAkiRAoTTGlzdFdhbGxldHNSZXNwb25zZRItCgd3YWxsZXRzGAEgAygLMhwubmV4YWNvcmUuYWNjb3VudHMudjEuV2FsbGV0KkgKCEN1cnJlbmN5EhgKFENVUlJFTkNZX1VOU1BFQ0lGSUVEEAASEAoMQ1VSUkVOQ1lfTkdOEAESEAoMQ1VSUkVOQ1lfVVNEEAIyoQMKD0FjY291bnRzU2VydmljZRJoCg1DcmVhdGVBY2NvdW50EioubmV4YWNvcmUuYWNjb3VudHMudjEuQ3JlYXRlQWNjb3VudFJlcXVlc3QaKy5uZXhhY29yZS5hY2NvdW50cy52MS5DcmVhdGVBY2NvdW50UmVzcG9uc2USXwoKR2V0QWNjb3VudBInLm5leGFjb3JlLmFjY291bnRzLnYxLkdldEFjY291bnRSZXF1ZXN0GigubmV4YWNvcmUuYWNjb3VudHMudjEuR2V0QWNjb3VudFJlc3BvbnNlEl8KCkdldEJhbGFuY2USJy5uZXhhY29yZS5hY2NvdW50cy52MS5HZXRCYWxhbmNlUmVxdWVzdBooLm5leGFjb3JlLmFjY291bnRzLnYxLkdldEJhbGFuY2VSZXNwb25zZRJiCgtMaXN0V2FsbGV0cxIoLm5leGFjb3JlLmFjY291bnRzLnYxLkxpc3RXYWxsZXRzUmVxdWVzdBopLm5leGFjb3JlLmFjY291bnRzLnYxLkxpc3RXYWxsZXRzUmVzcG9uc2VCX1pdZ2l0aHViLmNvbS9raW5nc29uc2VhbmcvbmV4YWNvcmUtZmluYW5jaWFsL2xlZGdlci1zZXJ2aWNlL2dlbi9uZXhhY29yZS9hY2NvdW50cy92MTthY2NvdW50c3YxYgZwcm90bzM',
-  )
+export const file_nexacore_accounts_v1_accounts: GenFile = /*@__PURE__*/
+  fileDesc("CiNuZXhhY29yZS9hY2NvdW50cy92MS9hY2NvdW50cy5wcm90bxIUbmV4YWNvcmUuYWNjb3VudHMudjEigwEKBldhbGxldBIRCgl3YWxsZXRfaWQYASABKAkSDwoHdXNlcl9pZBgCIAEoCRIwCghjdXJyZW5jeRgDIAEoDjIeLm5leGFjb3JlLmFjY291bnRzLnYxLkN1cnJlbmN5Eg8KB2JhbGFuY2UYBCABKAkSEgoKY3JlYXRlZF9hdBgFIAEoCSInChRDcmVhdGVBY2NvdW50UmVxdWVzdBIPCgd1c2VyX2lkGAEgASgJIloKFUNyZWF0ZUFjY291bnRSZXNwb25zZRISCgphY2NvdW50X2lkGAEgASgJEi0KB3dhbGxldHMYAiADKAsyHC5uZXhhY29yZS5hY2NvdW50cy52MS5XYWxsZXQiJAoRR2V0QWNjb3VudFJlcXVlc3QSDwoHdXNlcl9pZBgBIAEoCSJoChJHZXRBY2NvdW50UmVzcG9uc2USEgoKYWNjb3VudF9pZBgBIAEoCRIPCgd1c2VyX2lkGAIgASgJEi0KB3dhbGxldHMYAyADKAsyHC5uZXhhY29yZS5hY2NvdW50cy52MS5XYWxsZXQiVgoRR2V0QmFsYW5jZVJlcXVlc3QSDwoHdXNlcl9pZBgBIAEoCRIwCghjdXJyZW5jeRgCIAEoDjIeLm5leGFjb3JlLmFjY291bnRzLnYxLkN1cnJlbmN5IlcKEkdldEJhbGFuY2VSZXNwb25zZRIPCgdiYWxhbmNlGAEgASgJEjAKCGN1cnJlbmN5GAIgASgOMh4ubmV4YWNvcmUuYWNjb3VudHMudjEuQ3VycmVuY3kiJQoSTGlzdFdhbGxldHNSZXF1ZXN0Eg8KB3VzZXJfaWQYASABKAkiRAoTTGlzdFdhbGxldHNSZXNwb25zZRItCgd3YWxsZXRzGAEgAygLMhwubmV4YWNvcmUuYWNjb3VudHMudjEuV2FsbGV0KkgKCEN1cnJlbmN5EhgKFENVUlJFTkNZX1VOU1BFQ0lGSUVEEAASEAoMQ1VSUkVOQ1lfTkdOEAESEAoMQ1VSUkVOQ1lfVVNEEAIyoQMKD0FjY291bnRzU2VydmljZRJoCg1DcmVhdGVBY2NvdW50EioubmV4YWNvcmUuYWNjb3VudHMudjEuQ3JlYXRlQWNjb3VudFJlcXVlc3QaKy5uZXhhY29yZS5hY2NvdW50cy52MS5DcmVhdGVBY2NvdW50UmVzcG9uc2USXwoKR2V0QWNjb3VudBInLm5leGFjb3JlLmFjY291bnRzLnYxLkdldEFjY291bnRSZXF1ZXN0GigubmV4YWNvcmUuYWNjb3VudHMudjEuR2V0QWNjb3VudFJlc3BvbnNlEl8KCkdldEJhbGFuY2USJy5uZXhhY29yZS5hY2NvdW50cy52MS5HZXRCYWxhbmNlUmVxdWVzdBooLm5leGFjb3JlLmFjY291bnRzLnYxLkdldEJhbGFuY2VSZXNwb25zZRJiCgtMaXN0V2FsbGV0cxIoLm5leGFjb3JlLmFjY291bnRzLnYxLkxpc3RXYWxsZXRzUmVxdWVzdBopLm5leGFjb3JlLmFjY291bnRzLnYxLkxpc3RXYWxsZXRzUmVzcG9uc2VCX1pdZ2l0aHViLmNvbS9raW5nc29uc2VhbmcvbmV4YWNvcmUtZmluYW5jaWFsL2xlZGdlci1zZXJ2aWNlL2dlbi9uZXhhY29yZS9hY2NvdW50cy92MTthY2NvdW50c3YxYgZwcm90bzM");
 
 /**
  * @generated from message nexacore.accounts.v1.Wallet
  */
-export type Wallet = Message<'nexacore.accounts.v1.Wallet'> & {
+export type Wallet = Message<"nexacore.accounts.v1.Wallet"> & {
   /**
    * @generated from field: string wallet_id = 1;
    */
-  walletId: string
+  walletId: string;
 
   /**
    * @generated from field: string user_id = 2;
    */
-  userId: string
+  userId: string;
 
   /**
    * @generated from field: nexacore.accounts.v1.Currency currency = 3;
    */
-  currency: Currency
+  currency: Currency;
 
   /**
    * @generated from field: string balance = 4;
    */
-  balance: string
+  balance: string;
 
   /**
    * @generated from field: string created_at = 5;
    */
-  createdAt: string
-}
+  createdAt: string;
+};
 
 /**
  * Describes the message nexacore.accounts.v1.Wallet.
  * Use `create(WalletSchema)` to create a new message.
  */
-export const WalletSchema: GenMessage<Wallet> =
-  /*@__PURE__*/
-  messageDesc(file_nexacore_accounts_v1_accounts, 0)
+export const WalletSchema: GenMessage<Wallet> = /*@__PURE__*/
+  messageDesc(file_nexacore_accounts_v1_accounts, 0);
 
 /**
  * @generated from message nexacore.accounts.v1.CreateAccountRequest
  */
-export type CreateAccountRequest =
-  Message<'nexacore.accounts.v1.CreateAccountRequest'> & {
-    /**
-     * @generated from field: string user_id = 1;
-     */
-    userId: string
-  }
+export type CreateAccountRequest = Message<"nexacore.accounts.v1.CreateAccountRequest"> & {
+  /**
+   * @generated from field: string user_id = 1;
+   */
+  userId: string;
+};
 
 /**
  * Describes the message nexacore.accounts.v1.CreateAccountRequest.
  * Use `create(CreateAccountRequestSchema)` to create a new message.
  */
-export const CreateAccountRequestSchema: GenMessage<CreateAccountRequest> =
-  /*@__PURE__*/
-  messageDesc(file_nexacore_accounts_v1_accounts, 1)
+export const CreateAccountRequestSchema: GenMessage<CreateAccountRequest> = /*@__PURE__*/
+  messageDesc(file_nexacore_accounts_v1_accounts, 1);
 
 /**
  * @generated from message nexacore.accounts.v1.CreateAccountResponse
  */
-export type CreateAccountResponse =
-  Message<'nexacore.accounts.v1.CreateAccountResponse'> & {
-    /**
-     * @generated from field: string account_id = 1;
-     */
-    accountId: string
+export type CreateAccountResponse = Message<"nexacore.accounts.v1.CreateAccountResponse"> & {
+  /**
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
 
-    /**
-     * @generated from field: repeated nexacore.accounts.v1.Wallet wallets = 2;
-     */
-    wallets: Wallet[]
-  }
+  /**
+   * @generated from field: repeated nexacore.accounts.v1.Wallet wallets = 2;
+   */
+  wallets: Wallet[];
+};
 
 /**
  * Describes the message nexacore.accounts.v1.CreateAccountResponse.
  * Use `create(CreateAccountResponseSchema)` to create a new message.
  */
-export const CreateAccountResponseSchema: GenMessage<CreateAccountResponse> =
-  /*@__PURE__*/
-  messageDesc(file_nexacore_accounts_v1_accounts, 2)
+export const CreateAccountResponseSchema: GenMessage<CreateAccountResponse> = /*@__PURE__*/
+  messageDesc(file_nexacore_accounts_v1_accounts, 2);
 
 /**
  * @generated from message nexacore.accounts.v1.GetAccountRequest
  */
-export type GetAccountRequest =
-  Message<'nexacore.accounts.v1.GetAccountRequest'> & {
-    /**
-     * @generated from field: string user_id = 1;
-     */
-    userId: string
-  }
+export type GetAccountRequest = Message<"nexacore.accounts.v1.GetAccountRequest"> & {
+  /**
+   * @generated from field: string user_id = 1;
+   */
+  userId: string;
+};
 
 /**
  * Describes the message nexacore.accounts.v1.GetAccountRequest.
  * Use `create(GetAccountRequestSchema)` to create a new message.
  */
-export const GetAccountRequestSchema: GenMessage<GetAccountRequest> =
-  /*@__PURE__*/
-  messageDesc(file_nexacore_accounts_v1_accounts, 3)
+export const GetAccountRequestSchema: GenMessage<GetAccountRequest> = /*@__PURE__*/
+  messageDesc(file_nexacore_accounts_v1_accounts, 3);
 
 /**
  * @generated from message nexacore.accounts.v1.GetAccountResponse
  */
-export type GetAccountResponse =
-  Message<'nexacore.accounts.v1.GetAccountResponse'> & {
-    /**
-     * @generated from field: string account_id = 1;
-     */
-    accountId: string
+export type GetAccountResponse = Message<"nexacore.accounts.v1.GetAccountResponse"> & {
+  /**
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
 
-    /**
-     * @generated from field: string user_id = 2;
-     */
-    userId: string
+  /**
+   * @generated from field: string user_id = 2;
+   */
+  userId: string;
 
-    /**
-     * @generated from field: repeated nexacore.accounts.v1.Wallet wallets = 3;
-     */
-    wallets: Wallet[]
-  }
+  /**
+   * @generated from field: repeated nexacore.accounts.v1.Wallet wallets = 3;
+   */
+  wallets: Wallet[];
+};
 
 /**
  * Describes the message nexacore.accounts.v1.GetAccountResponse.
  * Use `create(GetAccountResponseSchema)` to create a new message.
  */
-export const GetAccountResponseSchema: GenMessage<GetAccountResponse> =
-  /*@__PURE__*/
-  messageDesc(file_nexacore_accounts_v1_accounts, 4)
+export const GetAccountResponseSchema: GenMessage<GetAccountResponse> = /*@__PURE__*/
+  messageDesc(file_nexacore_accounts_v1_accounts, 4);
 
 /**
  * @generated from message nexacore.accounts.v1.GetBalanceRequest
  */
-export type GetBalanceRequest =
-  Message<'nexacore.accounts.v1.GetBalanceRequest'> & {
-    /**
-     * @generated from field: string user_id = 1;
-     */
-    userId: string
+export type GetBalanceRequest = Message<"nexacore.accounts.v1.GetBalanceRequest"> & {
+  /**
+   * @generated from field: string user_id = 1;
+   */
+  userId: string;
 
-    /**
-     * @generated from field: nexacore.accounts.v1.Currency currency = 2;
-     */
-    currency: Currency
-  }
+  /**
+   * @generated from field: nexacore.accounts.v1.Currency currency = 2;
+   */
+  currency: Currency;
+};
 
 /**
  * Describes the message nexacore.accounts.v1.GetBalanceRequest.
  * Use `create(GetBalanceRequestSchema)` to create a new message.
  */
-export const GetBalanceRequestSchema: GenMessage<GetBalanceRequest> =
-  /*@__PURE__*/
-  messageDesc(file_nexacore_accounts_v1_accounts, 5)
+export const GetBalanceRequestSchema: GenMessage<GetBalanceRequest> = /*@__PURE__*/
+  messageDesc(file_nexacore_accounts_v1_accounts, 5);
 
 /**
  * @generated from message nexacore.accounts.v1.GetBalanceResponse
  */
-export type GetBalanceResponse =
-  Message<'nexacore.accounts.v1.GetBalanceResponse'> & {
-    /**
-     * @generated from field: string balance = 1;
-     */
-    balance: string
+export type GetBalanceResponse = Message<"nexacore.accounts.v1.GetBalanceResponse"> & {
+  /**
+   * @generated from field: string balance = 1;
+   */
+  balance: string;
 
-    /**
-     * @generated from field: nexacore.accounts.v1.Currency currency = 2;
-     */
-    currency: Currency
-  }
+  /**
+   * @generated from field: nexacore.accounts.v1.Currency currency = 2;
+   */
+  currency: Currency;
+};
 
 /**
  * Describes the message nexacore.accounts.v1.GetBalanceResponse.
  * Use `create(GetBalanceResponseSchema)` to create a new message.
  */
-export const GetBalanceResponseSchema: GenMessage<GetBalanceResponse> =
-  /*@__PURE__*/
-  messageDesc(file_nexacore_accounts_v1_accounts, 6)
+export const GetBalanceResponseSchema: GenMessage<GetBalanceResponse> = /*@__PURE__*/
+  messageDesc(file_nexacore_accounts_v1_accounts, 6);
 
 /**
  * @generated from message nexacore.accounts.v1.ListWalletsRequest
  */
-export type ListWalletsRequest =
-  Message<'nexacore.accounts.v1.ListWalletsRequest'> & {
-    /**
-     * @generated from field: string user_id = 1;
-     */
-    userId: string
-  }
+export type ListWalletsRequest = Message<"nexacore.accounts.v1.ListWalletsRequest"> & {
+  /**
+   * @generated from field: string user_id = 1;
+   */
+  userId: string;
+};
 
 /**
  * Describes the message nexacore.accounts.v1.ListWalletsRequest.
  * Use `create(ListWalletsRequestSchema)` to create a new message.
  */
-export const ListWalletsRequestSchema: GenMessage<ListWalletsRequest> =
-  /*@__PURE__*/
-  messageDesc(file_nexacore_accounts_v1_accounts, 7)
+export const ListWalletsRequestSchema: GenMessage<ListWalletsRequest> = /*@__PURE__*/
+  messageDesc(file_nexacore_accounts_v1_accounts, 7);
 
 /**
  * @generated from message nexacore.accounts.v1.ListWalletsResponse
  */
-export type ListWalletsResponse =
-  Message<'nexacore.accounts.v1.ListWalletsResponse'> & {
-    /**
-     * @generated from field: repeated nexacore.accounts.v1.Wallet wallets = 1;
-     */
-    wallets: Wallet[]
-  }
+export type ListWalletsResponse = Message<"nexacore.accounts.v1.ListWalletsResponse"> & {
+  /**
+   * @generated from field: repeated nexacore.accounts.v1.Wallet wallets = 1;
+   */
+  wallets: Wallet[];
+};
 
 /**
  * Describes the message nexacore.accounts.v1.ListWalletsResponse.
  * Use `create(ListWalletsResponseSchema)` to create a new message.
  */
-export const ListWalletsResponseSchema: GenMessage<ListWalletsResponse> =
-  /*@__PURE__*/
-  messageDesc(file_nexacore_accounts_v1_accounts, 8)
+export const ListWalletsResponseSchema: GenMessage<ListWalletsResponse> = /*@__PURE__*/
+  messageDesc(file_nexacore_accounts_v1_accounts, 8);
 
 /**
  * @generated from enum nexacore.accounts.v1.Currency
@@ -263,9 +233,8 @@ export enum Currency {
 /**
  * Describes the enum nexacore.accounts.v1.Currency.
  */
-export const CurrencySchema: GenEnum<Currency> =
-  /*@__PURE__*/
-  enumDesc(file_nexacore_accounts_v1_accounts, 0)
+export const CurrencySchema: GenEnum<Currency> = /*@__PURE__*/
+  enumDesc(file_nexacore_accounts_v1_accounts, 0);
 
 /**
  * @generated from service nexacore.accounts.v1.AccountsService
@@ -275,32 +244,34 @@ export const AccountsService: GenService<{
    * @generated from rpc nexacore.accounts.v1.AccountsService.CreateAccount
    */
   createAccount: {
-    methodKind: 'unary'
-    input: typeof CreateAccountRequestSchema
-    output: typeof CreateAccountResponseSchema
-  }
+    methodKind: "unary";
+    input: typeof CreateAccountRequestSchema;
+    output: typeof CreateAccountResponseSchema;
+  },
   /**
    * @generated from rpc nexacore.accounts.v1.AccountsService.GetAccount
    */
   getAccount: {
-    methodKind: 'unary'
-    input: typeof GetAccountRequestSchema
-    output: typeof GetAccountResponseSchema
-  }
+    methodKind: "unary";
+    input: typeof GetAccountRequestSchema;
+    output: typeof GetAccountResponseSchema;
+  },
   /**
    * @generated from rpc nexacore.accounts.v1.AccountsService.GetBalance
    */
   getBalance: {
-    methodKind: 'unary'
-    input: typeof GetBalanceRequestSchema
-    output: typeof GetBalanceResponseSchema
-  }
+    methodKind: "unary";
+    input: typeof GetBalanceRequestSchema;
+    output: typeof GetBalanceResponseSchema;
+  },
   /**
    * @generated from rpc nexacore.accounts.v1.AccountsService.ListWallets
    */
   listWallets: {
-    methodKind: 'unary'
-    input: typeof ListWalletsRequestSchema
-    output: typeof ListWalletsResponseSchema
-  }
-}> = /*@__PURE__*/ serviceDesc(file_nexacore_accounts_v1_accounts, 0)
+    methodKind: "unary";
+    input: typeof ListWalletsRequestSchema;
+    output: typeof ListWalletsResponseSchema;
+  },
+}> = /*@__PURE__*/
+  serviceDesc(file_nexacore_accounts_v1_accounts, 0);
+

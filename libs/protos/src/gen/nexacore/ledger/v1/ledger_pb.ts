@@ -2,255 +2,229 @@
 // @generated from file nexacore/ledger/v1/ledger.proto (package nexacore.ledger.v1, syntax proto3)
 /* eslint-disable */
 
-import type { Message } from '@bufbuild/protobuf'
-import type {
-  GenEnum,
-  GenFile,
-  GenMessage,
-  GenService,
-} from '@bufbuild/protobuf/codegenv2'
-import {
-  enumDesc,
-  fileDesc,
-  messageDesc,
-  serviceDesc,
-} from '@bufbuild/protobuf/codegenv2'
+import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
+import { enumDesc, fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv2";
+import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file nexacore/ledger/v1/ledger.proto.
  */
-export const file_nexacore_ledger_v1_ledger: GenFile =
-  /*@__PURE__*/
-  fileDesc(
-    'Ch9uZXhhY29yZS9sZWRnZXIvdjEvbGVkZ2VyLnByb3RvEhJuZXhhY29yZS5sZWRnZXIudjEivwEKDEpvdXJuYWxFbnRyeRIQCghlbnRyeV9pZBgBIAEoCRISCgphY2NvdW50X2lkGAIgASgJEisKBHR5cGUYAyABKA4yHS5uZXhhY29yZS5sZWRnZXIudjEuRW50cnlUeXBlEg4KBmFtb3VudBgEIAEoCRIQCghjdXJyZW5jeRgFIAEoCRIRCglyZWZlcmVuY2UYBiABKAkSEwoLZGVzY3JpcHRpb24YByABKAkSEgoKY3JlYXRlZF9hdBgIIAEoCSKdAQoQUG9zdEVudHJ5UmVxdWVzdBISCgphY2NvdW50X2lkGAEgASgJEg4KBmFtb3VudBgCIAEoCRIQCghjdXJyZW5jeRgDIAEoCRIrCgR0eXBlGAQgASgOMh0ubmV4YWNvcmUubGVkZ2VyLnYxLkVudHJ5VHlwZRIRCglyZWZlcmVuY2UYBSABKAkSEwoLZGVzY3JpcHRpb24YBiABKAkiPAoRUG9zdEVudHJ5UmVzcG9uc2USEAoIZW50cnlfaWQYASABKAkSFQoNYmFsYW5jZV9hZnRlchgCIAEoCSI5ChFHZXRCYWxhbmNlUmVxdWVzdBISCgphY2NvdW50X2lkGAEgASgJEhAKCGN1cnJlbmN5GAIgASgJIksKEkdldEJhbGFuY2VSZXNwb25zZRIPCgdiYWxhbmNlGAEgASgJEhAKCGN1cnJlbmN5GAIgASgJEhIKCmFjY291bnRfaWQYAyABKAkiSQoSTGlzdEVudHJpZXNSZXF1ZXN0EhIKCmFjY291bnRfaWQYASABKAkSDAoEcGFnZRgCIAEoBRIRCglwYWdlX3NpemUYAyABKAUiVwoTTGlzdEVudHJpZXNSZXNwb25zZRIxCgdlbnRyaWVzGAEgAygLMiAubmV4YWNvcmUubGVkZ2VyLnYxLkpvdXJuYWxFbnRyeRINCgV0b3RhbBgCIAEoBSpUCglFbnRyeVR5cGUSGgoWRU5UUllfVFlQRV9VTlNQRUNJRklFRBAAEhQKEEVOVFJZX1RZUEVfREVCSVQQARIVChFFTlRSWV9UWVBFX0NSRURJVBACMqYCCg1MZWRnZXJTZXJ2aWNlElgKCVBvc3RFbnRyeRIkLm5leGFjb3JlLmxlZGdlci52MS5Qb3N0RW50cnlSZXF1ZXN0GiUubmV4YWNvcmUubGVkZ2VyLnYxLlBvc3RFbnRyeVJlc3BvbnNlElsKCkdldEJhbGFuY2USJS5uZXhhY29yZS5sZWRnZXIudjEuR2V0QmFsYW5jZVJlcXVlc3QaJi5uZXhhY29yZS5sZWRnZXIudjEuR2V0QmFsYW5jZVJlc3BvbnNlEl4KC0xpc3RFbnRyaWVzEiYubmV4YWNvcmUubGVkZ2VyLnYxLkxpc3RFbnRyaWVzUmVxdWVzdBonLm5leGFjb3JlLmxlZGdlci52MS5MaXN0RW50cmllc1Jlc3BvbnNlQltaWWdpdGh1Yi5jb20va2luZ3NvbnNlYW5nL25leGFjb3JlLWZpbmFuY2lhbC9sZWRnZXItc2VydmljZS9nZW4vbmV4YWNvcmUvbGVkZ2VyL3YxO2xlZGdlcnYxYgZwcm90bzM',
-  )
+export const file_nexacore_ledger_v1_ledger: GenFile = /*@__PURE__*/
+  fileDesc("Ch9uZXhhY29yZS9sZWRnZXIvdjEvbGVkZ2VyLnByb3RvEhJuZXhhY29yZS5sZWRnZXIudjEivwEKDEpvdXJuYWxFbnRyeRIQCghlbnRyeV9pZBgBIAEoCRISCgphY2NvdW50X2lkGAIgASgJEisKBHR5cGUYAyABKA4yHS5uZXhhY29yZS5sZWRnZXIudjEuRW50cnlUeXBlEg4KBmFtb3VudBgEIAEoCRIQCghjdXJyZW5jeRgFIAEoCRIRCglyZWZlcmVuY2UYBiABKAkSEwoLZGVzY3JpcHRpb24YByABKAkSEgoKY3JlYXRlZF9hdBgIIAEoCSKdAQoQUG9zdEVudHJ5UmVxdWVzdBISCgphY2NvdW50X2lkGAEgASgJEg4KBmFtb3VudBgCIAEoCRIQCghjdXJyZW5jeRgDIAEoCRIrCgR0eXBlGAQgASgOMh0ubmV4YWNvcmUubGVkZ2VyLnYxLkVudHJ5VHlwZRIRCglyZWZlcmVuY2UYBSABKAkSEwoLZGVzY3JpcHRpb24YBiABKAkiPAoRUG9zdEVudHJ5UmVzcG9uc2USEAoIZW50cnlfaWQYASABKAkSFQoNYmFsYW5jZV9hZnRlchgCIAEoCSI5ChFHZXRCYWxhbmNlUmVxdWVzdBISCgphY2NvdW50X2lkGAEgASgJEhAKCGN1cnJlbmN5GAIgASgJIksKEkdldEJhbGFuY2VSZXNwb25zZRIPCgdiYWxhbmNlGAEgASgJEhAKCGN1cnJlbmN5GAIgASgJEhIKCmFjY291bnRfaWQYAyABKAkiSQoSTGlzdEVudHJpZXNSZXF1ZXN0EhIKCmFjY291bnRfaWQYASABKAkSDAoEcGFnZRgCIAEoBRIRCglwYWdlX3NpemUYAyABKAUiVwoTTGlzdEVudHJpZXNSZXNwb25zZRIxCgdlbnRyaWVzGAEgAygLMiAubmV4YWNvcmUubGVkZ2VyLnYxLkpvdXJuYWxFbnRyeRINCgV0b3RhbBgCIAEoBSpUCglFbnRyeVR5cGUSGgoWRU5UUllfVFlQRV9VTlNQRUNJRklFRBAAEhQKEEVOVFJZX1RZUEVfREVCSVQQARIVChFFTlRSWV9UWVBFX0NSRURJVBACMqYCCg1MZWRnZXJTZXJ2aWNlElgKCVBvc3RFbnRyeRIkLm5leGFjb3JlLmxlZGdlci52MS5Qb3N0RW50cnlSZXF1ZXN0GiUubmV4YWNvcmUubGVkZ2VyLnYxLlBvc3RFbnRyeVJlc3BvbnNlElsKCkdldEJhbGFuY2USJS5uZXhhY29yZS5sZWRnZXIudjEuR2V0QmFsYW5jZVJlcXVlc3QaJi5uZXhhY29yZS5sZWRnZXIudjEuR2V0QmFsYW5jZVJlc3BvbnNlEl4KC0xpc3RFbnRyaWVzEiYubmV4YWNvcmUubGVkZ2VyLnYxLkxpc3RFbnRyaWVzUmVxdWVzdBonLm5leGFjb3JlLmxlZGdlci52MS5MaXN0RW50cmllc1Jlc3BvbnNlQltaWWdpdGh1Yi5jb20va2luZ3NvbnNlYW5nL25leGFjb3JlLWZpbmFuY2lhbC9sZWRnZXItc2VydmljZS9nZW4vbmV4YWNvcmUvbGVkZ2VyL3YxO2xlZGdlcnYxYgZwcm90bzM");
 
 /**
  * @generated from message nexacore.ledger.v1.JournalEntry
  */
-export type JournalEntry = Message<'nexacore.ledger.v1.JournalEntry'> & {
+export type JournalEntry = Message<"nexacore.ledger.v1.JournalEntry"> & {
   /**
    * @generated from field: string entry_id = 1;
    */
-  entryId: string
+  entryId: string;
 
   /**
    * @generated from field: string account_id = 2;
    */
-  accountId: string
+  accountId: string;
 
   /**
    * @generated from field: nexacore.ledger.v1.EntryType type = 3;
    */
-  type: EntryType
+  type: EntryType;
 
   /**
    * @generated from field: string amount = 4;
    */
-  amount: string
+  amount: string;
 
   /**
    * @generated from field: string currency = 5;
    */
-  currency: string
+  currency: string;
 
   /**
    * @generated from field: string reference = 6;
    */
-  reference: string
+  reference: string;
 
   /**
    * @generated from field: string description = 7;
    */
-  description: string
+  description: string;
 
   /**
    * @generated from field: string created_at = 8;
    */
-  createdAt: string
-}
+  createdAt: string;
+};
 
 /**
  * Describes the message nexacore.ledger.v1.JournalEntry.
  * Use `create(JournalEntrySchema)` to create a new message.
  */
-export const JournalEntrySchema: GenMessage<JournalEntry> =
-  /*@__PURE__*/
-  messageDesc(file_nexacore_ledger_v1_ledger, 0)
+export const JournalEntrySchema: GenMessage<JournalEntry> = /*@__PURE__*/
+  messageDesc(file_nexacore_ledger_v1_ledger, 0);
 
 /**
  * @generated from message nexacore.ledger.v1.PostEntryRequest
  */
-export type PostEntryRequest =
-  Message<'nexacore.ledger.v1.PostEntryRequest'> & {
-    /**
-     * @generated from field: string account_id = 1;
-     */
-    accountId: string
+export type PostEntryRequest = Message<"nexacore.ledger.v1.PostEntryRequest"> & {
+  /**
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
 
-    /**
-     * @generated from field: string amount = 2;
-     */
-    amount: string
+  /**
+   * @generated from field: string amount = 2;
+   */
+  amount: string;
 
-    /**
-     * @generated from field: string currency = 3;
-     */
-    currency: string
+  /**
+   * @generated from field: string currency = 3;
+   */
+  currency: string;
 
-    /**
-     * @generated from field: nexacore.ledger.v1.EntryType type = 4;
-     */
-    type: EntryType
+  /**
+   * @generated from field: nexacore.ledger.v1.EntryType type = 4;
+   */
+  type: EntryType;
 
-    /**
-     * @generated from field: string reference = 5;
-     */
-    reference: string
+  /**
+   * @generated from field: string reference = 5;
+   */
+  reference: string;
 
-    /**
-     * @generated from field: string description = 6;
-     */
-    description: string
-  }
+  /**
+   * @generated from field: string description = 6;
+   */
+  description: string;
+};
 
 /**
  * Describes the message nexacore.ledger.v1.PostEntryRequest.
  * Use `create(PostEntryRequestSchema)` to create a new message.
  */
-export const PostEntryRequestSchema: GenMessage<PostEntryRequest> =
-  /*@__PURE__*/
-  messageDesc(file_nexacore_ledger_v1_ledger, 1)
+export const PostEntryRequestSchema: GenMessage<PostEntryRequest> = /*@__PURE__*/
+  messageDesc(file_nexacore_ledger_v1_ledger, 1);
 
 /**
  * @generated from message nexacore.ledger.v1.PostEntryResponse
  */
-export type PostEntryResponse =
-  Message<'nexacore.ledger.v1.PostEntryResponse'> & {
-    /**
-     * @generated from field: string entry_id = 1;
-     */
-    entryId: string
+export type PostEntryResponse = Message<"nexacore.ledger.v1.PostEntryResponse"> & {
+  /**
+   * @generated from field: string entry_id = 1;
+   */
+  entryId: string;
 
-    /**
-     * @generated from field: string balance_after = 2;
-     */
-    balanceAfter: string
-  }
+  /**
+   * @generated from field: string balance_after = 2;
+   */
+  balanceAfter: string;
+};
 
 /**
  * Describes the message nexacore.ledger.v1.PostEntryResponse.
  * Use `create(PostEntryResponseSchema)` to create a new message.
  */
-export const PostEntryResponseSchema: GenMessage<PostEntryResponse> =
-  /*@__PURE__*/
-  messageDesc(file_nexacore_ledger_v1_ledger, 2)
+export const PostEntryResponseSchema: GenMessage<PostEntryResponse> = /*@__PURE__*/
+  messageDesc(file_nexacore_ledger_v1_ledger, 2);
 
 /**
  * @generated from message nexacore.ledger.v1.GetBalanceRequest
  */
-export type GetBalanceRequest =
-  Message<'nexacore.ledger.v1.GetBalanceRequest'> & {
-    /**
-     * @generated from field: string account_id = 1;
-     */
-    accountId: string
+export type GetBalanceRequest = Message<"nexacore.ledger.v1.GetBalanceRequest"> & {
+  /**
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
 
-    /**
-     * @generated from field: string currency = 2;
-     */
-    currency: string
-  }
+  /**
+   * @generated from field: string currency = 2;
+   */
+  currency: string;
+};
 
 /**
  * Describes the message nexacore.ledger.v1.GetBalanceRequest.
  * Use `create(GetBalanceRequestSchema)` to create a new message.
  */
-export const GetBalanceRequestSchema: GenMessage<GetBalanceRequest> =
-  /*@__PURE__*/
-  messageDesc(file_nexacore_ledger_v1_ledger, 3)
+export const GetBalanceRequestSchema: GenMessage<GetBalanceRequest> = /*@__PURE__*/
+  messageDesc(file_nexacore_ledger_v1_ledger, 3);
 
 /**
  * @generated from message nexacore.ledger.v1.GetBalanceResponse
  */
-export type GetBalanceResponse =
-  Message<'nexacore.ledger.v1.GetBalanceResponse'> & {
-    /**
-     * @generated from field: string balance = 1;
-     */
-    balance: string
+export type GetBalanceResponse = Message<"nexacore.ledger.v1.GetBalanceResponse"> & {
+  /**
+   * @generated from field: string balance = 1;
+   */
+  balance: string;
 
-    /**
-     * @generated from field: string currency = 2;
-     */
-    currency: string
+  /**
+   * @generated from field: string currency = 2;
+   */
+  currency: string;
 
-    /**
-     * @generated from field: string account_id = 3;
-     */
-    accountId: string
-  }
+  /**
+   * @generated from field: string account_id = 3;
+   */
+  accountId: string;
+};
 
 /**
  * Describes the message nexacore.ledger.v1.GetBalanceResponse.
  * Use `create(GetBalanceResponseSchema)` to create a new message.
  */
-export const GetBalanceResponseSchema: GenMessage<GetBalanceResponse> =
-  /*@__PURE__*/
-  messageDesc(file_nexacore_ledger_v1_ledger, 4)
+export const GetBalanceResponseSchema: GenMessage<GetBalanceResponse> = /*@__PURE__*/
+  messageDesc(file_nexacore_ledger_v1_ledger, 4);
 
 /**
  * @generated from message nexacore.ledger.v1.ListEntriesRequest
  */
-export type ListEntriesRequest =
-  Message<'nexacore.ledger.v1.ListEntriesRequest'> & {
-    /**
-     * @generated from field: string account_id = 1;
-     */
-    accountId: string
+export type ListEntriesRequest = Message<"nexacore.ledger.v1.ListEntriesRequest"> & {
+  /**
+   * @generated from field: string account_id = 1;
+   */
+  accountId: string;
 
-    /**
-     * @generated from field: int32 page = 2;
-     */
-    page: number
+  /**
+   * @generated from field: int32 page = 2;
+   */
+  page: number;
 
-    /**
-     * @generated from field: int32 page_size = 3;
-     */
-    pageSize: number
-  }
+  /**
+   * @generated from field: int32 page_size = 3;
+   */
+  pageSize: number;
+};
 
 /**
  * Describes the message nexacore.ledger.v1.ListEntriesRequest.
  * Use `create(ListEntriesRequestSchema)` to create a new message.
  */
-export const ListEntriesRequestSchema: GenMessage<ListEntriesRequest> =
-  /*@__PURE__*/
-  messageDesc(file_nexacore_ledger_v1_ledger, 5)
+export const ListEntriesRequestSchema: GenMessage<ListEntriesRequest> = /*@__PURE__*/
+  messageDesc(file_nexacore_ledger_v1_ledger, 5);
 
 /**
  * @generated from message nexacore.ledger.v1.ListEntriesResponse
  */
-export type ListEntriesResponse =
-  Message<'nexacore.ledger.v1.ListEntriesResponse'> & {
-    /**
-     * @generated from field: repeated nexacore.ledger.v1.JournalEntry entries = 1;
-     */
-    entries: JournalEntry[]
+export type ListEntriesResponse = Message<"nexacore.ledger.v1.ListEntriesResponse"> & {
+  /**
+   * @generated from field: repeated nexacore.ledger.v1.JournalEntry entries = 1;
+   */
+  entries: JournalEntry[];
 
-    /**
-     * @generated from field: int32 total = 2;
-     */
-    total: number
-  }
+  /**
+   * @generated from field: int32 total = 2;
+   */
+  total: number;
+};
 
 /**
  * Describes the message nexacore.ledger.v1.ListEntriesResponse.
  * Use `create(ListEntriesResponseSchema)` to create a new message.
  */
-export const ListEntriesResponseSchema: GenMessage<ListEntriesResponse> =
-  /*@__PURE__*/
-  messageDesc(file_nexacore_ledger_v1_ledger, 6)
+export const ListEntriesResponseSchema: GenMessage<ListEntriesResponse> = /*@__PURE__*/
+  messageDesc(file_nexacore_ledger_v1_ledger, 6);
 
 /**
  * @generated from enum nexacore.ledger.v1.EntryType
@@ -275,9 +249,8 @@ export enum EntryType {
 /**
  * Describes the enum nexacore.ledger.v1.EntryType.
  */
-export const EntryTypeSchema: GenEnum<EntryType> =
-  /*@__PURE__*/
-  enumDesc(file_nexacore_ledger_v1_ledger, 0)
+export const EntryTypeSchema: GenEnum<EntryType> = /*@__PURE__*/
+  enumDesc(file_nexacore_ledger_v1_ledger, 0);
 
 /**
  * @generated from service nexacore.ledger.v1.LedgerService
@@ -287,24 +260,26 @@ export const LedgerService: GenService<{
    * @generated from rpc nexacore.ledger.v1.LedgerService.PostEntry
    */
   postEntry: {
-    methodKind: 'unary'
-    input: typeof PostEntryRequestSchema
-    output: typeof PostEntryResponseSchema
-  }
+    methodKind: "unary";
+    input: typeof PostEntryRequestSchema;
+    output: typeof PostEntryResponseSchema;
+  },
   /**
    * @generated from rpc nexacore.ledger.v1.LedgerService.GetBalance
    */
   getBalance: {
-    methodKind: 'unary'
-    input: typeof GetBalanceRequestSchema
-    output: typeof GetBalanceResponseSchema
-  }
+    methodKind: "unary";
+    input: typeof GetBalanceRequestSchema;
+    output: typeof GetBalanceResponseSchema;
+  },
   /**
    * @generated from rpc nexacore.ledger.v1.LedgerService.ListEntries
    */
   listEntries: {
-    methodKind: 'unary'
-    input: typeof ListEntriesRequestSchema
-    output: typeof ListEntriesResponseSchema
-  }
-}> = /*@__PURE__*/ serviceDesc(file_nexacore_ledger_v1_ledger, 0)
+    methodKind: "unary";
+    input: typeof ListEntriesRequestSchema;
+    output: typeof ListEntriesResponseSchema;
+  },
+}> = /*@__PURE__*/
+  serviceDesc(file_nexacore_ledger_v1_ledger, 0);
+

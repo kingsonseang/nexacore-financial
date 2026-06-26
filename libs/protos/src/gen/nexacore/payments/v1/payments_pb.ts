@@ -2,298 +2,299 @@
 // @generated from file nexacore/payments/v1/payments.proto (package nexacore.payments.v1, syntax proto3)
 /* eslint-disable */
 
-import type { Message } from '@bufbuild/protobuf'
-import type {
-  GenEnum,
-  GenFile,
-  GenMessage,
-  GenService,
-} from '@bufbuild/protobuf/codegenv2'
-import {
-  enumDesc,
-  fileDesc,
-  messageDesc,
-  serviceDesc,
-} from '@bufbuild/protobuf/codegenv2'
+import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
+import { enumDesc, fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv2";
+import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file nexacore/payments/v1/payments.proto.
  */
-export const file_nexacore_payments_v1_payments: GenFile =
-  /*@__PURE__*/
-  fileDesc(
-    'CiNuZXhhY29yZS9wYXltZW50cy92MS9wYXltZW50cy5wcm90bxIUbmV4YWNvcmUucGF5bWVudHMudjEi3QEKB1BheW1lbnQSEgoKcGF5bWVudF9pZBgBIAEoCRIPCgd1c2VyX2lkGAIgASgJEg4KBmFtb3VudBgDIAEoCRIQCghjdXJyZW5jeRgEIAEoCRIzCgZzdGF0dXMYBSABKA4yIy5uZXhhY29yZS5wYXltZW50cy52MS5QYXltZW50U3RhdHVzEi8KBHR5cGUYBiABKA4yIS5uZXhhY29yZS5wYXltZW50cy52MS5QYXltZW50VHlwZRIRCglyZWZlcmVuY2UYByABKAkSEgoKY3JlYXRlZF9hdBgIIAEoCSJeChpDcmVhdGVEZXBvc2l0SW50ZW50UmVxdWVzdBIPCgd1c2VyX2lkGAEgASgJEg4KBmFtb3VudBgCIAEoCRIQCghjdXJyZW5jeRgDIAEoCRINCgVlbWFpbBgEIAEoCSJZChtDcmVhdGVEZXBvc2l0SW50ZW50UmVzcG9uc2USEgoKcGF5bWVudF9pZBgBIAEoCRITCgtwYXltZW50X3VybBgCIAEoCRIRCglyZWZlcmVuY2UYAyABKAkiewobQ3JlYXRlV2l0aGRyYXdJbnRlbnRSZXF1ZXN0Eg8KB3VzZXJfaWQYASABKAkSDgoGYW1vdW50GAIgASgJEhAKCGN1cnJlbmN5GAMgASgJEhEKCWJhbmtfY29kZRgEIAEoCRIWCg5hY2NvdW50X251bWJlchgFIAEoCSJFChxDcmVhdGVXaXRoZHJhd0ludGVudFJlc3BvbnNlEhIKCnBheW1lbnRfaWQYASABKAkSEQoJcmVmZXJlbmNlGAIgASgJIi0KF0dldFBheW1lbnRTdGF0dXNSZXF1ZXN0EhIKCnBheW1lbnRfaWQYASABKAkiSgoYR2V0UGF5bWVudFN0YXR1c1Jlc3BvbnNlEi4KB3BheW1lbnQYASABKAsyHS5uZXhhY29yZS5wYXltZW50cy52MS5QYXltZW50IkcKE0xpc3RQYXltZW50c1JlcXVlc3QSDwoHdXNlcl9pZBgBIAEoCRIMCgRwYWdlGAIgASgFEhEKCXBhZ2Vfc2l6ZRgDIAEoBSJWChRMaXN0UGF5bWVudHNSZXNwb25zZRIvCghwYXltZW50cxgBIAMoCzIdLm5leGFjb3JlLnBheW1lbnRzLnYxLlBheW1lbnQSDQoFdG90YWwYAiABKAUqowEKDVBheW1lbnRTdGF0dXMSHgoaUEFZTUVOVF9TVEFUVVNfVU5TUEVDSUZJRUQQABIaChZQQVlNRU5UX1NUQVRVU19QRU5ESU5HEAESHQoZUEFZTUVOVF9TVEFUVVNfUFJPQ0VTU0lORxACEhwKGFBBWU1FTlRfU1RBVFVTX0NPTVBMRVRFRBADEhkKFVBBWU1FTlRfU1RBVFVTX0ZBSUxFRBAEKmIKC1BheW1lbnRUeXBlEhwKGFBBWU1FTlRfVFlQRV9VTlNQRUNJRklFRBAAEhgKFFBBWU1FTlRfVFlQRV9ERVBPU0lUEAESGwoXUEFZTUVOVF9UWVBFX1dJVEhEUkFXQUwQAjLmAwoPUGF5bWVudHNTZXJ2aWNlEnoKE0NyZWF0ZURlcG9zaXRJbnRlbnQSMC5uZXhhY29yZS5wYXltZW50cy52MS5DcmVhdGVEZXBvc2l0SW50ZW50UmVxdWVzdBoxLm5leGFjb3JlLnBheW1lbnRzLnYxLkNyZWF0ZURlcG9zaXRJbnRlbnRSZXNwb25zZRJ9ChRDcmVhdGVXaXRoZHJhd0ludGVudBIxLm5leGFjb3JlLnBheW1lbnRzLnYxLkNyZWF0ZVdpdGhkcmF3SW50ZW50UmVxdWVzdBoyLm5leGFjb3JlLnBheW1lbnRzLnYxLkNyZWF0ZVdpdGhkcmF3SW50ZW50UmVzcG9uc2UScQoQR2V0UGF5bWVudFN0YXR1cxItLm5leGFjb3JlLnBheW1lbnRzLnYxLkdldFBheW1lbnRTdGF0dXNSZXF1ZXN0Gi4ubmV4YWNvcmUucGF5bWVudHMudjEuR2V0UGF5bWVudFN0YXR1c1Jlc3BvbnNlEmUKDExpc3RQYXltZW50cxIpLm5leGFjb3JlLnBheW1lbnRzLnYxLkxpc3RQYXltZW50c1JlcXVlc3QaKi5uZXhhY29yZS5wYXltZW50cy52MS5MaXN0UGF5bWVudHNSZXNwb25zZUJfWl1naXRodWIuY29tL2tpbmdzb25zZWFuZy9uZXhhY29yZS1maW5hbmNpYWwvbGVkZ2VyLXNlcnZpY2UvZ2VuL25leGFjb3JlL3BheW1lbnRzL3YxO3BheW1lbnRzdjFiBnByb3RvMw',
-  )
+export const file_nexacore_payments_v1_payments: GenFile = /*@__PURE__*/
+  fileDesc("CiNuZXhhY29yZS9wYXltZW50cy92MS9wYXltZW50cy5wcm90bxIUbmV4YWNvcmUucGF5bWVudHMudjEi/QEKB1BheW1lbnQSEgoKcGF5bWVudF9pZBgBIAEoCRIPCgd1c2VyX2lkGAIgASgJEg4KBmFtb3VudBgDIAEoCRIwCghjdXJyZW5jeRgEIAEoDjIeLm5leGFjb3JlLnBheW1lbnRzLnYxLkN1cnJlbmN5EjMKBnN0YXR1cxgFIAEoDjIjLm5leGFjb3JlLnBheW1lbnRzLnYxLlBheW1lbnRTdGF0dXMSLwoEdHlwZRgGIAEoDjIhLm5leGFjb3JlLnBheW1lbnRzLnYxLlBheW1lbnRUeXBlEhEKCXJlZmVyZW5jZRgHIAEoCRISCgpjcmVhdGVkX2F0GAggASgJIn4KGkNyZWF0ZURlcG9zaXRJbnRlbnRSZXF1ZXN0Eg8KB3VzZXJfaWQYASABKAkSDgoGYW1vdW50GAIgASgJEjAKCGN1cnJlbmN5GAMgASgOMh4ubmV4YWNvcmUucGF5bWVudHMudjEuQ3VycmVuY3kSDQoFZW1haWwYBCABKAkiWQobQ3JlYXRlRGVwb3NpdEludGVudFJlc3BvbnNlEhIKCnBheW1lbnRfaWQYASABKAkSEwoLcGF5bWVudF91cmwYAiABKAkSEQoJcmVmZXJlbmNlGAMgASgJIpsBChtDcmVhdGVXaXRoZHJhd0ludGVudFJlcXVlc3QSDwoHdXNlcl9pZBgBIAEoCRIOCgZhbW91bnQYAiABKAkSMAoIY3VycmVuY3kYAyABKA4yHi5uZXhhY29yZS5wYXltZW50cy52MS5DdXJyZW5jeRIRCgliYW5rX2NvZGUYBCABKAkSFgoOYWNjb3VudF9udW1iZXIYBSABKAkiRQocQ3JlYXRlV2l0aGRyYXdJbnRlbnRSZXNwb25zZRISCgpwYXltZW50X2lkGAEgASgJEhEKCXJlZmVyZW5jZRgCIAEoCSI+ChdHZXRQYXltZW50U3RhdHVzUmVxdWVzdBISCgpwYXltZW50X2lkGAEgASgJEg8KB3VzZXJfaWQYAiABKAkiSgoYR2V0UGF5bWVudFN0YXR1c1Jlc3BvbnNlEi4KB3BheW1lbnQYASABKAsyHS5uZXhhY29yZS5wYXltZW50cy52MS5QYXltZW50IkcKE0xpc3RQYXltZW50c1JlcXVlc3QSDwoHdXNlcl9pZBgBIAEoCRIMCgRwYWdlGAIgASgFEhEKCXBhZ2Vfc2l6ZRgDIAEoBSJWChRMaXN0UGF5bWVudHNSZXNwb25zZRIvCghwYXltZW50cxgBIAMoCzIdLm5leGFjb3JlLnBheW1lbnRzLnYxLlBheW1lbnQSDQoFdG90YWwYAiABKAUqSAoIQ3VycmVuY3kSGAoUQ1VSUkVOQ1lfVU5TUEVDSUZJRUQQABIQCgxDVVJSRU5DWV9OR04QARIQCgxDVVJSRU5DWV9VU0QQAiqjAQoNUGF5bWVudFN0YXR1cxIeChpQQVlNRU5UX1NUQVRVU19VTlNQRUNJRklFRBAAEhoKFlBBWU1FTlRfU1RBVFVTX1BFTkRJTkcQARIdChlQQVlNRU5UX1NUQVRVU19QUk9DRVNTSU5HEAISHAoYUEFZTUVOVF9TVEFUVVNfQ09NUExFVEVEEAMSGQoVUEFZTUVOVF9TVEFUVVNfRkFJTEVEEAQqYgoLUGF5bWVudFR5cGUSHAoYUEFZTUVOVF9UWVBFX1VOU1BFQ0lGSUVEEAASGAoUUEFZTUVOVF9UWVBFX0RFUE9TSVQQARIbChdQQVlNRU5UX1RZUEVfV0lUSERSQVdBTBACMuYDCg9QYXltZW50c1NlcnZpY2USegoTQ3JlYXRlRGVwb3NpdEludGVudBIwLm5leGFjb3JlLnBheW1lbnRzLnYxLkNyZWF0ZURlcG9zaXRJbnRlbnRSZXF1ZXN0GjEubmV4YWNvcmUucGF5bWVudHMudjEuQ3JlYXRlRGVwb3NpdEludGVudFJlc3BvbnNlEn0KFENyZWF0ZVdpdGhkcmF3SW50ZW50EjEubmV4YWNvcmUucGF5bWVudHMudjEuQ3JlYXRlV2l0aGRyYXdJbnRlbnRSZXF1ZXN0GjIubmV4YWNvcmUucGF5bWVudHMudjEuQ3JlYXRlV2l0aGRyYXdJbnRlbnRSZXNwb25zZRJxChBHZXRQYXltZW50U3RhdHVzEi0ubmV4YWNvcmUucGF5bWVudHMudjEuR2V0UGF5bWVudFN0YXR1c1JlcXVlc3QaLi5uZXhhY29yZS5wYXltZW50cy52MS5HZXRQYXltZW50U3RhdHVzUmVzcG9uc2USZQoMTGlzdFBheW1lbnRzEikubmV4YWNvcmUucGF5bWVudHMudjEuTGlzdFBheW1lbnRzUmVxdWVzdBoqLm5leGFjb3JlLnBheW1lbnRzLnYxLkxpc3RQYXltZW50c1Jlc3BvbnNlQl9aXWdpdGh1Yi5jb20va2luZ3NvbnNlYW5nL25leGFjb3JlLWZpbmFuY2lhbC9sZWRnZXItc2VydmljZS9nZW4vbmV4YWNvcmUvcGF5bWVudHMvdjE7cGF5bWVudHN2MWIGcHJvdG8z");
 
 /**
  * @generated from message nexacore.payments.v1.Payment
  */
-export type Payment = Message<'nexacore.payments.v1.Payment'> & {
+export type Payment = Message<"nexacore.payments.v1.Payment"> & {
   /**
    * @generated from field: string payment_id = 1;
    */
-  paymentId: string
+  paymentId: string;
 
   /**
    * @generated from field: string user_id = 2;
    */
-  userId: string
+  userId: string;
 
   /**
    * @generated from field: string amount = 3;
    */
-  amount: string
+  amount: string;
 
   /**
-   * @generated from field: string currency = 4;
+   * @generated from field: nexacore.payments.v1.Currency currency = 4;
    */
-  currency: string
+  currency: Currency;
 
   /**
    * @generated from field: nexacore.payments.v1.PaymentStatus status = 5;
    */
-  status: PaymentStatus
+  status: PaymentStatus;
 
   /**
    * @generated from field: nexacore.payments.v1.PaymentType type = 6;
    */
-  type: PaymentType
+  type: PaymentType;
 
   /**
    * @generated from field: string reference = 7;
    */
-  reference: string
+  reference: string;
 
   /**
    * @generated from field: string created_at = 8;
    */
-  createdAt: string
-}
+  createdAt: string;
+};
 
 /**
  * Describes the message nexacore.payments.v1.Payment.
  * Use `create(PaymentSchema)` to create a new message.
  */
-export const PaymentSchema: GenMessage<Payment> =
-  /*@__PURE__*/
-  messageDesc(file_nexacore_payments_v1_payments, 0)
+export const PaymentSchema: GenMessage<Payment> = /*@__PURE__*/
+  messageDesc(file_nexacore_payments_v1_payments, 0);
 
 /**
  * @generated from message nexacore.payments.v1.CreateDepositIntentRequest
  */
-export type CreateDepositIntentRequest =
-  Message<'nexacore.payments.v1.CreateDepositIntentRequest'> & {
-    /**
-     * @generated from field: string user_id = 1;
-     */
-    userId: string
+export type CreateDepositIntentRequest = Message<"nexacore.payments.v1.CreateDepositIntentRequest"> & {
+  /**
+   * @generated from field: string user_id = 1;
+   */
+  userId: string;
 
-    /**
-     * @generated from field: string amount = 2;
-     */
-    amount: string
+  /**
+   * @generated from field: string amount = 2;
+   */
+  amount: string;
 
-    /**
-     * @generated from field: string currency = 3;
-     */
-    currency: string
+  /**
+   * @generated from field: nexacore.payments.v1.Currency currency = 3;
+   */
+  currency: Currency;
 
-    /**
-     * @generated from field: string email = 4;
-     */
-    email: string
-  }
+  /**
+   * @generated from field: string email = 4;
+   */
+  email: string;
+};
 
 /**
  * Describes the message nexacore.payments.v1.CreateDepositIntentRequest.
  * Use `create(CreateDepositIntentRequestSchema)` to create a new message.
  */
-export const CreateDepositIntentRequestSchema: GenMessage<CreateDepositIntentRequest> =
-  /*@__PURE__*/
-  messageDesc(file_nexacore_payments_v1_payments, 1)
+export const CreateDepositIntentRequestSchema: GenMessage<CreateDepositIntentRequest> = /*@__PURE__*/
+  messageDesc(file_nexacore_payments_v1_payments, 1);
 
 /**
  * @generated from message nexacore.payments.v1.CreateDepositIntentResponse
  */
-export type CreateDepositIntentResponse =
-  Message<'nexacore.payments.v1.CreateDepositIntentResponse'> & {
-    /**
-     * @generated from field: string payment_id = 1;
-     */
-    paymentId: string
+export type CreateDepositIntentResponse = Message<"nexacore.payments.v1.CreateDepositIntentResponse"> & {
+  /**
+   * @generated from field: string payment_id = 1;
+   */
+  paymentId: string;
 
-    /**
-     * @generated from field: string payment_url = 2;
-     */
-    paymentUrl: string
+  /**
+   * @generated from field: string payment_url = 2;
+   */
+  paymentUrl: string;
 
-    /**
-     * @generated from field: string reference = 3;
-     */
-    reference: string
-  }
+  /**
+   * @generated from field: string reference = 3;
+   */
+  reference: string;
+};
 
 /**
  * Describes the message nexacore.payments.v1.CreateDepositIntentResponse.
  * Use `create(CreateDepositIntentResponseSchema)` to create a new message.
  */
-export const CreateDepositIntentResponseSchema: GenMessage<CreateDepositIntentResponse> =
-  /*@__PURE__*/
-  messageDesc(file_nexacore_payments_v1_payments, 2)
+export const CreateDepositIntentResponseSchema: GenMessage<CreateDepositIntentResponse> = /*@__PURE__*/
+  messageDesc(file_nexacore_payments_v1_payments, 2);
 
 /**
  * @generated from message nexacore.payments.v1.CreateWithdrawIntentRequest
  */
-export type CreateWithdrawIntentRequest =
-  Message<'nexacore.payments.v1.CreateWithdrawIntentRequest'> & {
-    /**
-     * @generated from field: string user_id = 1;
-     */
-    userId: string
+export type CreateWithdrawIntentRequest = Message<"nexacore.payments.v1.CreateWithdrawIntentRequest"> & {
+  /**
+   * @generated from field: string user_id = 1;
+   */
+  userId: string;
 
-    /**
-     * @generated from field: string amount = 2;
-     */
-    amount: string
+  /**
+   * @generated from field: string amount = 2;
+   */
+  amount: string;
 
-    /**
-     * @generated from field: string currency = 3;
-     */
-    currency: string
+  /**
+   * @generated from field: nexacore.payments.v1.Currency currency = 3;
+   */
+  currency: Currency;
 
-    /**
-     * @generated from field: string bank_code = 4;
-     */
-    bankCode: string
+  /**
+   * @generated from field: string bank_code = 4;
+   */
+  bankCode: string;
 
-    /**
-     * @generated from field: string account_number = 5;
-     */
-    accountNumber: string
-  }
+  /**
+   * @generated from field: string account_number = 5;
+   */
+  accountNumber: string;
+};
 
 /**
  * Describes the message nexacore.payments.v1.CreateWithdrawIntentRequest.
  * Use `create(CreateWithdrawIntentRequestSchema)` to create a new message.
  */
-export const CreateWithdrawIntentRequestSchema: GenMessage<CreateWithdrawIntentRequest> =
-  /*@__PURE__*/
-  messageDesc(file_nexacore_payments_v1_payments, 3)
+export const CreateWithdrawIntentRequestSchema: GenMessage<CreateWithdrawIntentRequest> = /*@__PURE__*/
+  messageDesc(file_nexacore_payments_v1_payments, 3);
 
 /**
  * @generated from message nexacore.payments.v1.CreateWithdrawIntentResponse
  */
-export type CreateWithdrawIntentResponse =
-  Message<'nexacore.payments.v1.CreateWithdrawIntentResponse'> & {
-    /**
-     * @generated from field: string payment_id = 1;
-     */
-    paymentId: string
+export type CreateWithdrawIntentResponse = Message<"nexacore.payments.v1.CreateWithdrawIntentResponse"> & {
+  /**
+   * @generated from field: string payment_id = 1;
+   */
+  paymentId: string;
 
-    /**
-     * @generated from field: string reference = 2;
-     */
-    reference: string
-  }
+  /**
+   * @generated from field: string reference = 2;
+   */
+  reference: string;
+};
 
 /**
  * Describes the message nexacore.payments.v1.CreateWithdrawIntentResponse.
  * Use `create(CreateWithdrawIntentResponseSchema)` to create a new message.
  */
-export const CreateWithdrawIntentResponseSchema: GenMessage<CreateWithdrawIntentResponse> =
-  /*@__PURE__*/
-  messageDesc(file_nexacore_payments_v1_payments, 4)
+export const CreateWithdrawIntentResponseSchema: GenMessage<CreateWithdrawIntentResponse> = /*@__PURE__*/
+  messageDesc(file_nexacore_payments_v1_payments, 4);
 
 /**
  * @generated from message nexacore.payments.v1.GetPaymentStatusRequest
  */
-export type GetPaymentStatusRequest =
-  Message<'nexacore.payments.v1.GetPaymentStatusRequest'> & {
-    /**
-     * @generated from field: string payment_id = 1;
-     */
-    paymentId: string
-  }
+export type GetPaymentStatusRequest = Message<"nexacore.payments.v1.GetPaymentStatusRequest"> & {
+  /**
+   * @generated from field: string payment_id = 1;
+   */
+  paymentId: string;
+
+  /**
+   * @generated from field: string user_id = 2;
+   */
+  userId: string;
+};
 
 /**
  * Describes the message nexacore.payments.v1.GetPaymentStatusRequest.
  * Use `create(GetPaymentStatusRequestSchema)` to create a new message.
  */
-export const GetPaymentStatusRequestSchema: GenMessage<GetPaymentStatusRequest> =
-  /*@__PURE__*/
-  messageDesc(file_nexacore_payments_v1_payments, 5)
+export const GetPaymentStatusRequestSchema: GenMessage<GetPaymentStatusRequest> = /*@__PURE__*/
+  messageDesc(file_nexacore_payments_v1_payments, 5);
 
 /**
  * @generated from message nexacore.payments.v1.GetPaymentStatusResponse
  */
-export type GetPaymentStatusResponse =
-  Message<'nexacore.payments.v1.GetPaymentStatusResponse'> & {
-    /**
-     * @generated from field: nexacore.payments.v1.Payment payment = 1;
-     */
-    payment?: Payment | undefined
-  }
+export type GetPaymentStatusResponse = Message<"nexacore.payments.v1.GetPaymentStatusResponse"> & {
+  /**
+   * @generated from field: nexacore.payments.v1.Payment payment = 1;
+   */
+  payment?: Payment | undefined;
+};
 
 /**
  * Describes the message nexacore.payments.v1.GetPaymentStatusResponse.
  * Use `create(GetPaymentStatusResponseSchema)` to create a new message.
  */
-export const GetPaymentStatusResponseSchema: GenMessage<GetPaymentStatusResponse> =
-  /*@__PURE__*/
-  messageDesc(file_nexacore_payments_v1_payments, 6)
+export const GetPaymentStatusResponseSchema: GenMessage<GetPaymentStatusResponse> = /*@__PURE__*/
+  messageDesc(file_nexacore_payments_v1_payments, 6);
 
 /**
  * @generated from message nexacore.payments.v1.ListPaymentsRequest
  */
-export type ListPaymentsRequest =
-  Message<'nexacore.payments.v1.ListPaymentsRequest'> & {
-    /**
-     * @generated from field: string user_id = 1;
-     */
-    userId: string
+export type ListPaymentsRequest = Message<"nexacore.payments.v1.ListPaymentsRequest"> & {
+  /**
+   * @generated from field: string user_id = 1;
+   */
+  userId: string;
 
-    /**
-     * @generated from field: int32 page = 2;
-     */
-    page: number
+  /**
+   * @generated from field: int32 page = 2;
+   */
+  page: number;
 
-    /**
-     * @generated from field: int32 page_size = 3;
-     */
-    pageSize: number
-  }
+  /**
+   * @generated from field: int32 page_size = 3;
+   */
+  pageSize: number;
+};
 
 /**
  * Describes the message nexacore.payments.v1.ListPaymentsRequest.
  * Use `create(ListPaymentsRequestSchema)` to create a new message.
  */
-export const ListPaymentsRequestSchema: GenMessage<ListPaymentsRequest> =
-  /*@__PURE__*/
-  messageDesc(file_nexacore_payments_v1_payments, 7)
+export const ListPaymentsRequestSchema: GenMessage<ListPaymentsRequest> = /*@__PURE__*/
+  messageDesc(file_nexacore_payments_v1_payments, 7);
 
 /**
  * @generated from message nexacore.payments.v1.ListPaymentsResponse
  */
-export type ListPaymentsResponse =
-  Message<'nexacore.payments.v1.ListPaymentsResponse'> & {
-    /**
-     * @generated from field: repeated nexacore.payments.v1.Payment payments = 1;
-     */
-    payments: Payment[]
+export type ListPaymentsResponse = Message<"nexacore.payments.v1.ListPaymentsResponse"> & {
+  /**
+   * @generated from field: repeated nexacore.payments.v1.Payment payments = 1;
+   */
+  payments: Payment[];
 
-    /**
-     * @generated from field: int32 total = 2;
-     */
-    total: number
-  }
+  /**
+   * @generated from field: int32 total = 2;
+   */
+  total: number;
+};
 
 /**
  * Describes the message nexacore.payments.v1.ListPaymentsResponse.
  * Use `create(ListPaymentsResponseSchema)` to create a new message.
  */
-export const ListPaymentsResponseSchema: GenMessage<ListPaymentsResponse> =
-  /*@__PURE__*/
-  messageDesc(file_nexacore_payments_v1_payments, 8)
+export const ListPaymentsResponseSchema: GenMessage<ListPaymentsResponse> = /*@__PURE__*/
+  messageDesc(file_nexacore_payments_v1_payments, 8);
+
+/**
+ * @generated from enum nexacore.payments.v1.Currency
+ */
+export enum Currency {
+  /**
+   * @generated from enum value: CURRENCY_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: CURRENCY_NGN = 1;
+   */
+  NGN = 1,
+
+  /**
+   * @generated from enum value: CURRENCY_USD = 2;
+   */
+  USD = 2,
+}
+
+/**
+ * Describes the enum nexacore.payments.v1.Currency.
+ */
+export const CurrencySchema: GenEnum<Currency> = /*@__PURE__*/
+  enumDesc(file_nexacore_payments_v1_payments, 0);
 
 /**
  * @generated from enum nexacore.payments.v1.PaymentStatus
@@ -328,9 +329,8 @@ export enum PaymentStatus {
 /**
  * Describes the enum nexacore.payments.v1.PaymentStatus.
  */
-export const PaymentStatusSchema: GenEnum<PaymentStatus> =
-  /*@__PURE__*/
-  enumDesc(file_nexacore_payments_v1_payments, 0)
+export const PaymentStatusSchema: GenEnum<PaymentStatus> = /*@__PURE__*/
+  enumDesc(file_nexacore_payments_v1_payments, 1);
 
 /**
  * @generated from enum nexacore.payments.v1.PaymentType
@@ -355,9 +355,8 @@ export enum PaymentType {
 /**
  * Describes the enum nexacore.payments.v1.PaymentType.
  */
-export const PaymentTypeSchema: GenEnum<PaymentType> =
-  /*@__PURE__*/
-  enumDesc(file_nexacore_payments_v1_payments, 1)
+export const PaymentTypeSchema: GenEnum<PaymentType> = /*@__PURE__*/
+  enumDesc(file_nexacore_payments_v1_payments, 2);
 
 /**
  * @generated from service nexacore.payments.v1.PaymentsService
@@ -367,32 +366,34 @@ export const PaymentsService: GenService<{
    * @generated from rpc nexacore.payments.v1.PaymentsService.CreateDepositIntent
    */
   createDepositIntent: {
-    methodKind: 'unary'
-    input: typeof CreateDepositIntentRequestSchema
-    output: typeof CreateDepositIntentResponseSchema
-  }
+    methodKind: "unary";
+    input: typeof CreateDepositIntentRequestSchema;
+    output: typeof CreateDepositIntentResponseSchema;
+  },
   /**
    * @generated from rpc nexacore.payments.v1.PaymentsService.CreateWithdrawIntent
    */
   createWithdrawIntent: {
-    methodKind: 'unary'
-    input: typeof CreateWithdrawIntentRequestSchema
-    output: typeof CreateWithdrawIntentResponseSchema
-  }
+    methodKind: "unary";
+    input: typeof CreateWithdrawIntentRequestSchema;
+    output: typeof CreateWithdrawIntentResponseSchema;
+  },
   /**
    * @generated from rpc nexacore.payments.v1.PaymentsService.GetPaymentStatus
    */
   getPaymentStatus: {
-    methodKind: 'unary'
-    input: typeof GetPaymentStatusRequestSchema
-    output: typeof GetPaymentStatusResponseSchema
-  }
+    methodKind: "unary";
+    input: typeof GetPaymentStatusRequestSchema;
+    output: typeof GetPaymentStatusResponseSchema;
+  },
   /**
    * @generated from rpc nexacore.payments.v1.PaymentsService.ListPayments
    */
   listPayments: {
-    methodKind: 'unary'
-    input: typeof ListPaymentsRequestSchema
-    output: typeof ListPaymentsResponseSchema
-  }
-}> = /*@__PURE__*/ serviceDesc(file_nexacore_payments_v1_payments, 0)
+    methodKind: "unary";
+    input: typeof ListPaymentsRequestSchema;
+    output: typeof ListPaymentsResponseSchema;
+  },
+}> = /*@__PURE__*/
+  serviceDesc(file_nexacore_payments_v1_payments, 0);
+

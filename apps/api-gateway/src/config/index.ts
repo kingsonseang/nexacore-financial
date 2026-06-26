@@ -11,6 +11,9 @@ export const AppConfig = {
     identityServiceUrl: Config.string('IDENTITY_SERVICE_URL').pipe(
       Config.withDefault('http://localhost:50051'),
     ),
+    paymentsServiceUrl: Config.string('PAYMENTS_SERVICE_URL').pipe(
+      Config.withDefault('http://localhost:50053'),
+    ),
   },
   auth: {
     jwtSecret: Config.string('JWT_SECRET'),
