@@ -252,6 +252,7 @@ _Note: This README describes the intended architecture and will be updated as th
 - **`@effect/platform`'s `HttpRouter.post` handler type does not reliably infer `Respondable`** from `Effect.gen` generators when the success path returns through nested `Effect.tryPromise` calls. Gateway routes use explicit `Effect.flatMap` chains with typed `Effect.tryPromise<T, ConnectError>` generics instead of generators where this surfaces.
 - **gRPC reflection has no official ConnectRPC TypeScript implementation yet** (Go has one, TS does not). Bruno and grpcurl point at `.proto` files directly via `-import-path`/`-proto` instead of using reflection.
 - **gRPC JSON encoding requires camelCase field names** (e.g. `userId`, not `user_id`) — snake_case keys are silently dropped as unknown fields rather than erroring, which can mask bugs. Always verify request payloads use the camelCase proto JSON names.
+- **`api-gateway`'s `dev` target requires `tsx --watch` (with flag dashes), not `tsx watch`.** Likely a stdin-handling conflict between `tsx`'s watch mode and `@effect/platform-node`'s HTTP server signal handling, surfaced only under Nx's piped (non-TTY) stdin — `api-gateway` is the only service combining both. Other services run correctly with the bare `tsx watch` form; this is service-specific, not workspace-wide.
 
 ## Future considerations
 
