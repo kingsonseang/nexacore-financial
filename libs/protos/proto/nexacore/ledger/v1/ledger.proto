@@ -10,6 +10,12 @@ service LedgerService {
   rpc ListEntries(ListEntriesRequest) returns (ListEntriesResponse);
 }
 
+enum Currency {
+  CURRENCY_UNSPECIFIED = 0;
+  CURRENCY_NGN = 1;
+  CURRENCY_USD = 2;
+}
+
 enum EntryType {
   ENTRY_TYPE_UNSPECIFIED = 0;
   ENTRY_TYPE_DEBIT = 1;
@@ -21,7 +27,7 @@ message JournalEntry {
   string account_id = 2;
   EntryType type = 3;
   string amount = 4;
-  string currency = 5;
+  Currency currency = 5;
   string reference = 6;
   string description = 7;
   string created_at = 8;
@@ -30,7 +36,7 @@ message JournalEntry {
 message PostEntryRequest {
   string account_id = 1;
   string amount = 2;
-  string currency = 3;
+  Currency currency = 3;
   EntryType type = 4;
   string reference = 5;
   string description = 6;
@@ -43,12 +49,12 @@ message PostEntryResponse {
 
 message GetBalanceRequest {
   string account_id = 1;
-  string currency = 2;
+  Currency currency = 2;
 }
 
 message GetBalanceResponse {
   string balance = 1;
-  string currency = 2;
+  Currency currency = 2;
   string account_id = 3;
 }
 

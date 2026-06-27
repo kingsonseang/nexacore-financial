@@ -5,9 +5,22 @@ meta {
 }
 
 get {
-  url: {{HTTP_URL}}
-  body: none
-  auth: inherit
+  url: {{HTTP_URL}}/api/v1/ledger/balance/usd
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmMDU0MTg4Ni00ZjA1LTRmOTQtODQ3Zi1mNThmMWI2ZGZkMWMiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJleHAiOjE3ODI1NDU1ODl9.G9GLGWPV8WDu4IqkOmtR-7gJ93J8T6JY38fMb9WDYqQ
+}
+
+body:json {
+  {
+    "userId": "f0541886-4f05-4f94-847f-f58f1b6dfd1c",
+    "amount": "500",
+    "currency": "NGN",
+    "email": "test@test.com"
+  }
 }
 
 vars:pre-request {

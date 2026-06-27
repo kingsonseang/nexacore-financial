@@ -1,7 +1,47 @@
 {
-  "name": "ledger-service",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "@org/ledger-service",
   "projectType": "application",
   "sourceRoot": "apps/ledger-service",
-  "tags": []
+  "tags": [],
+  "targets": {
+    "generate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "go tool sqlc generate",
+        "cwd": "apps/ledger-service"
+      }
+    },
+    "migrate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "psql -U postgres -d nexacore_ledger -f db/schema.sql",
+        "cwd": "apps/ledger-service"
+      }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "go build -o bin/ledger-service ./...",
+        "cwd": "apps/ledger-service"
+      }
+    },
+    "start": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "./bin/ledger-service",
+        "cwd": "apps/ledger-service"
+      },
+      "dependsOn": [
+        "build"
+      ]
+    },
+    "dev": {
+      "continuous": true,
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "air",
+        "cwd": "apps/ledger-service"
+      }
+    }
+  }
 }

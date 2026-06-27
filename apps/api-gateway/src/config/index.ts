@@ -8,6 +8,9 @@ export const AppConfig = {
     accountsServiceUrl: Config.string('ACCOUNTS_SERVICE_URL').pipe(
       Config.withDefault('http://localhost:50052'),
     ),
+    ledgerServiceUrl: Config.string('LEDGER_SERVICE_URL').pipe(
+      Config.withDefault('http://localhost:50054'),
+    ),
     identityServiceUrl: Config.string('IDENTITY_SERVICE_URL').pipe(
       Config.withDefault('http://localhost:50051'),
     ),

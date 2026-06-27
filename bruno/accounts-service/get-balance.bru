@@ -13,9 +13,16 @@ grpc {
   methodType: unary
 }
 
+metadata {
+  : 
+}
+
 body:grpc {
   name: message 1
   content: '''
-    {}
+    {
+      "user_id": "f0541886-4f05-4f94-847f-f58f1b6dfd1c",
+      "currency": 1
+    }
   '''
 }

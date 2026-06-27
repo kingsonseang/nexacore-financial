@@ -5,7 +5,7 @@ meta {
 }
 
 grpc {
-  url: {{GRPC_URL}}
+  url: {{ACCOUNTS_GRPC_URL}}
   method: /nexacore.accounts.v1.AccountsService/GetAccount
   body: grpc
   protoPath: ../libs/protos/proto/nexacore/accounts/v1/accounts.proto
@@ -16,6 +16,8 @@ grpc {
 body:grpc {
   name: message 1
   content: '''
-    {}
+    {
+      "user_id": "f0541886-4f05-4f94-847f-f58f1b6dfd1c"
+    }
   '''
 }

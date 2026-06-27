@@ -10,7 +10,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file nexacore/ledger/v1/ledger.proto.
  */
 export const file_nexacore_ledger_v1_ledger: GenFile = /*@__PURE__*/
-  fileDesc("Ch9uZXhhY29yZS9sZWRnZXIvdjEvbGVkZ2VyLnByb3RvEhJuZXhhY29yZS5sZWRnZXIudjEivwEKDEpvdXJuYWxFbnRyeRIQCghlbnRyeV9pZBgBIAEoCRISCgphY2NvdW50X2lkGAIgASgJEisKBHR5cGUYAyABKA4yHS5uZXhhY29yZS5sZWRnZXIudjEuRW50cnlUeXBlEg4KBmFtb3VudBgEIAEoCRIQCghjdXJyZW5jeRgFIAEoCRIRCglyZWZlcmVuY2UYBiABKAkSEwoLZGVzY3JpcHRpb24YByABKAkSEgoKY3JlYXRlZF9hdBgIIAEoCSKdAQoQUG9zdEVudHJ5UmVxdWVzdBISCgphY2NvdW50X2lkGAEgASgJEg4KBmFtb3VudBgCIAEoCRIQCghjdXJyZW5jeRgDIAEoCRIrCgR0eXBlGAQgASgOMh0ubmV4YWNvcmUubGVkZ2VyLnYxLkVudHJ5VHlwZRIRCglyZWZlcmVuY2UYBSABKAkSEwoLZGVzY3JpcHRpb24YBiABKAkiPAoRUG9zdEVudHJ5UmVzcG9uc2USEAoIZW50cnlfaWQYASABKAkSFQoNYmFsYW5jZV9hZnRlchgCIAEoCSI5ChFHZXRCYWxhbmNlUmVxdWVzdBISCgphY2NvdW50X2lkGAEgASgJEhAKCGN1cnJlbmN5GAIgASgJIksKEkdldEJhbGFuY2VSZXNwb25zZRIPCgdiYWxhbmNlGAEgASgJEhAKCGN1cnJlbmN5GAIgASgJEhIKCmFjY291bnRfaWQYAyABKAkiSQoSTGlzdEVudHJpZXNSZXF1ZXN0EhIKCmFjY291bnRfaWQYASABKAkSDAoEcGFnZRgCIAEoBRIRCglwYWdlX3NpemUYAyABKAUiVwoTTGlzdEVudHJpZXNSZXNwb25zZRIxCgdlbnRyaWVzGAEgAygLMiAubmV4YWNvcmUubGVkZ2VyLnYxLkpvdXJuYWxFbnRyeRINCgV0b3RhbBgCIAEoBSpUCglFbnRyeVR5cGUSGgoWRU5UUllfVFlQRV9VTlNQRUNJRklFRBAAEhQKEEVOVFJZX1RZUEVfREVCSVQQARIVChFFTlRSWV9UWVBFX0NSRURJVBACMqYCCg1MZWRnZXJTZXJ2aWNlElgKCVBvc3RFbnRyeRIkLm5leGFjb3JlLmxlZGdlci52MS5Qb3N0RW50cnlSZXF1ZXN0GiUubmV4YWNvcmUubGVkZ2VyLnYxLlBvc3RFbnRyeVJlc3BvbnNlElsKCkdldEJhbGFuY2USJS5uZXhhY29yZS5sZWRnZXIudjEuR2V0QmFsYW5jZVJlcXVlc3QaJi5uZXhhY29yZS5sZWRnZXIudjEuR2V0QmFsYW5jZVJlc3BvbnNlEl4KC0xpc3RFbnRyaWVzEiYubmV4YWNvcmUubGVkZ2VyLnYxLkxpc3RFbnRyaWVzUmVxdWVzdBonLm5leGFjb3JlLmxlZGdlci52MS5MaXN0RW50cmllc1Jlc3BvbnNlQltaWWdpdGh1Yi5jb20va2luZ3NvbnNlYW5nL25leGFjb3JlLWZpbmFuY2lhbC9sZWRnZXItc2VydmljZS9nZW4vbmV4YWNvcmUvbGVkZ2VyL3YxO2xlZGdlcnYxYgZwcm90bzM");
+  fileDesc("Ch9uZXhhY29yZS9sZWRnZXIvdjEvbGVkZ2VyLnByb3RvEhJuZXhhY29yZS5sZWRnZXIudjEi3QEKDEpvdXJuYWxFbnRyeRIQCghlbnRyeV9pZBgBIAEoCRISCgphY2NvdW50X2lkGAIgASgJEisKBHR5cGUYAyABKA4yHS5uZXhhY29yZS5sZWRnZXIudjEuRW50cnlUeXBlEg4KBmFtb3VudBgEIAEoCRIuCghjdXJyZW5jeRgFIAEoDjIcLm5leGFjb3JlLmxlZGdlci52MS5DdXJyZW5jeRIRCglyZWZlcmVuY2UYBiABKAkSEwoLZGVzY3JpcHRpb24YByABKAkSEgoKY3JlYXRlZF9hdBgIIAEoCSK7AQoQUG9zdEVudHJ5UmVxdWVzdBISCgphY2NvdW50X2lkGAEgASgJEg4KBmFtb3VudBgCIAEoCRIuCghjdXJyZW5jeRgDIAEoDjIcLm5leGFjb3JlLmxlZGdlci52MS5DdXJyZW5jeRIrCgR0eXBlGAQgASgOMh0ubmV4YWNvcmUubGVkZ2VyLnYxLkVudHJ5VHlwZRIRCglyZWZlcmVuY2UYBSABKAkSEwoLZGVzY3JpcHRpb24YBiABKAkiPAoRUG9zdEVudHJ5UmVzcG9uc2USEAoIZW50cnlfaWQYASABKAkSFQoNYmFsYW5jZV9hZnRlchgCIAEoCSJXChFHZXRCYWxhbmNlUmVxdWVzdBISCgphY2NvdW50X2lkGAEgASgJEi4KCGN1cnJlbmN5GAIgASgOMhwubmV4YWNvcmUubGVkZ2VyLnYxLkN1cnJlbmN5ImkKEkdldEJhbGFuY2VSZXNwb25zZRIPCgdiYWxhbmNlGAEgASgJEi4KCGN1cnJlbmN5GAIgASgOMhwubmV4YWNvcmUubGVkZ2VyLnYxLkN1cnJlbmN5EhIKCmFjY291bnRfaWQYAyABKAkiSQoSTGlzdEVudHJpZXNSZXF1ZXN0EhIKCmFjY291bnRfaWQYASABKAkSDAoEcGFnZRgCIAEoBRIRCglwYWdlX3NpemUYAyABKAUiVwoTTGlzdEVudHJpZXNSZXNwb25zZRIxCgdlbnRyaWVzGAEgAygLMiAubmV4YWNvcmUubGVkZ2VyLnYxLkpvdXJuYWxFbnRyeRINCgV0b3RhbBgCIAEoBSpICghDdXJyZW5jeRIYChRDVVJSRU5DWV9VTlNQRUNJRklFRBAAEhAKDENVUlJFTkNZX05HThABEhAKDENVUlJFTkNZX1VTRBACKlQKCUVudHJ5VHlwZRIaChZFTlRSWV9UWVBFX1VOU1BFQ0lGSUVEEAASFAoQRU5UUllfVFlQRV9ERUJJVBABEhUKEUVOVFJZX1RZUEVfQ1JFRElUEAIypgIKDUxlZGdlclNlcnZpY2USWAoJUG9zdEVudHJ5EiQubmV4YWNvcmUubGVkZ2VyLnYxLlBvc3RFbnRyeVJlcXVlc3QaJS5uZXhhY29yZS5sZWRnZXIudjEuUG9zdEVudHJ5UmVzcG9uc2USWwoKR2V0QmFsYW5jZRIlLm5leGFjb3JlLmxlZGdlci52MS5HZXRCYWxhbmNlUmVxdWVzdBomLm5leGFjb3JlLmxlZGdlci52MS5HZXRCYWxhbmNlUmVzcG9uc2USXgoLTGlzdEVudHJpZXMSJi5uZXhhY29yZS5sZWRnZXIudjEuTGlzdEVudHJpZXNSZXF1ZXN0GicubmV4YWNvcmUubGVkZ2VyLnYxLkxpc3RFbnRyaWVzUmVzcG9uc2VCW1pZZ2l0aHViLmNvbS9raW5nc29uc2VhbmcvbmV4YWNvcmUtZmluYW5jaWFsL2xlZGdlci1zZXJ2aWNlL2dlbi9uZXhhY29yZS9sZWRnZXIvdjE7bGVkZ2VydjFiBnByb3RvMw");
 
 /**
  * @generated from message nexacore.ledger.v1.JournalEntry
@@ -37,9 +37,9 @@ export type JournalEntry = Message<"nexacore.ledger.v1.JournalEntry"> & {
   amount: string;
 
   /**
-   * @generated from field: string currency = 5;
+   * @generated from field: nexacore.ledger.v1.Currency currency = 5;
    */
-  currency: string;
+  currency: Currency;
 
   /**
    * @generated from field: string reference = 6;
@@ -79,9 +79,9 @@ export type PostEntryRequest = Message<"nexacore.ledger.v1.PostEntryRequest"> & 
   amount: string;
 
   /**
-   * @generated from field: string currency = 3;
+   * @generated from field: nexacore.ledger.v1.Currency currency = 3;
    */
-  currency: string;
+  currency: Currency;
 
   /**
    * @generated from field: nexacore.ledger.v1.EntryType type = 4;
@@ -138,9 +138,9 @@ export type GetBalanceRequest = Message<"nexacore.ledger.v1.GetBalanceRequest"> 
   accountId: string;
 
   /**
-   * @generated from field: string currency = 2;
+   * @generated from field: nexacore.ledger.v1.Currency currency = 2;
    */
-  currency: string;
+  currency: Currency;
 };
 
 /**
@@ -160,9 +160,9 @@ export type GetBalanceResponse = Message<"nexacore.ledger.v1.GetBalanceResponse"
   balance: string;
 
   /**
-   * @generated from field: string currency = 2;
+   * @generated from field: nexacore.ledger.v1.Currency currency = 2;
    */
-  currency: string;
+  currency: Currency;
 
   /**
    * @generated from field: string account_id = 3;
@@ -227,6 +227,32 @@ export const ListEntriesResponseSchema: GenMessage<ListEntriesResponse> = /*@__P
   messageDesc(file_nexacore_ledger_v1_ledger, 6);
 
 /**
+ * @generated from enum nexacore.ledger.v1.Currency
+ */
+export enum Currency {
+  /**
+   * @generated from enum value: CURRENCY_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: CURRENCY_NGN = 1;
+   */
+  NGN = 1,
+
+  /**
+   * @generated from enum value: CURRENCY_USD = 2;
+   */
+  USD = 2,
+}
+
+/**
+ * Describes the enum nexacore.ledger.v1.Currency.
+ */
+export const CurrencySchema: GenEnum<Currency> = /*@__PURE__*/
+  enumDesc(file_nexacore_ledger_v1_ledger, 0);
+
+/**
  * @generated from enum nexacore.ledger.v1.EntryType
  */
 export enum EntryType {
@@ -250,7 +276,7 @@ export enum EntryType {
  * Describes the enum nexacore.ledger.v1.EntryType.
  */
 export const EntryTypeSchema: GenEnum<EntryType> = /*@__PURE__*/
-  enumDesc(file_nexacore_ledger_v1_ledger, 0);
+  enumDesc(file_nexacore_ledger_v1_ledger, 1);
 
 /**
  * @generated from service nexacore.ledger.v1.LedgerService

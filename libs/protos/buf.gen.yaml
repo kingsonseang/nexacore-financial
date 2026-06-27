@@ -4,3 +4,11 @@ plugins:
     out: src/gen
     opt:
       - target=ts
+  - local: protoc-gen-go
+    out: ../../apps/ledger-service/gen
+    opt:
+      - paths=source_relative
+  - local: protoc-gen-go-grpc
+    out: ../../apps/ledger-service/gen
+    opt:
+      - paths=source_relative

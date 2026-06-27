@@ -1,0 +1,32 @@
+meta {
+  name: post-entry
+  type: grpc
+  seq: 1
+}
+
+grpc {
+  url: {{LEDGER_GRPC_URL}}
+  method: /nexacore.ledger.v1.LedgerService/PostEntry
+  body: grpc
+  protoPath: ../libs/protos/proto/nexacore/ledger/v1/ledger.proto
+  auth: none
+  methodType: unary
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {
+      "account_id": "f0541886-4f05-4f94-847f-f58f1b6dfd1c",
+      "amount": "30",
+      "currency": 1,
+      "type": 2,
+      "reference": "",
+      "description": ""
+    }
+  '''
+}
+
+vars:pre-request {
+  LEDGER_GRPC_URL: localhost:50054
+}

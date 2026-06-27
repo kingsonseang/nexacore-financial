@@ -21,6 +21,10 @@
       {
         "path": "../libs/protos/proto/nexacore/payments/v1/payments.proto",
         "type": "file"
+      },
+      {
+        "path": "../libs/protos/proto/nexacore/ledger/v1/ledger.proto",
+        "type": "file"
       }
     ]
   },
