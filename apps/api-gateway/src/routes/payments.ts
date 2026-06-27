@@ -59,9 +59,15 @@ export const paymentsRoutes = HttpRouter.empty.pipe(
           ),
       ),
     ).pipe(
-      Effect.tapError((e) => Effect.logError('deposit error', e)),
       Effect.flatMap((response) =>
-        HttpServerResponse.json(response, { status: 201 }),
+        HttpServerResponse.json(
+          {
+            paymentId: response.paymentId,
+            paymentUrl: response.paymentUrl,
+            reference: response.reference,
+          },
+          { status: 201 },
+        ),
       ),
       Effect.catchTag('ParseError', (e) =>
         HttpServerResponse.json(
@@ -101,7 +107,13 @@ export const paymentsRoutes = HttpRouter.empty.pipe(
       ),
     ).pipe(
       Effect.flatMap((response) =>
-        HttpServerResponse.json(response, { status: 201 }),
+        HttpServerResponse.json(
+          {
+            paymentId: response.paymentId,
+            reference: response.reference,
+          },
+          { status: 201 },
+        ),
       ),
       Effect.catchTag('ParseError', (e) =>
         HttpServerResponse.json(
@@ -132,7 +144,22 @@ export const paymentsRoutes = HttpRouter.empty.pipe(
         ),
       ),
     ).pipe(
-      Effect.flatMap((response) => HttpServerResponse.json(response)),
+      Effect.flatMap((response) =>
+        HttpServerResponse.json({
+          payment: response.payment
+            ? {
+                userId: response.payment.userId,
+                type: response.payment.type,
+                status: response.payment.status,
+                paymentId: response.payment.paymentId,
+                reference: response.payment.reference,
+                amount: response.payment.amount,
+                currency: response.payment.currency,
+                createdAt: response.payment.createdAt,
+              }
+            : undefined,
+        }),
+      ),
       Effect.catchTag('UnauthorizedError', (e) =>
         HttpServerResponse.json({ error: e.reason }, { status: 401 }),
       ),

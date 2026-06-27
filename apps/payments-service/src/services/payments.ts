@@ -1,8 +1,10 @@
 import { randomUUID } from 'node:crypto'
+import type { ProviderError } from '@org/payment-providers'
 import { eq } from 'drizzle-orm'
 import { Data, Effect } from 'effect'
 import { DatabaseService } from '../db/client.js'
 import { type CurrencyEnum, type Payment, payments } from '../db/schema.js'
+import { ProviderRegistryService } from '../providers/registry.js'
 
 export class PaymentNotFoundError extends Data.TaggedError(
   'PaymentNotFoundError',
@@ -13,16 +15,16 @@ export class InfrastructureError extends Data.TaggedError(
 )<{ cause: unknown }> {}
 
 /*
- * createDepositIntent and createWithdrawIntent currently mock the Paystack
- * call instead of hitting the real API. This lets the full request flow
- * (HTTP -> gateway -> gRPC -> DB -> response) be validated end-to-end before
- * introducing a real provider integration. Replace mockInitiatePaystackPayment
- * with a real libs/payment-providers client once this slice is working.
+ * Converts a decimal amount string ("500.00") to integer minor units (50000)
+ * without floating point arithmetic, since parseFloat(amount) * 100 risks
+ * precision errors on certain decimal values. Consistent with this project's
+ * existing convention of treating monetary amounts as strings end-to-end.
  */
-const mockInitiatePaystackPayment = (reference: string) =>
-  Effect.succeed({
-    paymentUrl: `https://checkout.paystack.com/mock/${reference}`,
-  })
+const toMinorUnits = (amount: string): number => {
+  const [whole, fraction = '0'] = amount.split('.')
+  const paddedFraction = fraction.padEnd(2, '0').slice(0, 2)
+  return Number.parseInt(whole, 10) * 100 + Number.parseInt(paddedFraction, 10)
+}
 
 export const createDepositIntent = (params: {
   userId: string
@@ -32,9 +34,22 @@ export const createDepositIntent = (params: {
 }) =>
   Effect.gen(function* () {
     const db = yield* DatabaseService
+    const providers = yield* ProviderRegistryService
     const reference = `dep_${randomUUID()}`
 
-    const { paymentUrl } = yield* mockInitiatePaystackPayment(reference)
+    const provider = providers.providerFor(params.currency)
+
+    const { paymentUrl } = yield* provider
+      .initializeDeposit({
+        email: params.email,
+        amountMinorUnits: toMinorUnits(params.amount),
+        reference,
+      })
+      .pipe(
+        Effect.mapError(
+          (cause: ProviderError) => new InfrastructureError({ cause }),
+        ),
+      )
 
     const [payment] = yield* Effect.tryPromise<Payment[], InfrastructureError>({
       try: () =>

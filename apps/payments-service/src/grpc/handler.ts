@@ -3,11 +3,12 @@ import { type MessageShape, PaymentsPb } from '@org/protos'
 import { Effect, Either, Layer, ManagedRuntime } from 'effect'
 import { DatabaseLive, type DrizzleDB } from '../db/client.js'
 import type { Payment } from '../db/schema.js'
+import { ProviderRegistryLive } from '../providers/registry.js'
 import * as payments from '../services/payments.js'
 
 // --- Runtime ---
 
-const AppLayer = Layer.mergeAll(DatabaseLive)
+const AppLayer = Layer.mergeAll(DatabaseLive, ProviderRegistryLive)
 const runtime = ManagedRuntime.make(AppLayer)
 
 // --- Error helpers ---

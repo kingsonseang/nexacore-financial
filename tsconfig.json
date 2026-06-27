@@ -35,6 +35,9 @@
     },
     {
       "path": "./libs/protos"
+    },
+    {
+      "path": "./libs/payment-providers"
     }
   ],
   "compilerOptions": {
