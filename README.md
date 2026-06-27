@@ -130,11 +130,11 @@ pnpm install
 
 Each TS service is run directly with `tsx watch` rather than through Nx's `dev` target — `nx:run-commands` with `continuous: true` currently buffers/swallows stdout for long-running watch processes in this workspace on Windows. Run from the service directory:
 
-\`\`\`bash
+```bash
 cd apps/identity-service && pnpm tsx watch src/main.ts
 cd apps/accounts-service && pnpm tsx watch src/main.ts
 cd apps/api-gateway && pnpm tsx watch src/main.ts
-\`\`\`
+```
 
 Nx `dev`/`build`/`generate`/`migrate` targets exist and work normally for non-continuous tasks.
 
@@ -142,7 +142,7 @@ Nx `dev`/`build`/`generate`/`migrate` targets exist and work normally for non-co
 
 Each service owns its own Postgres database (not just a schema — see Known workarounds). Create and migrate:
 
-\`\`\`bash
+```bash
 createdb -U postgres nexacore_identity
 createdb -U postgres nexacore_accounts
 
@@ -150,7 +150,7 @@ pnpm nx run identity-service:generate
 pnpm nx run identity-service:migrate
 pnpm nx run accounts-service:generate
 pnpm nx run accounts-service:migrate
-\`\`\`
+```
 
 ### Run services (once project.json targets are defined)
 

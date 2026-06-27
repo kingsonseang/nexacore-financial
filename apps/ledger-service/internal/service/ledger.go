@@ -99,3 +99,14 @@ func (s *LedgerService) ListEntries(
 	}
 	return entries, nil
 }
+
+func (s *LedgerService) GetEntryByReference(
+	ctx context.Context,
+	reference string,
+) (db.JournalEntry, error) {
+	entry, err := s.queries.GetEntryByReference(ctx, reference)
+	if err != nil {
+		return db.JournalEntry{}, fmt.Errorf("get entry by reference: %w", err)
+	}
+	return entry, nil
+}

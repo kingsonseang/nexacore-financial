@@ -1,4 +1,5 @@
 import { randomUUID } from 'node:crypto'
+import { Code, ConnectError } from '@connectrpc/connect'
 import type { ProviderError } from '@org/payment-providers'
 import { fromMinorUnits, toMinorUnits } from '@org/payment-providers'
 import { LedgerPb } from '@org/protos'
@@ -258,4 +259,76 @@ export const confirmWebhook = (params: {
     }
 
     return { handled: true, paymentId: payment.id, status: newStatus }
+  })
+
+const entryExists = (ledger: LedgerClient, reference: string) =>
+  Effect.tryPromise<boolean, InfrastructureError>({
+    try: async () => {
+      try {
+        await ledger.getEntryByReference({ reference })
+        return true
+      } catch (e) {
+        if (e instanceof ConnectError && e.code === Code.NotFound) {
+          return false
+        }
+        throw e
+      }
+    },
+    catch: (cause) => new InfrastructureError({ cause }),
+  })
+
+export const reconcilePayments = () =>
+  Effect.gen(function* () {
+    const db = yield* DatabaseService
+    const ledger = yield* LedgerClient
+
+    const completedPayments = yield* Effect.tryPromise<
+      Payment[],
+      InfrastructureError
+    >({
+      try: () =>
+        db.select().from(payments).where(eq(payments.status, 'completed')),
+      catch: (cause) => new InfrastructureError({ cause }),
+    })
+
+    const results: { paymentId: string; reference: string; action: string }[] =
+      []
+
+    for (const payment of completedPayments) {
+      const exists = yield* entryExists(ledger, payment.reference)
+
+      if (exists) {
+        results.push({
+          paymentId: payment.id,
+          reference: payment.reference,
+          action: 'already_reconciled',
+        })
+        continue
+      }
+
+      yield* Effect.tryPromise<unknown, InfrastructureError>({
+        try: () =>
+          ledger.postEntry({
+            accountId: payment.userId,
+            amount: payment.amount,
+            currency:
+              payment.currency === 'NGN'
+                ? LedgerPb.Currency.NGN
+                : LedgerPb.Currency.USD,
+            type: LedgerPb.EntryType.CREDIT,
+            reference: payment.reference,
+            description:
+              'Reconciled deposit (provider confirmed, ledger entry was missing)',
+          }) as Promise<unknown>,
+        catch: (cause) => new InfrastructureError({ cause }),
+      })
+
+      results.push({
+        paymentId: payment.id,
+        reference: payment.reference,
+        action: 'posted',
+      })
+    }
+
+    return results
   })

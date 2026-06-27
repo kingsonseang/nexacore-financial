@@ -1,11 +1,12 @@
 import { Code, ConnectError, type ConnectRouter } from '@connectrpc/connect'
+import type { ProviderRegistry } from '@org/payment-providers'
 import { type MessageShape, PaymentsPb } from '@org/protos'
 import { Effect, Either, Layer, ManagedRuntime } from 'effect'
 import { DatabaseLive, type DrizzleDB } from '../db/client.js'
 import type { Payment } from '../db/schema.js'
 import { ProviderRegistryLive } from '../providers/registry.js'
 import * as payments from '../services/payments.js'
-import { LedgerClientLive } from './clients/ledger.js'
+import { type LedgerClient, LedgerClientLive } from './clients/ledger.js'
 
 // --- Runtime ---
 
@@ -15,6 +16,13 @@ const AppLayer = Layer.mergeAll(
   LedgerClientLive,
 )
 const runtime = ManagedRuntime.make(AppLayer)
+export const runReconciliation = (
+  effect: Effect.Effect<
+    void,
+    never,
+    DrizzleDB | LedgerClient | ProviderRegistry
+  >,
+) => runtime.runFork(effect)
 
 // --- Error helpers ---
 
@@ -216,5 +224,17 @@ export const paymentsRoutes = (router: ConnectRouter) =>
               InfrastructureError: () => internalError,
             }),
           ),
+      ),
+
+    reconcilePayments: (
+      _req: MessageShape<typeof PaymentsPb.ReconcilePaymentsRequestSchema>,
+    ) =>
+      runHandler(
+        payments.reconcilePayments().pipe(
+          Effect.map((results) => ({ results })),
+          Effect.catchTags({
+            InfrastructureError: () => internalError,
+          }),
+        ),
       ),
   })

@@ -579,6 +579,94 @@ func (x *ListEntriesResponse) GetTotal() int32 {
 	return 0
 }
 
+type GetEntryByReferenceRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Reference     string                 `protobuf:"bytes,1,opt,name=reference,proto3" json:"reference,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetEntryByReferenceRequest) Reset() {
+	*x = GetEntryByReferenceRequest{}
+	mi := &file_nexacore_ledger_v1_ledger_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetEntryByReferenceRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetEntryByReferenceRequest) ProtoMessage() {}
+
+func (x *GetEntryByReferenceRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_nexacore_ledger_v1_ledger_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetEntryByReferenceRequest.ProtoReflect.Descriptor instead.
+func (*GetEntryByReferenceRequest) Descriptor() ([]byte, []int) {
+	return file_nexacore_ledger_v1_ledger_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *GetEntryByReferenceRequest) GetReference() string {
+	if x != nil {
+		return x.Reference
+	}
+	return ""
+}
+
+type GetEntryByReferenceResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Entry         *JournalEntry          `protobuf:"bytes,1,opt,name=entry,proto3" json:"entry,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetEntryByReferenceResponse) Reset() {
+	*x = GetEntryByReferenceResponse{}
+	mi := &file_nexacore_ledger_v1_ledger_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetEntryByReferenceResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetEntryByReferenceResponse) ProtoMessage() {}
+
+func (x *GetEntryByReferenceResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_nexacore_ledger_v1_ledger_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetEntryByReferenceResponse.ProtoReflect.Descriptor instead.
+func (*GetEntryByReferenceResponse) Descriptor() ([]byte, []int) {
+	return file_nexacore_ledger_v1_ledger_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *GetEntryByReferenceResponse) GetEntry() *JournalEntry {
+	if x != nil {
+		return x.Entry
+	}
+	return nil
+}
+
 var File_nexacore_ledger_v1_ledger_proto protoreflect.FileDescriptor
 
 const file_nexacore_ledger_v1_ledger_proto_rawDesc = "" +
@@ -622,7 +710,11 @@ const file_nexacore_ledger_v1_ledger_proto_rawDesc = "" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\"g\n" +
 	"\x13ListEntriesResponse\x12:\n" +
 	"\aentries\x18\x01 \x03(\v2 .nexacore.ledger.v1.JournalEntryR\aentries\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x05R\x05total*H\n" +
+	"\x05total\x18\x02 \x01(\x05R\x05total\":\n" +
+	"\x1aGetEntryByReferenceRequest\x12\x1c\n" +
+	"\treference\x18\x01 \x01(\tR\treference\"U\n" +
+	"\x1bGetEntryByReferenceResponse\x126\n" +
+	"\x05entry\x18\x01 \x01(\v2 .nexacore.ledger.v1.JournalEntryR\x05entry*H\n" +
 	"\bCurrency\x12\x18\n" +
 	"\x14CURRENCY_UNSPECIFIED\x10\x00\x12\x10\n" +
 	"\fCURRENCY_NGN\x10\x01\x12\x10\n" +
@@ -630,12 +722,13 @@ const file_nexacore_ledger_v1_ledger_proto_rawDesc = "" +
 	"\tEntryType\x12\x1a\n" +
 	"\x16ENTRY_TYPE_UNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x10ENTRY_TYPE_DEBIT\x10\x01\x12\x15\n" +
-	"\x11ENTRY_TYPE_CREDIT\x10\x022\xa6\x02\n" +
+	"\x11ENTRY_TYPE_CREDIT\x10\x022\x9e\x03\n" +
 	"\rLedgerService\x12X\n" +
 	"\tPostEntry\x12$.nexacore.ledger.v1.PostEntryRequest\x1a%.nexacore.ledger.v1.PostEntryResponse\x12[\n" +
 	"\n" +
 	"GetBalance\x12%.nexacore.ledger.v1.GetBalanceRequest\x1a&.nexacore.ledger.v1.GetBalanceResponse\x12^\n" +
-	"\vListEntries\x12&.nexacore.ledger.v1.ListEntriesRequest\x1a'.nexacore.ledger.v1.ListEntriesResponseB[ZYgithub.com/kingsonseang/nexacore-financial/ledger-service/gen/nexacore/ledger/v1;ledgerv1b\x06proto3"
+	"\vListEntries\x12&.nexacore.ledger.v1.ListEntriesRequest\x1a'.nexacore.ledger.v1.ListEntriesResponse\x12v\n" +
+	"\x13GetEntryByReference\x12..nexacore.ledger.v1.GetEntryByReferenceRequest\x1a/.nexacore.ledger.v1.GetEntryByReferenceResponseB[ZYgithub.com/kingsonseang/nexacore-financial/ledger-service/gen/nexacore/ledger/v1;ledgerv1b\x06proto3"
 
 var (
 	file_nexacore_ledger_v1_ledger_proto_rawDescOnce sync.Once
@@ -650,17 +743,19 @@ func file_nexacore_ledger_v1_ledger_proto_rawDescGZIP() []byte {
 }
 
 var file_nexacore_ledger_v1_ledger_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_nexacore_ledger_v1_ledger_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_nexacore_ledger_v1_ledger_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_nexacore_ledger_v1_ledger_proto_goTypes = []any{
-	(Currency)(0),               // 0: nexacore.ledger.v1.Currency
-	(EntryType)(0),              // 1: nexacore.ledger.v1.EntryType
-	(*JournalEntry)(nil),        // 2: nexacore.ledger.v1.JournalEntry
-	(*PostEntryRequest)(nil),    // 3: nexacore.ledger.v1.PostEntryRequest
-	(*PostEntryResponse)(nil),   // 4: nexacore.ledger.v1.PostEntryResponse
-	(*GetBalanceRequest)(nil),   // 5: nexacore.ledger.v1.GetBalanceRequest
-	(*GetBalanceResponse)(nil),  // 6: nexacore.ledger.v1.GetBalanceResponse
-	(*ListEntriesRequest)(nil),  // 7: nexacore.ledger.v1.ListEntriesRequest
-	(*ListEntriesResponse)(nil), // 8: nexacore.ledger.v1.ListEntriesResponse
+	(Currency)(0),                       // 0: nexacore.ledger.v1.Currency
+	(EntryType)(0),                      // 1: nexacore.ledger.v1.EntryType
+	(*JournalEntry)(nil),                // 2: nexacore.ledger.v1.JournalEntry
+	(*PostEntryRequest)(nil),            // 3: nexacore.ledger.v1.PostEntryRequest
+	(*PostEntryResponse)(nil),           // 4: nexacore.ledger.v1.PostEntryResponse
+	(*GetBalanceRequest)(nil),           // 5: nexacore.ledger.v1.GetBalanceRequest
+	(*GetBalanceResponse)(nil),          // 6: nexacore.ledger.v1.GetBalanceResponse
+	(*ListEntriesRequest)(nil),          // 7: nexacore.ledger.v1.ListEntriesRequest
+	(*ListEntriesResponse)(nil),         // 8: nexacore.ledger.v1.ListEntriesResponse
+	(*GetEntryByReferenceRequest)(nil),  // 9: nexacore.ledger.v1.GetEntryByReferenceRequest
+	(*GetEntryByReferenceResponse)(nil), // 10: nexacore.ledger.v1.GetEntryByReferenceResponse
 }
 var file_nexacore_ledger_v1_ledger_proto_depIdxs = []int32{
 	1,  // 0: nexacore.ledger.v1.JournalEntry.type:type_name -> nexacore.ledger.v1.EntryType
@@ -670,17 +765,20 @@ var file_nexacore_ledger_v1_ledger_proto_depIdxs = []int32{
 	0,  // 4: nexacore.ledger.v1.GetBalanceRequest.currency:type_name -> nexacore.ledger.v1.Currency
 	0,  // 5: nexacore.ledger.v1.GetBalanceResponse.currency:type_name -> nexacore.ledger.v1.Currency
 	2,  // 6: nexacore.ledger.v1.ListEntriesResponse.entries:type_name -> nexacore.ledger.v1.JournalEntry
-	3,  // 7: nexacore.ledger.v1.LedgerService.PostEntry:input_type -> nexacore.ledger.v1.PostEntryRequest
-	5,  // 8: nexacore.ledger.v1.LedgerService.GetBalance:input_type -> nexacore.ledger.v1.GetBalanceRequest
-	7,  // 9: nexacore.ledger.v1.LedgerService.ListEntries:input_type -> nexacore.ledger.v1.ListEntriesRequest
-	4,  // 10: nexacore.ledger.v1.LedgerService.PostEntry:output_type -> nexacore.ledger.v1.PostEntryResponse
-	6,  // 11: nexacore.ledger.v1.LedgerService.GetBalance:output_type -> nexacore.ledger.v1.GetBalanceResponse
-	8,  // 12: nexacore.ledger.v1.LedgerService.ListEntries:output_type -> nexacore.ledger.v1.ListEntriesResponse
-	10, // [10:13] is the sub-list for method output_type
-	7,  // [7:10] is the sub-list for method input_type
-	7,  // [7:7] is the sub-list for extension type_name
-	7,  // [7:7] is the sub-list for extension extendee
-	0,  // [0:7] is the sub-list for field type_name
+	2,  // 7: nexacore.ledger.v1.GetEntryByReferenceResponse.entry:type_name -> nexacore.ledger.v1.JournalEntry
+	3,  // 8: nexacore.ledger.v1.LedgerService.PostEntry:input_type -> nexacore.ledger.v1.PostEntryRequest
+	5,  // 9: nexacore.ledger.v1.LedgerService.GetBalance:input_type -> nexacore.ledger.v1.GetBalanceRequest
+	7,  // 10: nexacore.ledger.v1.LedgerService.ListEntries:input_type -> nexacore.ledger.v1.ListEntriesRequest
+	9,  // 11: nexacore.ledger.v1.LedgerService.GetEntryByReference:input_type -> nexacore.ledger.v1.GetEntryByReferenceRequest
+	4,  // 12: nexacore.ledger.v1.LedgerService.PostEntry:output_type -> nexacore.ledger.v1.PostEntryResponse
+	6,  // 13: nexacore.ledger.v1.LedgerService.GetBalance:output_type -> nexacore.ledger.v1.GetBalanceResponse
+	8,  // 14: nexacore.ledger.v1.LedgerService.ListEntries:output_type -> nexacore.ledger.v1.ListEntriesResponse
+	10, // 15: nexacore.ledger.v1.LedgerService.GetEntryByReference:output_type -> nexacore.ledger.v1.GetEntryByReferenceResponse
+	12, // [12:16] is the sub-list for method output_type
+	8,  // [8:12] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_nexacore_ledger_v1_ledger_proto_init() }
@@ -694,7 +792,7 @@ func file_nexacore_ledger_v1_ledger_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_nexacore_ledger_v1_ledger_proto_rawDesc), len(file_nexacore_ledger_v1_ledger_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   7,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

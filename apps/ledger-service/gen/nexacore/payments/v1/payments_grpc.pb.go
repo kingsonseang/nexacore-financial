@@ -24,6 +24,7 @@ const (
 	PaymentsService_GetPaymentStatus_FullMethodName     = "/nexacore.payments.v1.PaymentsService/GetPaymentStatus"
 	PaymentsService_ListPayments_FullMethodName         = "/nexacore.payments.v1.PaymentsService/ListPayments"
 	PaymentsService_ConfirmWebhook_FullMethodName       = "/nexacore.payments.v1.PaymentsService/ConfirmWebhook"
+	PaymentsService_ReconcilePayments_FullMethodName    = "/nexacore.payments.v1.PaymentsService/ReconcilePayments"
 )
 
 // PaymentsServiceClient is the client API for PaymentsService service.
@@ -35,6 +36,7 @@ type PaymentsServiceClient interface {
 	GetPaymentStatus(ctx context.Context, in *GetPaymentStatusRequest, opts ...grpc.CallOption) (*GetPaymentStatusResponse, error)
 	ListPayments(ctx context.Context, in *ListPaymentsRequest, opts ...grpc.CallOption) (*ListPaymentsResponse, error)
 	ConfirmWebhook(ctx context.Context, in *ConfirmWebhookRequest, opts ...grpc.CallOption) (*ConfirmWebhookResponse, error)
+	ReconcilePayments(ctx context.Context, in *ReconcilePaymentsRequest, opts ...grpc.CallOption) (*ReconcilePaymentsResponse, error)
 }
 
 type paymentsServiceClient struct {
@@ -95,6 +97,16 @@ func (c *paymentsServiceClient) ConfirmWebhook(ctx context.Context, in *ConfirmW
 	return out, nil
 }
 
+func (c *paymentsServiceClient) ReconcilePayments(ctx context.Context, in *ReconcilePaymentsRequest, opts ...grpc.CallOption) (*ReconcilePaymentsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ReconcilePaymentsResponse)
+	err := c.cc.Invoke(ctx, PaymentsService_ReconcilePayments_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PaymentsServiceServer is the server API for PaymentsService service.
 // All implementations must embed UnimplementedPaymentsServiceServer
 // for forward compatibility.
@@ -104,6 +116,7 @@ type PaymentsServiceServer interface {
 	GetPaymentStatus(context.Context, *GetPaymentStatusRequest) (*GetPaymentStatusResponse, error)
 	ListPayments(context.Context, *ListPaymentsRequest) (*ListPaymentsResponse, error)
 	ConfirmWebhook(context.Context, *ConfirmWebhookRequest) (*ConfirmWebhookResponse, error)
+	ReconcilePayments(context.Context, *ReconcilePaymentsRequest) (*ReconcilePaymentsResponse, error)
 	mustEmbedUnimplementedPaymentsServiceServer()
 }
 
@@ -128,6 +141,9 @@ func (UnimplementedPaymentsServiceServer) ListPayments(context.Context, *ListPay
 }
 func (UnimplementedPaymentsServiceServer) ConfirmWebhook(context.Context, *ConfirmWebhookRequest) (*ConfirmWebhookResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ConfirmWebhook not implemented")
+}
+func (UnimplementedPaymentsServiceServer) ReconcilePayments(context.Context, *ReconcilePaymentsRequest) (*ReconcilePaymentsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReconcilePayments not implemented")
 }
 func (UnimplementedPaymentsServiceServer) mustEmbedUnimplementedPaymentsServiceServer() {}
 func (UnimplementedPaymentsServiceServer) testEmbeddedByValue()                         {}
@@ -240,6 +256,24 @@ func _PaymentsService_ConfirmWebhook_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PaymentsService_ReconcilePayments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReconcilePaymentsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentsServiceServer).ReconcilePayments(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PaymentsService_ReconcilePayments_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentsServiceServer).ReconcilePayments(ctx, req.(*ReconcilePaymentsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PaymentsService_ServiceDesc is the grpc.ServiceDesc for PaymentsService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -266,6 +300,10 @@ var PaymentsService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ConfirmWebhook",
 			Handler:    _PaymentsService_ConfirmWebhook_Handler,
+		},
+		{
+			MethodName: "ReconcilePayments",
+			Handler:    _PaymentsService_ReconcilePayments_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

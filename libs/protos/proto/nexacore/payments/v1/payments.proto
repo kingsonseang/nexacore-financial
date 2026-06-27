@@ -10,6 +10,7 @@ service PaymentsService {
   rpc GetPaymentStatus(GetPaymentStatusRequest) returns (GetPaymentStatusResponse);
   rpc ListPayments(ListPaymentsRequest) returns (ListPaymentsResponse);
   rpc ConfirmWebhook(ConfirmWebhookRequest) returns (ConfirmWebhookResponse);
+  rpc ReconcilePayments(ReconcilePaymentsRequest) returns (ReconcilePaymentsResponse);
 }
 
 enum Currency {
@@ -99,4 +100,16 @@ message ConfirmWebhookResponse {
   bool handled = 1;
   string payment_id = 2;
   string status = 3;
+}
+
+message ReconcilePaymentsRequest {}
+
+message ReconciliationResult {
+  string payment_id = 1;
+  string reference = 2;
+  string action = 3;
+}
+
+message ReconcilePaymentsResponse {
+  repeated ReconciliationResult results = 1;
 }

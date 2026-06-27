@@ -14,3 +14,6 @@ SELECT * FROM journal_entries
 WHERE account_id = $1
 ORDER BY created_at DESC
 LIMIT $2 OFFSET $3;
+
+-- name: GetEntryByReference :one
+SELECT * FROM journal_entries WHERE reference = $1 LIMIT 1;

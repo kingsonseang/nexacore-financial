@@ -858,6 +858,146 @@ func (x *ConfirmWebhookResponse) GetStatus() string {
 	return ""
 }
 
+type ReconcilePaymentsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReconcilePaymentsRequest) Reset() {
+	*x = ReconcilePaymentsRequest{}
+	mi := &file_nexacore_payments_v1_payments_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReconcilePaymentsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReconcilePaymentsRequest) ProtoMessage() {}
+
+func (x *ReconcilePaymentsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_nexacore_payments_v1_payments_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReconcilePaymentsRequest.ProtoReflect.Descriptor instead.
+func (*ReconcilePaymentsRequest) Descriptor() ([]byte, []int) {
+	return file_nexacore_payments_v1_payments_proto_rawDescGZIP(), []int{11}
+}
+
+type ReconciliationResult struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	PaymentId     string                 `protobuf:"bytes,1,opt,name=payment_id,json=paymentId,proto3" json:"payment_id,omitempty"`
+	Reference     string                 `protobuf:"bytes,2,opt,name=reference,proto3" json:"reference,omitempty"`
+	Action        string                 `protobuf:"bytes,3,opt,name=action,proto3" json:"action,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReconciliationResult) Reset() {
+	*x = ReconciliationResult{}
+	mi := &file_nexacore_payments_v1_payments_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReconciliationResult) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReconciliationResult) ProtoMessage() {}
+
+func (x *ReconciliationResult) ProtoReflect() protoreflect.Message {
+	mi := &file_nexacore_payments_v1_payments_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReconciliationResult.ProtoReflect.Descriptor instead.
+func (*ReconciliationResult) Descriptor() ([]byte, []int) {
+	return file_nexacore_payments_v1_payments_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *ReconciliationResult) GetPaymentId() string {
+	if x != nil {
+		return x.PaymentId
+	}
+	return ""
+}
+
+func (x *ReconciliationResult) GetReference() string {
+	if x != nil {
+		return x.Reference
+	}
+	return ""
+}
+
+func (x *ReconciliationResult) GetAction() string {
+	if x != nil {
+		return x.Action
+	}
+	return ""
+}
+
+type ReconcilePaymentsResponse struct {
+	state         protoimpl.MessageState  `protogen:"open.v1"`
+	Results       []*ReconciliationResult `protobuf:"bytes,1,rep,name=results,proto3" json:"results,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReconcilePaymentsResponse) Reset() {
+	*x = ReconcilePaymentsResponse{}
+	mi := &file_nexacore_payments_v1_payments_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReconcilePaymentsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReconcilePaymentsResponse) ProtoMessage() {}
+
+func (x *ReconcilePaymentsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_nexacore_payments_v1_payments_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReconcilePaymentsResponse.ProtoReflect.Descriptor instead.
+func (*ReconcilePaymentsResponse) Descriptor() ([]byte, []int) {
+	return file_nexacore_payments_v1_payments_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *ReconcilePaymentsResponse) GetResults() []*ReconciliationResult {
+	if x != nil {
+		return x.Results
+	}
+	return nil
+}
+
 var File_nexacore_payments_v1_payments_proto protoreflect.FileDescriptor
 
 const file_nexacore_payments_v1_payments_proto_rawDesc = "" +
@@ -916,7 +1056,15 @@ const file_nexacore_payments_v1_payments_proto_rawDesc = "" +
 	"\ahandled\x18\x01 \x01(\bR\ahandled\x12\x1d\n" +
 	"\n" +
 	"payment_id\x18\x02 \x01(\tR\tpaymentId\x12\x16\n" +
-	"\x06status\x18\x03 \x01(\tR\x06status*H\n" +
+	"\x06status\x18\x03 \x01(\tR\x06status\"\x1a\n" +
+	"\x18ReconcilePaymentsRequest\"k\n" +
+	"\x14ReconciliationResult\x12\x1d\n" +
+	"\n" +
+	"payment_id\x18\x01 \x01(\tR\tpaymentId\x12\x1c\n" +
+	"\treference\x18\x02 \x01(\tR\treference\x12\x16\n" +
+	"\x06action\x18\x03 \x01(\tR\x06action\"a\n" +
+	"\x19ReconcilePaymentsResponse\x12D\n" +
+	"\aresults\x18\x01 \x03(\v2*.nexacore.payments.v1.ReconciliationResultR\aresults*H\n" +
 	"\bCurrency\x12\x18\n" +
 	"\x14CURRENCY_UNSPECIFIED\x10\x00\x12\x10\n" +
 	"\fCURRENCY_NGN\x10\x01\x12\x10\n" +
@@ -930,13 +1078,14 @@ const file_nexacore_payments_v1_payments_proto_rawDesc = "" +
 	"\vPaymentType\x12\x1c\n" +
 	"\x18PAYMENT_TYPE_UNSPECIFIED\x10\x00\x12\x18\n" +
 	"\x14PAYMENT_TYPE_DEPOSIT\x10\x01\x12\x1b\n" +
-	"\x17PAYMENT_TYPE_WITHDRAWAL\x10\x022\xd3\x04\n" +
+	"\x17PAYMENT_TYPE_WITHDRAWAL\x10\x022\xc9\x05\n" +
 	"\x0fPaymentsService\x12z\n" +
 	"\x13CreateDepositIntent\x120.nexacore.payments.v1.CreateDepositIntentRequest\x1a1.nexacore.payments.v1.CreateDepositIntentResponse\x12}\n" +
 	"\x14CreateWithdrawIntent\x121.nexacore.payments.v1.CreateWithdrawIntentRequest\x1a2.nexacore.payments.v1.CreateWithdrawIntentResponse\x12q\n" +
 	"\x10GetPaymentStatus\x12-.nexacore.payments.v1.GetPaymentStatusRequest\x1a..nexacore.payments.v1.GetPaymentStatusResponse\x12e\n" +
 	"\fListPayments\x12).nexacore.payments.v1.ListPaymentsRequest\x1a*.nexacore.payments.v1.ListPaymentsResponse\x12k\n" +
-	"\x0eConfirmWebhook\x12+.nexacore.payments.v1.ConfirmWebhookRequest\x1a,.nexacore.payments.v1.ConfirmWebhookResponseB_Z]github.com/kingsonseang/nexacore-financial/ledger-service/gen/nexacore/payments/v1;paymentsv1b\x06proto3"
+	"\x0eConfirmWebhook\x12+.nexacore.payments.v1.ConfirmWebhookRequest\x1a,.nexacore.payments.v1.ConfirmWebhookResponse\x12t\n" +
+	"\x11ReconcilePayments\x12..nexacore.payments.v1.ReconcilePaymentsRequest\x1a/.nexacore.payments.v1.ReconcilePaymentsResponseB_Z]github.com/kingsonseang/nexacore-financial/ledger-service/gen/nexacore/payments/v1;paymentsv1b\x06proto3"
 
 var (
 	file_nexacore_payments_v1_payments_proto_rawDescOnce sync.Once
@@ -951,7 +1100,7 @@ func file_nexacore_payments_v1_payments_proto_rawDescGZIP() []byte {
 }
 
 var file_nexacore_payments_v1_payments_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_nexacore_payments_v1_payments_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_nexacore_payments_v1_payments_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_nexacore_payments_v1_payments_proto_goTypes = []any{
 	(Currency)(0),                        // 0: nexacore.payments.v1.Currency
 	(PaymentStatus)(0),                   // 1: nexacore.payments.v1.PaymentStatus
@@ -967,6 +1116,9 @@ var file_nexacore_payments_v1_payments_proto_goTypes = []any{
 	(*ListPaymentsResponse)(nil),         // 11: nexacore.payments.v1.ListPaymentsResponse
 	(*ConfirmWebhookRequest)(nil),        // 12: nexacore.payments.v1.ConfirmWebhookRequest
 	(*ConfirmWebhookResponse)(nil),       // 13: nexacore.payments.v1.ConfirmWebhookResponse
+	(*ReconcilePaymentsRequest)(nil),     // 14: nexacore.payments.v1.ReconcilePaymentsRequest
+	(*ReconciliationResult)(nil),         // 15: nexacore.payments.v1.ReconciliationResult
+	(*ReconcilePaymentsResponse)(nil),    // 16: nexacore.payments.v1.ReconcilePaymentsResponse
 }
 var file_nexacore_payments_v1_payments_proto_depIdxs = []int32{
 	0,  // 0: nexacore.payments.v1.Payment.currency:type_name -> nexacore.payments.v1.Currency
@@ -976,21 +1128,24 @@ var file_nexacore_payments_v1_payments_proto_depIdxs = []int32{
 	0,  // 4: nexacore.payments.v1.CreateWithdrawIntentRequest.currency:type_name -> nexacore.payments.v1.Currency
 	3,  // 5: nexacore.payments.v1.GetPaymentStatusResponse.payment:type_name -> nexacore.payments.v1.Payment
 	3,  // 6: nexacore.payments.v1.ListPaymentsResponse.payments:type_name -> nexacore.payments.v1.Payment
-	4,  // 7: nexacore.payments.v1.PaymentsService.CreateDepositIntent:input_type -> nexacore.payments.v1.CreateDepositIntentRequest
-	6,  // 8: nexacore.payments.v1.PaymentsService.CreateWithdrawIntent:input_type -> nexacore.payments.v1.CreateWithdrawIntentRequest
-	8,  // 9: nexacore.payments.v1.PaymentsService.GetPaymentStatus:input_type -> nexacore.payments.v1.GetPaymentStatusRequest
-	10, // 10: nexacore.payments.v1.PaymentsService.ListPayments:input_type -> nexacore.payments.v1.ListPaymentsRequest
-	12, // 11: nexacore.payments.v1.PaymentsService.ConfirmWebhook:input_type -> nexacore.payments.v1.ConfirmWebhookRequest
-	5,  // 12: nexacore.payments.v1.PaymentsService.CreateDepositIntent:output_type -> nexacore.payments.v1.CreateDepositIntentResponse
-	7,  // 13: nexacore.payments.v1.PaymentsService.CreateWithdrawIntent:output_type -> nexacore.payments.v1.CreateWithdrawIntentResponse
-	9,  // 14: nexacore.payments.v1.PaymentsService.GetPaymentStatus:output_type -> nexacore.payments.v1.GetPaymentStatusResponse
-	11, // 15: nexacore.payments.v1.PaymentsService.ListPayments:output_type -> nexacore.payments.v1.ListPaymentsResponse
-	13, // 16: nexacore.payments.v1.PaymentsService.ConfirmWebhook:output_type -> nexacore.payments.v1.ConfirmWebhookResponse
-	12, // [12:17] is the sub-list for method output_type
-	7,  // [7:12] is the sub-list for method input_type
-	7,  // [7:7] is the sub-list for extension type_name
-	7,  // [7:7] is the sub-list for extension extendee
-	0,  // [0:7] is the sub-list for field type_name
+	15, // 7: nexacore.payments.v1.ReconcilePaymentsResponse.results:type_name -> nexacore.payments.v1.ReconciliationResult
+	4,  // 8: nexacore.payments.v1.PaymentsService.CreateDepositIntent:input_type -> nexacore.payments.v1.CreateDepositIntentRequest
+	6,  // 9: nexacore.payments.v1.PaymentsService.CreateWithdrawIntent:input_type -> nexacore.payments.v1.CreateWithdrawIntentRequest
+	8,  // 10: nexacore.payments.v1.PaymentsService.GetPaymentStatus:input_type -> nexacore.payments.v1.GetPaymentStatusRequest
+	10, // 11: nexacore.payments.v1.PaymentsService.ListPayments:input_type -> nexacore.payments.v1.ListPaymentsRequest
+	12, // 12: nexacore.payments.v1.PaymentsService.ConfirmWebhook:input_type -> nexacore.payments.v1.ConfirmWebhookRequest
+	14, // 13: nexacore.payments.v1.PaymentsService.ReconcilePayments:input_type -> nexacore.payments.v1.ReconcilePaymentsRequest
+	5,  // 14: nexacore.payments.v1.PaymentsService.CreateDepositIntent:output_type -> nexacore.payments.v1.CreateDepositIntentResponse
+	7,  // 15: nexacore.payments.v1.PaymentsService.CreateWithdrawIntent:output_type -> nexacore.payments.v1.CreateWithdrawIntentResponse
+	9,  // 16: nexacore.payments.v1.PaymentsService.GetPaymentStatus:output_type -> nexacore.payments.v1.GetPaymentStatusResponse
+	11, // 17: nexacore.payments.v1.PaymentsService.ListPayments:output_type -> nexacore.payments.v1.ListPaymentsResponse
+	13, // 18: nexacore.payments.v1.PaymentsService.ConfirmWebhook:output_type -> nexacore.payments.v1.ConfirmWebhookResponse
+	16, // 19: nexacore.payments.v1.PaymentsService.ReconcilePayments:output_type -> nexacore.payments.v1.ReconcilePaymentsResponse
+	14, // [14:20] is the sub-list for method output_type
+	8,  // [8:14] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_nexacore_payments_v1_payments_proto_init() }
@@ -1004,7 +1159,7 @@ func file_nexacore_payments_v1_payments_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_nexacore_payments_v1_payments_proto_rawDesc), len(file_nexacore_payments_v1_payments_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   11,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

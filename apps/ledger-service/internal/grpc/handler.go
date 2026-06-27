@@ -2,6 +2,8 @@ package grpc
 
 import (
 	"context"
+	"errors"
+	"github.com/jackc/pgx/v5"
 
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -142,5 +144,36 @@ func (h *Handler) ListEntries(
 	return &ledgerv1.ListEntriesResponse{
 		Entries: protoEntries,
 		Total:   int32(len(protoEntries)),
+	}, nil
+}
+
+func (h *Handler) GetEntryByReference(
+	ctx context.Context,
+	req *ledgerv1.GetEntryByReferenceRequest,
+) (*ledgerv1.GetEntryByReferenceResponse, error) {
+	entry, err := h.ledger.GetEntryByReference(ctx, req.Reference)
+	if err != nil {
+		if errors.Is(err, pgx.ErrNoRows) {
+			return nil, status.Error(codes.NotFound, "entry not found")
+		}
+		return nil, status.Error(codes.Internal, "failed to get entry")
+	}
+
+	amountStr, err := dbtypes.NumericToString(entry.Amount)
+	if err != nil {
+		return nil, status.Error(codes.Internal, "failed to convert amount")
+	}
+
+	return &ledgerv1.GetEntryByReferenceResponse{
+		Entry: &ledgerv1.JournalEntry{
+			EntryId:     dbtypes.UUIDToString(entry.ID),
+			AccountId:   dbtypes.UUIDToString(entry.AccountID),
+			Type:        toProtoEntryType(entry.EntryType),
+			Amount:      amountStr,
+			Currency:    toProtoCurrency(entry.Currency),
+			Reference:   entry.Reference,
+			Description: dbtypes.TextToString(entry.Description),
+			CreatedAt:   entry.CreatedAt.Time.Format("2006-01-02T15:04:05Z07:00"),
+		},
 	}, nil
 }

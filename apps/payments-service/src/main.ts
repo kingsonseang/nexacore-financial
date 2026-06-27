@@ -4,7 +4,8 @@ import { connectNodeAdapter } from '@connectrpc/connect-node'
 import { NodeRuntime } from '@effect/platform-node'
 import { ConfigProvider, Effect, Layer } from 'effect'
 import { AppConfig } from './config/index.js'
-import { paymentsRoutes } from './grpc/handler.js'
+import { paymentsRoutes, runReconciliation } from './grpc/handler.js'
+import { reconciliationLoop } from './jobs/reconciliation.js'
 
 // --- Routes ---
 
@@ -35,6 +36,8 @@ const ServerLive = Layer.scopedDiscard(
 )
 
 // --- Run ---
+runReconciliation(reconciliationLoop)
+
 NodeRuntime.runMain(
   Layer.launch(ServerLive).pipe(
     Effect.provide(Layer.setConfigProvider(ConfigProvider.fromEnv())),

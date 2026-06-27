@@ -30,6 +30,26 @@ func (q *Queries) GetBalance(ctx context.Context, arg GetBalanceParams) (pgtype.
 	return balance, err
 }
 
+const getEntryByReference = `-- name: GetEntryByReference :one
+SELECT id, account_id, entry_type, amount, currency, reference, description, created_at FROM journal_entries WHERE reference = $1 LIMIT 1
+`
+
+func (q *Queries) GetEntryByReference(ctx context.Context, reference string) (JournalEntry, error) {
+	row := q.db.QueryRow(ctx, getEntryByReference, reference)
+	var i JournalEntry
+	err := row.Scan(
+		&i.ID,
+		&i.AccountID,
+		&i.EntryType,
+		&i.Amount,
+		&i.Currency,
+		&i.Reference,
+		&i.Description,
+		&i.CreatedAt,
+	)
+	return i, err
+}
+
 const listEntries = `-- name: ListEntries :many
 SELECT id, account_id, entry_type, amount, currency, reference, description, created_at FROM journal_entries
 WHERE account_id = $1

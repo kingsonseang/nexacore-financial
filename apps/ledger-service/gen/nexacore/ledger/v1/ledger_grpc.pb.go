@@ -19,9 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	LedgerService_PostEntry_FullMethodName   = "/nexacore.ledger.v1.LedgerService/PostEntry"
-	LedgerService_GetBalance_FullMethodName  = "/nexacore.ledger.v1.LedgerService/GetBalance"
-	LedgerService_ListEntries_FullMethodName = "/nexacore.ledger.v1.LedgerService/ListEntries"
+	LedgerService_PostEntry_FullMethodName           = "/nexacore.ledger.v1.LedgerService/PostEntry"
+	LedgerService_GetBalance_FullMethodName          = "/nexacore.ledger.v1.LedgerService/GetBalance"
+	LedgerService_ListEntries_FullMethodName         = "/nexacore.ledger.v1.LedgerService/ListEntries"
+	LedgerService_GetEntryByReference_FullMethodName = "/nexacore.ledger.v1.LedgerService/GetEntryByReference"
 )
 
 // LedgerServiceClient is the client API for LedgerService service.
@@ -31,6 +32,7 @@ type LedgerServiceClient interface {
 	PostEntry(ctx context.Context, in *PostEntryRequest, opts ...grpc.CallOption) (*PostEntryResponse, error)
 	GetBalance(ctx context.Context, in *GetBalanceRequest, opts ...grpc.CallOption) (*GetBalanceResponse, error)
 	ListEntries(ctx context.Context, in *ListEntriesRequest, opts ...grpc.CallOption) (*ListEntriesResponse, error)
+	GetEntryByReference(ctx context.Context, in *GetEntryByReferenceRequest, opts ...grpc.CallOption) (*GetEntryByReferenceResponse, error)
 }
 
 type ledgerServiceClient struct {
@@ -71,6 +73,16 @@ func (c *ledgerServiceClient) ListEntries(ctx context.Context, in *ListEntriesRe
 	return out, nil
 }
 
+func (c *ledgerServiceClient) GetEntryByReference(ctx context.Context, in *GetEntryByReferenceRequest, opts ...grpc.CallOption) (*GetEntryByReferenceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetEntryByReferenceResponse)
+	err := c.cc.Invoke(ctx, LedgerService_GetEntryByReference_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // LedgerServiceServer is the server API for LedgerService service.
 // All implementations must embed UnimplementedLedgerServiceServer
 // for forward compatibility.
@@ -78,6 +90,7 @@ type LedgerServiceServer interface {
 	PostEntry(context.Context, *PostEntryRequest) (*PostEntryResponse, error)
 	GetBalance(context.Context, *GetBalanceRequest) (*GetBalanceResponse, error)
 	ListEntries(context.Context, *ListEntriesRequest) (*ListEntriesResponse, error)
+	GetEntryByReference(context.Context, *GetEntryByReferenceRequest) (*GetEntryByReferenceResponse, error)
 	mustEmbedUnimplementedLedgerServiceServer()
 }
 
@@ -96,6 +109,9 @@ func (UnimplementedLedgerServiceServer) GetBalance(context.Context, *GetBalanceR
 }
 func (UnimplementedLedgerServiceServer) ListEntries(context.Context, *ListEntriesRequest) (*ListEntriesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListEntries not implemented")
+}
+func (UnimplementedLedgerServiceServer) GetEntryByReference(context.Context, *GetEntryByReferenceRequest) (*GetEntryByReferenceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetEntryByReference not implemented")
 }
 func (UnimplementedLedgerServiceServer) mustEmbedUnimplementedLedgerServiceServer() {}
 func (UnimplementedLedgerServiceServer) testEmbeddedByValue()                       {}
@@ -172,6 +188,24 @@ func _LedgerService_ListEntries_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _LedgerService_GetEntryByReference_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetEntryByReferenceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LedgerServiceServer).GetEntryByReference(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LedgerService_GetEntryByReference_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LedgerServiceServer).GetEntryByReference(ctx, req.(*GetEntryByReferenceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // LedgerService_ServiceDesc is the grpc.ServiceDesc for LedgerService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -190,6 +224,10 @@ var LedgerService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListEntries",
 			Handler:    _LedgerService_ListEntries_Handler,
+		},
+		{
+			MethodName: "GetEntryByReference",
+			Handler:    _LedgerService_GetEntryByReference_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

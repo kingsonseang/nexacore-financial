@@ -8,6 +8,7 @@ service LedgerService {
   rpc PostEntry(PostEntryRequest) returns (PostEntryResponse);
   rpc GetBalance(GetBalanceRequest) returns (GetBalanceResponse);
   rpc ListEntries(ListEntriesRequest) returns (ListEntriesResponse);
+  rpc GetEntryByReference(GetEntryByReferenceRequest) returns (GetEntryByReferenceResponse);
 }
 
 enum Currency {
@@ -67,4 +68,12 @@ message ListEntriesRequest {
 message ListEntriesResponse {
   repeated JournalEntry entries = 1;
   int32 total = 2;
+}
+
+message GetEntryByReferenceRequest {
+  string reference = 1;
+}
+
+message GetEntryByReferenceResponse {
+  JournalEntry entry = 1;
 }
