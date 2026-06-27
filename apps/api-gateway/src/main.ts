@@ -17,6 +17,7 @@ import { accountsRoutes } from './routes/accounts.js'
 import { authRoutes } from './routes/auth.js'
 import { ledgerRoutes } from './routes/ledger.js'
 import { paymentsRoutes } from './routes/payments.js'
+import { webhookRoutes } from './routes/webhooks.js'
 
 const app = HttpRouter.empty.pipe(
   HttpRouter.get(
@@ -29,6 +30,7 @@ const app = HttpRouter.empty.pipe(
   HttpRouter.mount('/api/v1', accountsRoutes),
   HttpRouter.mount('/api/v1', paymentsRoutes),
   HttpRouter.mount('/api/v1', ledgerRoutes),
+  HttpRouter.mount('/api/v1', webhookRoutes),
   Effect.catchTag('RouteNotFound', () =>
     HttpServerResponse.json({ error: 'Not found' }, { status: 404 }),
   ),

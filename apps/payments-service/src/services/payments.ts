@@ -1,10 +1,28 @@
 import { randomUUID } from 'node:crypto'
 import type { ProviderError } from '@org/payment-providers'
+import { fromMinorUnits, toMinorUnits } from '@org/payment-providers'
+import { LedgerPb } from '@org/protos'
 import { eq } from 'drizzle-orm'
 import { Data, Effect } from 'effect'
 import { DatabaseService } from '../db/client.js'
 import { type CurrencyEnum, type Payment, payments } from '../db/schema.js'
+import { LedgerClient } from '../grpc/clients/ledger.js'
 import { ProviderRegistryService } from '../providers/registry.js'
+
+export class AmountMismatchError extends Data.TaggedError(
+  'AmountMismatchError',
+)<{
+  expected: string
+  received: string
+}> {}
+
+export class InvalidSignatureError extends Data.TaggedError(
+  'InvalidSignatureError',
+)<{ provider: string }> {}
+
+export class UnsupportedProviderError extends Data.TaggedError(
+  'UnsupportedProviderError',
+)<{ provider: string }> {}
 
 export class PaymentNotFoundError extends Data.TaggedError(
   'PaymentNotFoundError',
@@ -13,18 +31,6 @@ export class PaymentNotFoundError extends Data.TaggedError(
 export class InfrastructureError extends Data.TaggedError(
   'InfrastructureError',
 )<{ cause: unknown }> {}
-
-/*
- * Converts a decimal amount string ("500.00") to integer minor units (50000)
- * without floating point arithmetic, since parseFloat(amount) * 100 risks
- * precision errors on certain decimal values. Consistent with this project's
- * existing convention of treating monetary amounts as strings end-to-end.
- */
-const toMinorUnits = (amount: string): number => {
-  const [whole, fraction = '0'] = amount.split('.')
-  const paddedFraction = fraction.padEnd(2, '0').slice(0, 2)
-  return Number.parseInt(whole, 10) * 100 + Number.parseInt(paddedFraction, 10)
-}
 
 export const createDepositIntent = (params: {
   userId: string
@@ -144,4 +150,112 @@ export const listPayments = (params: {
     })
 
     return userPayments
+  })
+
+export const confirmWebhook = (params: {
+  providerName: string
+  rawBody: string
+  signature: string
+}) =>
+  Effect.gen(function* () {
+    const db = yield* DatabaseService
+    const providers = yield* ProviderRegistryService
+    const ledger = yield* LedgerClient
+    const provider = providers.providerByName(params.providerName)
+
+    if (!provider) {
+      return yield* Effect.fail(
+        new UnsupportedProviderError({ provider: params.providerName }),
+      )
+    }
+
+    const valid = provider.verifyWebhookSignature(
+      params.rawBody,
+      params.signature,
+    )
+    if (!valid) {
+      return yield* Effect.fail(
+        new InvalidSignatureError({ provider: params.providerName }),
+      )
+    }
+
+    const event = provider.parseWebhookEvent(params.rawBody)
+    if (!event) {
+      return { handled: false, paymentId: '', status: 'ignored' as const }
+    }
+
+    const [payment] = yield* Effect.tryPromise<Payment[], InfrastructureError>({
+      try: () =>
+        db
+          .select()
+          .from(payments)
+          .where(eq(payments.reference, event.reference))
+          .limit(1),
+      catch: (cause) => new InfrastructureError({ cause }),
+    })
+
+    if (!payment) {
+      return yield* Effect.fail(
+        new PaymentNotFoundError({ paymentId: event.reference }),
+      )
+    }
+
+    /*
+     * Paystack retries webhooks on non-2xx responses and can deliver the
+     * same event more than once. Once a payment is already completed or
+     * failed, treat further deliveries as a no-op rather than posting a
+     * duplicate ledger entry.
+     */
+    if (payment.status === 'completed' || payment.status === 'failed') {
+      return { handled: true, paymentId: payment.id, status: payment.status }
+    }
+
+    const newStatus = event.type === 'deposit_success' ? 'completed' : 'failed'
+
+    /*
+     * Amount is verified before the DB status is updated or the ledger entry
+     * is posted. A mismatch must leave the payment in its current state
+     * (still pending) rather than marking it completed without crediting
+     * the ledger — the two need to either both happen or neither happen.
+     */
+    if (newStatus === 'completed') {
+      const receivedAmount = fromMinorUnits(event.amountMinorUnits)
+      if (receivedAmount !== payment.amount) {
+        return yield* Effect.fail(
+          new AmountMismatchError({
+            expected: payment.amount,
+            received: receivedAmount,
+          }),
+        )
+      }
+    }
+
+    yield* Effect.tryPromise<unknown, InfrastructureError>({
+      try: () =>
+        db
+          .update(payments)
+          .set({ status: newStatus, updatedAt: new Date() })
+          .where(eq(payments.id, payment.id)),
+      catch: (cause) => new InfrastructureError({ cause }),
+    })
+
+    if (newStatus === 'completed') {
+      yield* Effect.tryPromise<unknown, InfrastructureError>({
+        try: () =>
+          ledger.postEntry({
+            accountId: payment.userId,
+            amount: payment.amount,
+            currency:
+              payment.currency === 'NGN'
+                ? LedgerPb.Currency.NGN
+                : LedgerPb.Currency.USD,
+            type: LedgerPb.EntryType.CREDIT,
+            reference: payment.reference,
+            description: `Deposit via ${params.providerName}`,
+          }) as Promise<unknown>,
+        catch: (cause) => new InfrastructureError({ cause }),
+      })
+    }
+
+    return { handled: true, paymentId: payment.id, status: newStatus }
   })

@@ -10,7 +10,17 @@ export const createProviderRegistry = (config: {
   const providerFor = (currency: 'NGN' | 'USD'): PaymentProvider =>
     currency === 'NGN' ? paystack : mockUsdProvider
 
-  return { providerFor }
+  const providerByName = (name: string): PaymentProvider | undefined => {
+    if (name === 'paystack') {
+      return paystack
+    }
+    if (name === mockUsdProvider.name) {
+      return mockUsdProvider
+    }
+    return
+  }
+
+  return { providerFor, providerByName }
 }
 
 export type ProviderRegistry = ReturnType<typeof createProviderRegistry>

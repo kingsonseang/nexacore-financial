@@ -18,6 +18,9 @@
   "references": [
     {
       "path": "../../libs/protos/tsconfig.lib.json"
+    },
+    {
+      "path": "../../libs/payment-providers/tsconfig.lib.json"
     }
   ]
 }

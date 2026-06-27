@@ -9,6 +9,7 @@ service PaymentsService {
   rpc CreateWithdrawIntent(CreateWithdrawIntentRequest) returns (CreateWithdrawIntentResponse);
   rpc GetPaymentStatus(GetPaymentStatusRequest) returns (GetPaymentStatusResponse);
   rpc ListPayments(ListPaymentsRequest) returns (ListPaymentsResponse);
+  rpc ConfirmWebhook(ConfirmWebhookRequest) returns (ConfirmWebhookResponse);
 }
 
 enum Currency {
@@ -86,4 +87,16 @@ message ListPaymentsRequest {
 message ListPaymentsResponse {
   repeated Payment payments = 1;
   int32 total = 2;
+}
+
+message ConfirmWebhookRequest {
+  string provider = 1;
+  string raw_body = 2;
+  string signature = 3;
+}
+
+message ConfirmWebhookResponse {
+  bool handled = 1;
+  string payment_id = 2;
+  string status = 3;
 }

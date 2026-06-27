@@ -22,4 +22,7 @@ export const mockUsdProvider: PaymentProvider = {
       amountMinorUnits: 0,
       providerReference: reference,
     }),
+
+  verifyWebhookSignature: () => false,
+  parseWebhookEvent: () => null,
 }

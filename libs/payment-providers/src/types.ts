@@ -32,3 +32,21 @@ export interface PaymentProvider {
     reference: string,
   ) => Effect.Effect<VerifyDepositResult, ProviderError>
 }
+
+export interface WebhookEvent {
+  amountMinorUnits: number
+  reference: string
+  type: 'deposit_success' | 'deposit_failed'
+}
+
+export interface PaymentProvider {
+  initializeDeposit: (
+    params: InitializeDepositParams,
+  ) => Effect.Effect<InitializeDepositResult, ProviderError>
+  readonly name: string
+  parseWebhookEvent: (rawBody: string) => WebhookEvent | null
+  verifyDeposit: (
+    reference: string,
+  ) => Effect.Effect<VerifyDepositResult, ProviderError>
+  verifyWebhookSignature: (rawBody: string, signature: string) => boolean
+}

@@ -10,4 +10,9 @@ export const AppConfig = {
   paystack: {
     secretKey: Config.string('PAYSTACK_SECRET_KEY'),
   },
+  services: {
+    ledgerServiceUrl: Config.string('LEDGER_SERVICE_URL').pipe(
+      Config.withDefault('http://localhost:50054'),
+    ),
+  },
 } as const

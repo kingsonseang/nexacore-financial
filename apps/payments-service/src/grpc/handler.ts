@@ -5,10 +5,15 @@ import { DatabaseLive, type DrizzleDB } from '../db/client.js'
 import type { Payment } from '../db/schema.js'
 import { ProviderRegistryLive } from '../providers/registry.js'
 import * as payments from '../services/payments.js'
+import { LedgerClientLive } from './clients/ledger.js'
 
 // --- Runtime ---
 
-const AppLayer = Layer.mergeAll(DatabaseLive, ProviderRegistryLive)
+const AppLayer = Layer.mergeAll(
+  DatabaseLive,
+  ProviderRegistryLive,
+  LedgerClientLive,
+)
 const runtime = ManagedRuntime.make(AppLayer)
 
 // --- Error helpers ---
@@ -185,6 +190,29 @@ export const paymentsRoutes = (router: ConnectRouter) =>
               total: userPayments.length,
             })),
             Effect.catchTags({
+              InfrastructureError: () => internalError,
+            }),
+          ),
+      ),
+
+    confirmWebhook: (
+      req: MessageShape<typeof PaymentsPb.ConfirmWebhookRequestSchema>,
+    ) =>
+      runHandler(
+        payments
+          .confirmWebhook({
+            providerName: req.provider,
+            rawBody: req.rawBody,
+            signature: req.signature,
+          })
+          .pipe(
+            Effect.catchTags({
+              InvalidSignatureError: () =>
+                fail('Invalid webhook signature', Code.PermissionDenied),
+              UnsupportedProviderError: () =>
+                fail('Unsupported provider', Code.InvalidArgument),
+              PaymentNotFoundError: () =>
+                fail('Payment not found', Code.NotFound),
               InfrastructureError: () => internalError,
             }),
           ),
